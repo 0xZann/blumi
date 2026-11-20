@@ -6,6 +6,12 @@
 <title>BLUMI — A Little Blue, A Bigger World</title>
 <meta name="description" content="BLUMI is an independent digital brand being built within the Base ecosystem. Beyond Limits, United Minds, Innovation — bringing people, creativity and technology together.">
 <meta name="theme-color" content="#0a5cff">
+<script>
+(function(){ try {
+  var t = localStorage.getItem("blumi-theme") === "dark" ? "dark" : "light";   // light by default
+  document.documentElement.setAttribute("data-theme", t);
+} catch (e) { document.documentElement.setAttribute("data-theme", "light"); } })();
+</script>
 <meta property="og:title" content="BLUMI — A Little Blue, A Bigger World">
 <meta property="og:description" content="An independent digital brand focused on creativity, community, technology and innovation. Build on Base.">
 <meta property="og:type" content="website">
@@ -624,6 +630,56 @@ h1,h2,h3,h4,.section-title{letter-spacing:-.02em}
 .token-id h3{font-size:clamp(26px,3.4vw,36px)}.fact strong{font-size:16px}
 @media(max-width:600px){.hero-meaning{font-size:10.5px}}
 @media(max-width:600px){.hero h1 .line:first-child{text-shadow:0 1px 0 #24365f,0 2px 0 #1b2c55,0 3px 0 #13234a,0 12px 22px rgba(10,60,180,.28)}}
+
+/* ==========================================================
+   DARK MODE — html[data-theme="dark"]
+   ========================================================== */
+html[data-theme="dark"]{
+  --ink:#eaf2ff; --ink-soft:#9fb3d6; --ice:#08142f; --ice-2:#040b1f; --line:rgba(120,170,255,.16);
+  --glass:rgba(9,19,46,.62); --shadow-sm:0 2px 10px rgba(0,0,0,.35); --shadow-md:0 14px 40px -14px rgba(0,0,0,.6);
+  --card:rgba(11,23,54,.72); --card-solid:#0a1838; --card-line:rgba(120,170,255,.16);
+  color-scheme:dark}
+html[data-theme="dark"] body{background:radial-gradient(1200px 900px at 100% 30%,rgba(47,123,255,.16),transparent 60%),radial-gradient(1000px 800px at 0% 65%,rgba(95,180,255,.08),transparent 60%),#030817}
+html[data-theme="dark"] .header.scrolled{background:rgba(3,8,23,.86);box-shadow:0 1px 0 var(--line)}
+html[data-theme="dark"] .mobile-nav{background:rgba(3,8,23,.96)}
+html[data-theme="dark"] .hero{background:radial-gradient(1200px 700px at 78% 40%,rgba(47,123,255,.32),transparent 60%),radial-gradient(900px 600px at 10% 10%,rgba(95,180,255,.12),transparent 60%),linear-gradient(180deg,#050d25,#040b1f 70%,#030817)}
+html[data-theme="dark"] .hero h1 .line:first-child{color:#f2f7ff;text-shadow:0 1px 0 #7aa6ff,0 2px 0 #4f86f5,0 3px 0 #2f69e0,0 4px 0 #1d51c4,0 18px 34px rgba(47,123,255,.45)}
+html[data-theme="dark"] .section-title{text-shadow:0 2px 0 rgba(0,0,0,.35),0 12px 28px rgba(47,123,255,.22)}
+html[data-theme="dark"] .grad-text,html[data-theme="dark"] .section-title .grad-text,html[data-theme="dark"] .hero h1 .grad-text{background:linear-gradient(180deg,#bfe2ff 0%,#7cc1ff 40%,#3d8bff 70%,#2f6fe8 100%);-webkit-background-clip:text;background-clip:text}
+html[data-theme="dark"] .btn-ghost,html[data-theme="dark"] .base-badge,html[data-theme="dark"] .nav ul,html[data-theme="dark"] .menu-btn,html[data-theme="dark"] .chip,html[data-theme="dark"] .theme-btn{background:rgba(11,23,54,.7);border-color:var(--card-line);color:var(--ink)}
+html[data-theme="dark"] .p-card,html[data-theme="dark"] .eco-card,html[data-theme="dark"] .mission-card,html[data-theme="dark"] .phase-card,html[data-theme="dark"] .token-card,
+html[data-theme="dark"] .faq-item,html[data-theme="dark"] .off-list,html[data-theme="dark"] .social,html[data-theme="dark"] .fact,html[data-theme="dark"] .trait,html[data-theme="dark"] .notice{background:var(--card);border-color:var(--card-line)}
+html[data-theme="dark"] .token-body{background:transparent}
+html[data-theme="dark"] .token-stat,html[data-theme="dark"] .icon-btn,html[data-theme="dark"] .mission-list li::before,html[data-theme="dark"] .status,html[data-theme="dark"] .faq-item summary .pm,html[data-theme="dark"] .footer ul span em{background:rgba(47,123,255,.14);border-color:var(--card-line)}
+html[data-theme="dark"] .phase-node{background:var(--card-solid);border-color:var(--card-line)}
+html[data-theme="dark"] .philosophy{background:linear-gradient(135deg,rgba(47,123,255,.14),rgba(95,180,255,.08));border-color:var(--card-line)}
+html[data-theme="dark"] .community-wrap{background:radial-gradient(700px 400px at 50% -10%,rgba(47,123,255,.3),transparent 60%),linear-gradient(180deg,rgba(11,23,54,.85),rgba(6,14,36,.75));border-color:var(--card-line)}
+html[data-theme="dark"] .p-letter{-webkit-text-stroke:1.5px rgba(120,170,255,.14)}
+html[data-theme="dark"] .token-warn{background:rgba(255,190,80,.08);border-color:rgba(255,200,110,.28);color:#ffd590}
+html[data-theme="dark"] .copy-btn:not(.done){background:#eaf2ff}
+html[data-theme="dark"] .footer{background:transparent}
+html[data-theme="dark"] .grid,html[data-theme="dark"] .hero::before{opacity:.35}
+html[data-theme="dark"] .p-card::before{opacity:.0}
+html[data-theme="dark"] .off-row{border-color:var(--card-line)}
+html[data-theme="dark"] .never{box-shadow:0 30px 70px -30px rgba(0,0,0,.7)}
+html[data-theme="dark"] .vision-card{box-shadow:0 30px 80px -30px rgba(47,123,255,.5)}
+html[data-theme="dark"] #intro{background:radial-gradient(700px 520px at 50% 44%,rgba(47,123,255,.28),transparent 65%),linear-gradient(180deg,#050d25,#030817)}
+html[data-theme="dark"] #intro .i-bar{background:rgba(120,170,255,.16)}
+html[data-theme="dark"] #intro .i-shadow{background:radial-gradient(rgba(0,0,0,.55),transparent 70%)}
+/* theme toggle button */
+.theme-btn{position:relative;width:44px;height:44px;border-radius:14px;border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  display:grid;place-items:center;cursor:pointer;color:var(--ink);overflow:hidden;transition:transform .3s var(--ease),border-color .3s}
+.theme-btn:hover{transform:translateY(-1px);border-color:rgba(10,92,255,.35)}
+.theme-btn svg{position:absolute;width:20px;height:20px;transition:transform .55s var(--ease),opacity .4s ease}
+.theme-btn .sun{transform:translateY(130%) rotate(-60deg);opacity:0}
+html[data-theme="dark"] .theme-btn .moon{transform:translateY(-130%) rotate(40deg);opacity:0}
+html[data-theme="dark"] .theme-btn .sun{transform:none;opacity:1}
+.theme-btn .sun{color:#ffc23a}.theme-btn .moon{color:#0a5cff}
+html[data-theme="dark"] .theme-btn .moon{color:#9fd0ff}
+/* smooth colour change while switching */
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+::view-transition-old(root){z-index:1}::view-transition-new(root){z-index:2}
+.theme-fade{position:fixed;inset:0;z-index:9998;pointer-events:none;will-change:opacity}
 </style>
 </head>
 <body class="no-js">
@@ -696,6 +752,10 @@ h1,h2,h3,h4,.section-title{letter-spacing:-.02em}
       <ul data-nav></ul>
     </nav>
     <div class="header-right">
+      <button class="theme-btn" type="button" data-theme-toggle aria-label="Switch to dark mode">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z"/></svg>
+      </button>
       <div class="header-cta">
         <a href="#community" class="btn btn-primary" data-i18n="cta.join">Join the Community</a>
       </div>
@@ -1444,6 +1504,46 @@ const ARROW = '<svg class="s-arrow" viewBox="0 0 24 24" fill="none" stroke="curr
     if (typeof setActive === "function") setActive(true);
     document.title = titleFor(currentUrlId);
   }
+
+  /* ---------- light / dark mode ---------- */
+  const themeBtn = $("[data-theme-toggle]");
+  const syncThemeUI = () => {
+    const dark = document.documentElement.getAttribute("data-theme") === "dark";
+    themeBtn.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+    const m = document.querySelector('meta[name="theme-color"]'); if (m) m.setAttribute("content", dark ? "#030817" : "#0a5cff");
+  };
+  let themeBusy = false;
+  themeBtn.addEventListener("click", () => {
+    if (themeBusy) return;
+    const root = document.documentElement, next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    const apply = () => { root.setAttribute("data-theme", next); store.set("blumi-theme", next); syncThemeUI(); };
+    const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) { apply(); return; }
+    themeBusy = true;
+    const r = themeBtn.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2;
+    const R = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    if (document.startViewTransition) {
+      /* circular reveal from the button, drawn by the compositor: no per-element repaint */
+      const vt = document.startViewTransition(apply);
+      vt.ready.then(() => {
+        root.animate({ clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${R}px at ${x}px ${y}px)`] },
+          { duration: 750, easing: "cubic-bezier(.65,0,.35,1)", pseudoElement: "::view-transition-new(root)" });
+      }).catch(() => {});
+      vt.finished.finally(() => { themeBusy = false; });
+    } else {
+      /* fallback: veil in the old background colour, swap underneath, fade the veil out */
+      const veil = document.createElement("div");
+      veil.className = "theme-fade";
+      veil.style.background = next === "dark" ? "#f4f9ff" : "#030817";
+      document.body.appendChild(veil);
+      requestAnimationFrame(() => {
+        apply();
+        const a = veil.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 550, easing: "ease-out" });
+        a.onfinish = () => { veil.remove(); themeBusy = false; };
+      });
+    }
+  });
+  syncThemeUI();
 
   /* ---------- year ---------- */
   $("#year").textContent = new Date().getFullYear();
