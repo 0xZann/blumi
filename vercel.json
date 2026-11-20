@@ -39,10 +39,6 @@
     {
       "source": "/official",
       "destination": "/index.html"
-    },
-    {
-      "source": "/brand-kit",
-      "destination": "/index.html"
     }
   ]
 }

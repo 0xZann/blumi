@@ -323,24 +323,25 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
 /* ==========================================================
    COMMUNITY
    ========================================================== */
-.community-wrap{position:relative;padding:56px 24px;border-radius:var(--r-xl);overflow:hidden;text-align:center;color:#fff;
-  background:radial-gradient(700px 400px at 50% -10%,rgba(95,180,255,.55),transparent 60%),linear-gradient(160deg,var(--ocean-2),var(--ocean) 70%);box-shadow:var(--shadow-glow)}
+.community-wrap{position:relative;padding:56px 24px;border-radius:var(--r-xl);overflow:hidden;text-align:center;color:var(--ink);
+  background:radial-gradient(700px 400px at 50% -10%,rgba(95,180,255,.28),transparent 60%),linear-gradient(180deg,#fff,rgba(255,255,255,.75));
+  border:1px solid rgba(255,255,255,.95);box-shadow:var(--shadow-md)}
 @media(min-width:768px){.community-wrap{padding:88px 56px}}
-.community-wrap .eyebrow{color:var(--sky)}
-.community-wrap .section-title{color:#fff}
-.community-wrap .section-lead{color:rgba(234,243,255,.75);margin-inline:auto;max-width:560px}
+.community-wrap .eyebrow{color:var(--electric)}
+.community-wrap .section-title{color:var(--ink)}
+.community-wrap .section-lead{color:var(--ink-soft);margin-inline:auto;max-width:560px}
 .community-wrap .mascot-tile{width:96px;height:96px;margin:0 auto 28px;animation:float 7s ease-in-out infinite}
 .socials{margin-top:44px;display:grid;gap:14px;text-align:left}
 @media(min-width:760px){.socials{grid-template-columns:repeat(2,1fr);gap:18px;max-width:760px;margin-inline:auto}}
-.social{position:relative;display:flex;align-items:center;gap:16px;padding:20px;border-radius:var(--r-md);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:transform .45s var(--ease),background .45s,border-color .45s}
-.social:hover{transform:translateY(-4px);background:rgba(255,255,255,.11);border-color:rgba(95,180,255,.45)}
-.social .s-icon{flex:none;width:50px;height:50px;border-radius:15px;display:grid;place-items:center;background:#fff;color:var(--ocean)}
+.social{position:relative;display:flex;align-items:center;gap:16px;padding:20px;border-radius:var(--r-md);background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-sm);
+  transition:transform .45s var(--ease),box-shadow .45s var(--ease),border-color .45s}
+.social:hover{transform:translateY(-4px);border-color:rgba(10,92,255,.35);box-shadow:var(--shadow-md)}
+.social .s-icon{flex:none;width:50px;height:50px;border-radius:15px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--sky),var(--electric));box-shadow:0 10px 22px -10px rgba(10,92,255,.8)}
 .social .s-icon svg{width:22px;height:22px}
-.social strong{display:block;font:600 16px/1.2 var(--font-display)}
-.social span{display:block;margin-top:4px;font-size:13px;color:rgba(234,243,255,.62)}
+.social strong{display:block;font:600 16px/1.2 var(--font-display);color:var(--ink)}
+.social span{display:block;margin-top:4px;font-size:13px;color:var(--ink-soft)}
 .social[aria-disabled="true"]{cursor:default}
-.social .s-arrow{margin-left:auto;width:20px;height:20px;opacity:.55}
+.social .s-arrow{margin-left:auto;width:20px;height:20px;color:var(--electric);opacity:.8}
 
 /* ==========================================================
    FOOTER
@@ -475,43 +476,6 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
 .never li::before{content:"";position:absolute;left:0;top:2px;width:20px;height:20px;border-radius:50%;background:rgba(255,90,90,.18) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff8a8a' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M7 7l10 10M17 7 7 17'/%3E%3C/svg%3E") center/11px no-repeat}
 .never p{margin-top:20px;font-size:14px;color:rgba(234,243,255,.7)}
 
-/* ---------- brand kit ---------- */
-.kit-grid{display:grid;gap:18px}
-@media(min-width:760px){.kit-grid{grid-template-columns:repeat(3,1fr)}}
-.kit-card{border-radius:var(--r-lg);background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-md);overflow:hidden;display:flex;flex-direction:column;transition:transform .45s var(--ease)}
-.kit-card:hover{transform:translateY(-5px)}
-.kit-prev{aspect-ratio:16/10;display:grid;place-items:center;background:repeating-conic-gradient(#eef5ff 0 25%,#fff 0 50%) 0 0/22px 22px}
-.kit-prev img{max-height:76%;max-width:84%;border-radius:12px;box-shadow:0 14px 30px -14px rgba(6,23,61,.45)}
-.kit-prev img.round{border-radius:0;box-shadow:none;filter:drop-shadow(0 14px 22px rgba(6,23,61,.3))}
-.kit-body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:6px;flex:1}
-.kit-body h3{font-size:18px;font-weight:700}
-.kit-body p{font-size:13.5px;color:var(--ink-soft)}
-.kit-body .btn{--pad:12px 18px;font-size:14px;margin-top:auto;align-self:flex-start;margin-top:14px}
-.kit-row{margin-top:24px;display:grid;gap:18px}
-@media(min-width:960px){.kit-row{grid-template-columns:1.3fr .7fr}}
-.panel{padding:26px;border-radius:var(--r-lg);background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-md)}
-.panel h3{font-size:18px;font-weight:700}
-.swatches{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
-.swatch{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;cursor:pointer;text-align:left;padding:0;font:inherit;color:inherit;transition:transform .3s var(--ease),box-shadow .3s}
-.swatch:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
-.swatch .c{height:70px}
-.swatch .m{padding:10px 12px}
-.swatch b{display:block;font:600 13px/1.2 var(--font-display)}
-.swatch code{display:block;margin-top:4px;font:500 12px/1 ui-monospace,Menlo,Consolas,monospace;color:var(--ink-soft)}
-.fonts{margin-top:16px;display:grid;gap:12px}
-.font-s{padding:16px;border-radius:16px;background:var(--ice-2);border:1px solid var(--line)}
-.font-s .aa{font:700 34px/1 var(--font-display)}
-.font-s .aa.body{font-family:var(--font-body);font-weight:600}
-.font-s small{display:block;margin-top:8px;font-size:13px;color:var(--ink-soft)}
-.dodont{margin-top:18px;display:grid;gap:18px}
-@media(min-width:760px){.dodont{grid-template-columns:1fr 1fr}}
-.dodont ul{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:10px}
-.dodont li{position:relative;padding-left:28px;font-size:14.5px;color:var(--ink-soft)}
-.dodont li::before{content:"";position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:50%}
-.dodont .do li::before{background:#d9f7e6 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b8a4a' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/11px no-repeat}
-.dodont .dont li::before{background:#ffe3e3 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d23b3b' stroke-width='3.2' stroke-linecap='round'%3E%3Cpath d='M7 7l10 10M17 7 7 17'/%3E%3C/svg%3E") center/10px no-repeat}
-.dodont h4{font:700 15px/1 var(--font-display)}
-.dodont .do h4{color:#0b8a4a}.dodont .dont h4{color:#d23b3b}
 .footer-grid{grid-template-columns:1fr}
 @media(min-width:640px){.footer-grid{grid-template-columns:1fr 1fr}}
 @media(min-width:960px){.footer-grid{grid-template-columns:1.5fr 1fr 1fr 1fr}}
@@ -888,7 +852,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
       <details class="faq-item reveal"><summary><span data-i18n="faq.q7">How do I stay safe from scams?</span><span class="pm" aria-hidden="true"></span></summary>
         <div class="faq-a" data-i18n="faq.a7">Only trust the links listed under <a href="#official">Official Channels</a>. BLUMI will never DM you first, never ask for your seed phrase or private key, and never ask you to send crypto to receive something back.</div></details>
       <details class="faq-item reveal"><summary><span data-i18n="faq.q8">Can I use the BLUMI mascot in my own content?</span><span class="pm" aria-hidden="true"></span></summary>
-        <div class="faq-a" data-i18n="faq.a8">Yes, for fan art, memes and community content. Use the files from the <a href="#brand-kit">Brand Kit</a>, keep the mascot's original shape and colours, and don't use it to suggest something is official when it isn't.</div></details>
+        <div class="faq-a" data-i18n="faq.a8">Yes, for fan art, memes and community content. Keep the mascot's original shape, proportions and colours, and don't use it on unofficial tokens or to suggest something is official when it isn't.</div></details>
     </div>
   </div>
 </section>
@@ -914,54 +878,6 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
         </ul>
         <p data-i18n="never.p">Spotted a fake? Let us know in the official Telegram so the community can stay safe.</p>
       </aside>
-    </div>
-  </div>
-</section>
-
-<!-- ================= BRAND KIT ================= -->
-<section class="section" id="brand-kit" aria-labelledby="kit-title">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow reveal">Brand Kit</span>
-      <h2 class="section-title reveal" id="kit-title" style="--d:.06s" data-i18n="kit.title">Create with <span class="grad-text">BLUMI.</span></h2>
-      <p class="section-lead reveal" style="--d:.12s" data-i18n="kit.lead">Official assets for fan art, memes and community content. Please keep the mascot exactly as it is.</p>
-    </div>
-    <div class="kit-grid">
-      <article class="kit-card reveal">
-        <div class="kit-prev"><img src="assets/brand/thumb-mascot.webp" alt="BLUMI mascot on blue background" width="180" height="180" loading="lazy"></div>
-        <div class="kit-body"><h3 data-i18n="kit.a1">Mascot · Square</h3><p>PNG · 1024 × 1024</p>
-          <a class="btn btn-primary" href="assets/brand/blumi-mascot-1024.png" download="BLUMI-mascot-1024.png"><span data-i18n="kit.dl">Download</span></a></div>
-      </article>
-      <article class="kit-card reveal" style="--d:.08s">
-        <div class="kit-prev"><img class="round" src="assets/brand/thumb-icon.webp" alt="BLUMI app-style rounded icon" width="180" height="180" loading="lazy"></div>
-        <div class="kit-body"><h3 data-i18n="kit.a2">Mascot · Rounded icon</h3><p data-i18n="kit.a2p">PNG · 1024 × 1024 · transparent corners</p>
-          <a class="btn btn-primary" href="assets/brand/blumi-icon-rounded-1024.png" download="BLUMI-icon-rounded-1024.png"><span data-i18n="kit.dl">Download</span></a></div>
-      </article>
-      <article class="kit-card reveal" style="--d:.16s">
-        <div class="kit-prev"><img src="assets/brand/thumb-banner.webp" alt="BLUMI social preview banner" width="300" height="158" loading="lazy"></div>
-        <div class="kit-body"><h3 data-i18n="kit.a3">Social banner</h3><p>PNG · 1200 × 630</p>
-          <a class="btn btn-primary" href="assets/og-image.png" download="BLUMI-banner-1200x630.png"><span data-i18n="kit.dl">Download</span></a></div>
-      </article>
-    </div>
-    <div class="kit-row">
-      <div class="panel reveal">
-        <h3 data-i18n="kit.colors">Colours</h3>
-        <div class="swatches" data-swatches></div>
-      </div>
-      <div class="panel reveal" style="--d:.08s">
-        <h3 data-i18n="kit.type">Typography</h3>
-        <div class="fonts">
-          <div class="font-s"><div class="aa">Sora</div><small data-i18n="kit.f1">Headlines & display</small></div>
-          <div class="font-s"><div class="aa body">Manrope</div><small data-i18n="kit.f2">Body text & UI</small></div>
-        </div>
-      </div>
-    </div>
-    <div class="panel reveal" style="margin-top:18px">
-      <h3 data-i18n="kit.usage">Using the mascot</h3>
-      <div class="dodont">
-        <div class="do"><h4 data-i18n="kit.do">Do</h4><ul data-i18n="kit.dolist"><li>Keep the original shape, proportions and colours</li><li>Give it room to breathe on blue or light backgrounds</li><li>Use it for fan art, memes and community content</li></ul></div>
-        <div class="dont"><h4 data-i18n="kit.dont">Don't</h4><ul data-i18n="kit.dontlist"><li>Stretch, squash, recolour or redraw it</li><li>Use it on unofficial tokens, sales or giveaways</li><li>Imply that your content is official BLUMI content</li></ul></div>
-      </div>
     </div>
   </div>
 </section>
@@ -1017,20 +933,11 @@ const BLUMI_CONFIG = {
     { id: "roadmap",    en: "Roadmap",    id_: "Roadmap",    header: true,  group: "explore" },
     { id: "community",  en: "Community",  id_: "Komunitas",  header: true,  group: "explore" },
     { id: "faq",        en: "FAQ",        id_: "FAQ",        header: false, group: "resources" },
-    { id: "official",   en: "Official Channels", id_: "Kanal Resmi", header: false, group: "resources" },
-    { id: "brand-kit",  en: "Brand Kit",  id_: "Brand Kit",  header: false, group: "resources" }
+    { id: "official",   en: "Official Channels", id_: "Kanal Resmi", header: false, group: "resources" }
   ],
   socials: [
     { key: "x",        label: "X / Twitter", handle: "@blumidotworld",       url: "https://x.com/blumidotworld" },
     { key: "telegram", label: "Telegram",    handle: "t.me/blumicommunity",  url: "https://t.me/blumicommunity" }
-  ],
-  colors: [
-    { name: "Electric Blue", id_: "Biru Elektrik",  hex: "#0A5CFF" },
-    { name: "Deep Ocean",    id_: "Biru Samudra",   hex: "#06173D" },
-    { name: "Sky Blue",      id_: "Biru Langit",    hex: "#5FB4FF" },
-    { name: "Ice Blue",      id_: "Biru Es",        hex: "#E8F3FF" },
-    { name: "Pure White",    id_: "Putih",          hex: "#FFFFFF" },
-    { name: "Base Blue",     id_: "Biru Base",      hex: "#0000FF" }
   ],
   web3: {
     network: "Base",
@@ -1140,20 +1047,13 @@ const I18N_ID = {
   "faq.q7": "Bagaimana supaya aman dari penipuan?",
   "faq.a7": "Hanya percayai link yang ada di <a href=\"#official\">Kanal Resmi</a>. BLUMI tidak akan pernah DM kamu duluan, tidak akan meminta seed phrase atau private key, dan tidak akan meminta kamu mengirim kripto untuk mendapatkan sesuatu.",
   "faq.q8": "Bolehkah saya memakai maskot BLUMI di konten saya?",
-  "faq.a8": "Boleh, untuk fan art, meme, dan konten komunitas. Pakai file dari <a href=\"#brand-kit\">Brand Kit</a>, jaga bentuk dan warna asli maskot, dan jangan gunakan untuk membuat sesuatu terlihat resmi padahal bukan.",
+  "faq.a8": "Boleh, untuk fan art, meme, dan konten komunitas. Jaga bentuk, proporsi, dan warna asli maskot, dan jangan gunakan untuk token tidak resmi atau membuat sesuatu terlihat resmi padahal bukan.",
   "off.eyebrow": "Kanal Resmi",
   "off.title": "Hanya percayai <span class=\"grad-text\">ini.</span>",
   "off.lead": "Penipu sering meniru nama dan logo. Ini satu-satunya kanal resmi BLUMI. Simpan halaman ini dan cek di sini sebelum kamu mengklik, bergabung, atau membeli apa pun.",
   "never.title": "BLUMI tidak akan pernah",
   "never.list": "<li>DM kamu duluan soal token, presale, atau airdrop</li><li>Meminta seed phrase atau private key kamu</li><li>Memintamu mengirim kripto untuk \"verifikasi\" atau mendapat hadiah</li><li>Membagikan alamat kontrak hanya lewat DM atau balasan komentar</li><li>Memintamu menghubungkan wallet di situs lain</li>",
   "never.p": "Menemukan akun atau token palsu? Kabari kami di Telegram resmi supaya komunitas tetap aman.",
-  "kit.title": "Berkarya bersama <span class=\"grad-text\">BLUMI.</span>",
-  "kit.lead": "Aset resmi untuk fan art, meme, dan konten komunitas. Tolong jaga maskotnya tetap seperti aslinya.",
-  "kit.a1": "Maskot · Kotak", "kit.a2": "Maskot · Ikon bulat", "kit.a2p": "PNG · 1024 × 1024 · sudut transparan", "kit.a3": "Banner sosial",
-  "kit.dl": "Unduh", "kit.colors": "Warna", "kit.type": "Tipografi", "kit.f1": "Judul & tampilan besar", "kit.f2": "Teks isi & antarmuka",
-  "kit.usage": "Memakai maskot", "kit.do": "Boleh", "kit.dont": "Jangan",
-  "kit.dolist": "<li>Pertahankan bentuk, proporsi, dan warna aslinya</li><li>Beri ruang lega di latar biru atau terang</li><li>Pakai untuk fan art, meme, dan konten komunitas</li>",
-  "kit.dontlist": "<li>Meregangkan, memipihkan, mengganti warna, atau menggambar ulang</li><li>Memakainya untuk token, penjualan, atau giveaway tidak resmi</li><li>Membuat kontenmu seolah-olah konten resmi BLUMI</li>",
   "foot.statement": "Menyatukan manusia, kreativitas, dan teknologi untuk membentuk dunia digital yang lebih terhubung.",
   "foot.explore": "Jelajahi", "foot.resources": "Sumber", "foot.rights": "Hak cipta dilindungi.", "foot.top": "Kembali ke atas"
 };
@@ -1312,19 +1212,11 @@ const ARROW = '<svg class="s-arrow" viewBox="0 0 24 24" fill="none" stroke="curr
     $$("[data-off-copy]").forEach(b => b.addEventListener("click", () => copyText(rows[+b.dataset.offCopy].copy, L("Copied","Tersalin"))));
   }
 
-  /* ---------- brand kit colours ---------- */
-  function renderSwatches(){
-    $("[data-swatches]").innerHTML = BLUMI_CONFIG.colors.map(c => `<button class="swatch" type="button" data-hex="${c.hex}" aria-label="${L("Copy","Salin")} ${c.hex}">
-      <div class="c" style="background:${c.hex};${c.hex === "#FFFFFF" ? "box-shadow:inset 0 -1px 0 var(--line)" : ""}"></div>
-      <div class="m"><b>${L(c.name, c.id_)}</b><code>${c.hex}</code></div></button>`).join("");
-    $$("[data-hex]").forEach(b => b.addEventListener("click", () => copyText(b.dataset.hex, `${b.dataset.hex} ${L("copied","disalin")}`)));
-  }
-
   /* ---------- apply language everywhere ---------- */
   function applyLang(){
     document.documentElement.lang = LANG;
     $$("[data-i18n]").forEach(el => { const k = el.dataset.i18n; el.innerHTML = (LANG === "id" && I18N_ID[k] != null) ? I18N_ID[k] : EN_HTML.get(el); });
-    renderNav(); renderSocials(); renderToken(); renderOfficial(); renderSwatches();
+    renderNav(); renderSocials(); renderToken(); renderOfficial();
     linkify();
     if (window.__blumiGame) window.__blumiGame.refresh();
     if (typeof setActive === "function") setActive(true);
