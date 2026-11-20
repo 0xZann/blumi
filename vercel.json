@@ -1,7 +1,48 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false,
   "rewrites": [
-    { "source": "/:section(about|mascot|ecosystem|playground|vision|token|roadmap|community|faq|official|brand-kit)", "destination": "/index.html" }
+    {
+      "source": "/about",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/mascot",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/ecosystem",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/playground",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/vision",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/token",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/roadmap",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/community",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/faq",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/official",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/brand-kit",
+      "destination": "/index.html"
+    }
   ]
 }
