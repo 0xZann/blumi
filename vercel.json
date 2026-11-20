@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/:section(about|ecosystem|vision|token|roadmap|community)", "destination": "/index.html" }
+  ]
+}

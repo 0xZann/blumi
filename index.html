@@ -7,7 +7,7 @@
 <meta name="description" content="BLUMI is an independent digital brand being built within the Base ecosystem. Beyond Limits, United Minds, Innovation — bringing people, creativity and technology together.">
 <meta name="theme-color" content="#0a5cff">
 <meta property="og:title" content="BLUMI — A Little Blue, A Bigger World">
-<meta property="og:description" content="An independent digital brand focused on creativity, community, technology and innovation. Built on Base.">
+<meta property="og:description" content="An independent digital brand focused on creativity, community, technology and innovation. Build on Base.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="BLUMI">
 <meta property="og:image" content="assets/og-image.png">
@@ -15,7 +15,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="BLUMI — A Little Blue, A Bigger World">
-<meta name="twitter:description" content="An independent digital brand focused on creativity, community, technology and innovation. Built on Base.">
+<meta name="twitter:description" content="An independent digital brand focused on creativity, community, technology and innovation. Build on Base.">
 <meta name="twitter:image" content="assets/og-image.png">
 <link rel="apple-touch-icon" href="assets/blumi-mascot-160.webp">
 <link rel="icon" type="image/png" href="assets/favicon.png">
@@ -392,7 +392,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
 
 <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
   <div data-mobile-nav style="display:flex;flex-direction:column"></div>
-  <span class="base-badge"><span class="dot" aria-hidden="true"></span>Built on Base</span>
+  <span class="base-badge"><span class="dot" aria-hidden="true"></span>Build on Base</span>
 </nav>
 
 <main id="main">
@@ -401,7 +401,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
 <section class="hero" id="home" aria-labelledby="hero-title">
   <div class="container hero-grid">
     <div class="hero-copy">
-      <span class="base-badge reveal"><span class="dot" aria-hidden="true"></span>Built on Base <small>· Independent Brand</small></span>
+      <span class="base-badge reveal"><span class="dot" aria-hidden="true"></span>Build on Base <small>· Independent Brand</small></span>
       <h1 id="hero-title" class="reveal" style="--d:.08s">
         <span class="line">A Little Blue,</span>
         <span class="line grad-text">A Bigger World.</span>
@@ -565,7 +565,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
         <div class="mascot-tile"><img src="assets/blumi-mascot-160.webp" alt="" width="88" height="88" loading="lazy"></div>
         <h3 data-t="name"></h3>
         <span class="token-ticker" data-t="ticker"></span>
-        <p class="token-net"><i aria-hidden="true"></i>Built on Base</p>
+        <p class="token-net"><i aria-hidden="true"></i>Build on Base</p>
       </div>
       <div class="token-body">
         <div class="token-stats" data-t="stats"></div>
@@ -657,7 +657,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
         <a href="#home" class="brand"><img src="assets/blumi-mascot-160.webp" alt="" width="38" height="38" loading="lazy">BLUMI</a>
         <p class="footer-statement">Bringing people, creativity, and technology together to shape a more connected digital world.</p>
         <p class="footer-tag">A LITTLE BLUE, A BIGGER WORLD.</p>
-        <div style="margin-top:22px"><span class="base-badge"><span class="dot" aria-hidden="true"></span>Built on Base</span></div>
+        <div style="margin-top:22px"><span class="base-badge"><span class="dot" aria-hidden="true"></span>Build on Base</span></div>
       </div>
       <div>
         <h4>Explore</h4>
@@ -826,20 +826,6 @@ const ARROW = '<svg class="s-arrow" viewBox="0 0 24 24" fill="none" stroke="curr
   document.addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
   window.addEventListener("resize", () => { if (window.innerWidth >= 960) setMenu(false); });
 
-  /* ---------- smooth scroll (keeps URL clean inside sandboxed viewers) ---------- */
-  document.addEventListener("click", e => {
-    const a = e.target.closest('a[href^="#"]');
-    if (!a) return;
-    const id = a.getAttribute("href").slice(1);
-    const el = document.getElementById(id);
-    if (!el) return;
-    e.preventDefault();
-    const behavior = matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
-    if (id === "home") window.scrollTo({ top: 0, behavior });
-    else el.scrollIntoView({ behavior });
-    try { history.replaceState(null, "", "#" + id); } catch (_) {}
-  });
-
   /* ---------- scroll reveal ---------- */
   const reveals = $$(".reveal");
   if ("IntersectionObserver" in window) {
@@ -849,16 +835,92 @@ const ARROW = '<svg class="s-arrow" viewBox="0 0 24 24" fill="none" stroke="curr
     reveals.forEach(r => io.observe(r));
   } else reveals.forEach(r => r.classList.add("in"));
 
-  /* ---------- active section in nav ---------- */
+  /* ==========================================================
+     ROUTING — clean URLs (/about, /token, /roadmap …)
+     Clean paths are used when the site runs as its own page
+     (Vercel). Inside an embedded preview it falls back to #hash.
+     vercel.json rewrites each section path to index.html.
+     ========================================================== */
+  const SECTION_IDS = BLUMI_CONFIG.nav.map(n => n.id);
+  let PATH_MODE = false;
+  try { PATH_MODE = window.self === window.top && /^https?:$/.test(location.protocol); } catch (_) {}
+  const urlFor = id => PATH_MODE ? (id === "home" ? "/" : "/" + id) : "#" + id;
+  const BASE_TITLE = "BLUMI — A Little Blue, A Bigger World";
+  const titleFor = id => id === "home" ? BASE_TITLE : `${BLUMI_CONFIG.nav.find(n => n.id === id).label} — BLUMI`;
+  const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // every in-page link to a section gets a real, shareable href
+  $$('a[href^="#"]').forEach(a => {
+    const id = a.getAttribute("href").slice(1);
+    if (!SECTION_IDS.includes(id)) return;          // e.g. #main skip link stays as is
+    a.dataset.target = id;
+    a.setAttribute("href", urlFor(id));
+  });
+
+  const sectionFromLocation = () => {
+    const fromPath = location.pathname.replace(/^\/+|\/+$/g, "").toLowerCase();
+    if (PATH_MODE && SECTION_IDS.includes(fromPath)) return fromPath;
+    const fromHash = location.hash.slice(1);
+    if (SECTION_IDS.includes(fromHash)) return fromHash;
+    return "home";
+  };
+
+  let lockUntil = 0;                                 // pause URL syncing while a click-scroll runs
+  const goTo = (id, behavior) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    lockUntil = Date.now() + (behavior === "smooth" ? 1200 : 50);
+    if (id === "home") window.scrollTo({ top: 0, behavior });
+    else el.scrollIntoView({ behavior });
+  };
+
+  let currentUrlId = sectionFromLocation();
+  const setUrl = (id, push) => {
+    if (id === currentUrlId && !push) return;
+    currentUrlId = id;
+    document.title = titleFor(id);
+    try {
+      const url = urlFor(id) === "#home" ? location.pathname + location.search : urlFor(id);
+      history[push ? "pushState" : "replaceState"]({ id }, "", url);
+    } catch (_) {}
+  };
+
+  document.addEventListener("click", e => {
+    const a = e.target.closest("a[data-target]");
+    if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;   // allow open-in-new-tab
+    e.preventDefault();
+    const id = a.dataset.target;
+    goTo(id, reduce() ? "auto" : "smooth");
+    if (id !== currentUrlId) setUrl(id, true);
+  });
+
+  window.addEventListener("popstate", () => {
+    const id = sectionFromLocation();
+    currentUrlId = id; document.title = titleFor(id);
+    goTo(id, reduce() ? "auto" : "smooth");
+  });
+
+  /* ---------- active section in nav + URL follows scrolling ---------- */
   const links = $$("[data-link]");
-  const sections = BLUMI_CONFIG.nav.map(n => document.getElementById(n.id)).filter(Boolean);
+  const sections = SECTION_IDS.map(id => document.getElementById(id)).filter(Boolean);
   const setActive = () => {
     const y = window.scrollY + window.innerHeight * .35;
     let current = sections[0].id;
     sections.forEach(s => { if (s.offsetTop <= y) current = s.id; });
     if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) current = sections[sections.length-1].id;
     links.forEach(l => l.classList.toggle("active", l.dataset.link === current));
+    if (Date.now() > lockUntil) setUrl(current, false);
   };
+
+  // land on the section in the URL (e.g. someone opens blumi's /token link)
+  const startId = sectionFromLocation();
+  document.title = titleFor(startId);
+  if (startId !== "home") {
+    history.scrollRestoration = "manual";
+    lockUntil = Date.now() + 600;
+    requestAnimationFrame(() => goTo(startId, "auto"));
+    window.addEventListener("load", () => goTo(startId, "auto"), { once: true });
+  }
   setActive(); window.addEventListener("scroll", setActive, { passive: true });
 
   /* ---------- subtle mascot parallax (pointer devices only) ---------- */
