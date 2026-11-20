@@ -368,10 +368,157 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
   .reveal{opacity:1;transform:none}
 }
+
+/* ==========================================================
+   v2 ADDITIONS — language toggle, mascot, playground,
+   FAQ, official channels, brand kit
+   ========================================================== */
+.header-right{display:flex;align-items:center;gap:10px}
+.lang-btn{display:inline-flex;align-items:center;padding:4px;border-radius:999px;border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);cursor:pointer;font:600 12px/1 var(--font-display);letter-spacing:.06em;color:var(--ink-soft)}
+.lang-btn span{padding:8px 10px;border-radius:999px;transition:background .3s,color .3s}
+.lang-btn span.on{background:linear-gradient(135deg,var(--electric-2),var(--electric));color:#fff;box-shadow:0 4px 12px -4px rgba(10,92,255,.7)}
+.header-cta{display:none!important}
+@media(min-width:1280px){.header-cta{display:block!important}}
+.mobile-nav{overflow-y:auto;padding-bottom:40px}
+.mobile-nav a{font-size:22px;padding:11px 4px}
+.mobile-nav .m-group{margin:18px 0 4px;font:600 11px/1 var(--font-display);letter-spacing:.2em;text-transform:uppercase;color:var(--electric)}
+.mobile-nav .base-badge{margin-top:24px}
+
+/* ---------- mascot ---------- */
+.mascot-sec{background:linear-gradient(180deg,var(--ice-2),#fff 50%,var(--ice-2))}
+.mascot-grid{display:grid;gap:48px;align-items:center}
+@media(min-width:960px){.mascot-grid{grid-template-columns:.9fr 1.1fr;gap:72px}}
+.mascot-stage{position:relative;width:min(78vw,440px);aspect-ratio:1;margin:0 auto}
+.mascot-stage .mascot-tile{position:absolute;inset:10%;animation:float 7s ease-in-out infinite}
+.mascot-stage .ripple{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(10,92,255,.22);animation:ripple 4.5s cubic-bezier(.2,.6,.3,1) infinite}
+.mascot-stage .ripple:nth-child(2){animation-delay:-1.5s}.mascot-stage .ripple:nth-child(3){animation-delay:-3s}
+@keyframes ripple{0%{transform:scale(.55);opacity:0}15%{opacity:1}100%{transform:scale(1.15);opacity:0}}
+.mascot-copy .section-title{margin-top:16px}
+.mascot-story{margin-top:20px;font-size:clamp(16px,1.6vw,18px);color:var(--ink-soft)}
+.mascot-story + .mascot-story{margin-top:14px}
+.traits{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px}
+.trait{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-sm);font:600 14px/1 var(--font-display)}
+.trait i{font-style:normal}
+.facts{margin-top:28px;display:grid;gap:14px}
+@media(min-width:640px){.facts{grid-template-columns:repeat(3,1fr)}}
+.fact{padding:20px;border-radius:var(--r-md);background:linear-gradient(180deg,#fff,rgba(255,255,255,.7));border:1px solid var(--line);box-shadow:var(--shadow-sm);transition:transform .4s var(--ease)}
+.fact:hover{transform:translateY(-4px)}
+.fact small{display:block;font:600 11px/1 var(--font-display);letter-spacing:.18em;text-transform:uppercase;color:var(--electric)}
+.fact p{margin-top:10px;font-size:14.5px;color:var(--ink-soft)}
+.fact strong{display:block;margin-top:8px;font:700 17px/1.3 var(--font-display);color:var(--ink)}
+
+/* ---------- playground game ---------- */
+.play-sec{background:linear-gradient(180deg,var(--ice-2),var(--ice))}
+.game-card{position:relative;border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--shadow-glow);background:linear-gradient(180deg,#3d8bff,#0a5cff 55%,#0539b8);user-select:none;-webkit-user-select:none}
+.game-card canvas{display:block;width:100%;height:clamp(420px,62vh,560px);cursor:none;outline:none}
+.game-card.playing canvas{touch-action:none}
+.game-card:not(.playing) canvas{cursor:default}
+.hud{position:absolute;left:16px;right:16px;top:16px;display:flex;gap:8px;justify-content:space-between;pointer-events:none;z-index:2}
+.hud .chip-h{display:inline-flex;align-items:baseline;gap:8px;padding:10px 14px;border-radius:14px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff}
+.hud .chip-h small{font:600 10.5px/1 var(--font-display);letter-spacing:.16em;text-transform:uppercase;opacity:.75}
+.hud .chip-h b{font:700 20px/1 var(--font-display);font-variant-numeric:tabular-nums}
+.hud .hud-l{display:flex;gap:8px}
+.overlay{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;color:#fff;
+  background:radial-gradient(600px 400px at 50% 40%,rgba(255,255,255,.18),transparent 70%),rgba(4,18,58,.38);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);transition:opacity .4s var(--ease),visibility .4s}
+.overlay[hidden]{display:flex!important;opacity:0;visibility:hidden;pointer-events:none}
+.overlay h3{font-size:clamp(30px,5vw,48px);font-weight:800}
+.overlay p{margin-top:10px;max-width:420px;color:rgba(255,255,255,.85);font-size:15.5px}
+.overlay .legend{margin-top:22px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.overlay .legend>span{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.14);font:600 13px/1 var(--font-display)}
+.overlay .legend i{width:14px;height:14px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;display:inline-block}
+.overlay .actions{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.overlay .btn-ghost{background:rgba(255,255,255,.14);color:#fff;border-color:rgba(255,255,255,.35)}
+.overlay .big-score{font:800 clamp(56px,10vw,96px)/1 var(--font-display);margin-top:6px;letter-spacing:-.03em}
+.overlay .newbest{margin-top:8px;display:inline-block;padding:6px 12px;border-radius:999px;background:#ffd34d;color:#4a3300;font:700 12px/1 var(--font-display);letter-spacing:.12em}
+.game-note{margin-top:18px;text-align:center;font-size:13.5px;color:var(--ink-soft)}
+
+/* ---------- FAQ ---------- */
+.faq-list{max-width:860px;margin:0 auto;display:grid;gap:12px}
+.faq-item{border-radius:var(--r-md);background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-sm);overflow:hidden;transition:box-shadow .3s,border-color .3s}
+.faq-item[open]{border-color:rgba(10,92,255,.3);box-shadow:var(--shadow-md)}
+.faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 22px;font:600 16.5px/1.4 var(--font-display)}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary .pm{flex:none;width:30px;height:30px;border-radius:10px;background:var(--ice);position:relative;transition:background .3s,transform .4s var(--ease)}
+.faq-item summary .pm::before,.faq-item summary .pm::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:2px;margin:-1px 0 0 -6px;border-radius:2px;background:var(--electric);transition:transform .4s var(--ease)}
+.faq-item summary .pm::after{transform:rotate(90deg)}
+.faq-item[open] summary .pm{background:var(--electric);transform:rotate(180deg)}
+.faq-item[open] summary .pm::before{background:#fff}
+.faq-item[open] summary .pm::after{transform:rotate(0);background:#fff}
+.faq-a{padding:0 22px 22px;color:var(--ink-soft);animation:faqIn .45s var(--ease)}
+.faq-a a{color:var(--electric);font-weight:600}
+@keyframes faqIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+/* ---------- official channels ---------- */
+.official-sec{background:linear-gradient(180deg,var(--ice-2),var(--ice))}
+.off-grid{display:grid;gap:24px}
+@media(min-width:960px){.off-grid{grid-template-columns:1.25fr .75fr;align-items:start}}
+.off-list{border-radius:var(--r-lg);background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-md);overflow:hidden}
+.off-row{display:flex;align-items:center;gap:16px;padding:18px 20px;border-bottom:1px solid var(--line)}
+.off-row:last-child{border-bottom:0}
+.off-ic{flex:none;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--sky),var(--electric))}
+.off-ic svg{width:22px;height:22px}
+.off-main{min-width:0;flex:1}
+.off-main small{display:block;font:600 11px/1 var(--font-display);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+.off-main strong{display:block;margin-top:6px;font:600 16px/1.3 var(--font-display);overflow-wrap:anywhere}
+.off-main strong.soon{color:var(--electric);letter-spacing:.14em}
+.off-acts{display:flex;gap:6px;flex:none}
+.icon-btn{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;border:1px solid var(--line);background:var(--ice-2);color:var(--ink);cursor:pointer;transition:background .25s,transform .25s var(--ease),color .25s}
+.icon-btn:hover{background:var(--electric);color:#fff;transform:translateY(-2px)}
+.icon-btn:disabled{opacity:.4;pointer-events:none}
+.icon-btn svg{width:18px;height:18px}
+.verified{display:inline-flex;align-items:center;gap:6px;margin-left:8px;padding:4px 8px;border-radius:999px;background:rgba(10,92,255,.08);color:var(--electric);font:600 10.5px/1 var(--font-display);letter-spacing:.12em;vertical-align:middle}
+.never{padding:30px 28px;border-radius:var(--r-lg);color:#fff;background:radial-gradient(400px 300px at 100% 0%,rgba(95,180,255,.4),transparent 60%),linear-gradient(160deg,var(--ocean-2),var(--ocean));box-shadow:var(--shadow-glow)}
+.never h3{font-size:22px;font-weight:700;display:flex;align-items:center;gap:10px}
+.never h3 svg{width:24px;height:24px;color:#ffd34d}
+.never ul{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:12px}
+.never li{position:relative;padding-left:30px;color:rgba(234,243,255,.85);font-size:15px}
+.never li::before{content:"";position:absolute;left:0;top:2px;width:20px;height:20px;border-radius:50%;background:rgba(255,90,90,.18) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff8a8a' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M7 7l10 10M17 7 7 17'/%3E%3C/svg%3E") center/11px no-repeat}
+.never p{margin-top:20px;font-size:14px;color:rgba(234,243,255,.7)}
+
+/* ---------- brand kit ---------- */
+.kit-grid{display:grid;gap:18px}
+@media(min-width:760px){.kit-grid{grid-template-columns:repeat(3,1fr)}}
+.kit-card{border-radius:var(--r-lg);background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-md);overflow:hidden;display:flex;flex-direction:column;transition:transform .45s var(--ease)}
+.kit-card:hover{transform:translateY(-5px)}
+.kit-prev{aspect-ratio:16/10;display:grid;place-items:center;background:repeating-conic-gradient(#eef5ff 0 25%,#fff 0 50%) 0 0/22px 22px}
+.kit-prev img{max-height:76%;max-width:84%;border-radius:12px;box-shadow:0 14px 30px -14px rgba(6,23,61,.45)}
+.kit-prev img.round{border-radius:0;box-shadow:none;filter:drop-shadow(0 14px 22px rgba(6,23,61,.3))}
+.kit-body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:6px;flex:1}
+.kit-body h3{font-size:18px;font-weight:700}
+.kit-body p{font-size:13.5px;color:var(--ink-soft)}
+.kit-body .btn{--pad:12px 18px;font-size:14px;margin-top:auto;align-self:flex-start;margin-top:14px}
+.kit-row{margin-top:24px;display:grid;gap:18px}
+@media(min-width:960px){.kit-row{grid-template-columns:1.3fr .7fr}}
+.panel{padding:26px;border-radius:var(--r-lg);background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-md)}
+.panel h3{font-size:18px;font-weight:700}
+.swatches{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
+.swatch{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;cursor:pointer;text-align:left;padding:0;font:inherit;color:inherit;transition:transform .3s var(--ease),box-shadow .3s}
+.swatch:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.swatch .c{height:70px}
+.swatch .m{padding:10px 12px}
+.swatch b{display:block;font:600 13px/1.2 var(--font-display)}
+.swatch code{display:block;margin-top:4px;font:500 12px/1 ui-monospace,Menlo,Consolas,monospace;color:var(--ink-soft)}
+.fonts{margin-top:16px;display:grid;gap:12px}
+.font-s{padding:16px;border-radius:16px;background:var(--ice-2);border:1px solid var(--line)}
+.font-s .aa{font:700 34px/1 var(--font-display)}
+.font-s .aa.body{font-family:var(--font-body);font-weight:600}
+.font-s small{display:block;margin-top:8px;font-size:13px;color:var(--ink-soft)}
+.dodont{margin-top:18px;display:grid;gap:18px}
+@media(min-width:760px){.dodont{grid-template-columns:1fr 1fr}}
+.dodont ul{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:10px}
+.dodont li{position:relative;padding-left:28px;font-size:14.5px;color:var(--ink-soft)}
+.dodont li::before{content:"";position:absolute;left:0;top:2px;width:18px;height:18px;border-radius:50%}
+.dodont .do li::before{background:#d9f7e6 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b8a4a' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/11px no-repeat}
+.dodont .dont li::before{background:#ffe3e3 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d23b3b' stroke-width='3.2' stroke-linecap='round'%3E%3Cpath d='M7 7l10 10M17 7 7 17'/%3E%3C/svg%3E") center/10px no-repeat}
+.dodont h4{font:700 15px/1 var(--font-display)}
+.dodont .do h4{color:#0b8a4a}.dodont .dont h4{color:#d23b3b}
+.footer-grid{grid-template-columns:1fr}
+@media(min-width:640px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:960px){.footer-grid{grid-template-columns:1.5fr 1fr 1fr 1fr}}
 </style>
 </head>
 <body class="no-js">
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
 
 <!-- ================= HEADER ================= -->
 <header class="header" id="header">
@@ -383,10 +530,12 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
     <nav class="nav" aria-label="Primary">
       <ul data-nav></ul>
     </nav>
-    <div class="header-cta">
-      <a href="#community" class="btn btn-primary">Join the Community</a>
+    <div class="header-right">
+      <div class="header-cta">
+        <a href="#community" class="btn btn-primary" data-i18n="cta.join">Join the Community</a>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav"><span></span></button>
     </div>
-    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav"><span></span></button>
   </div>
 </header>
 
@@ -407,16 +556,16 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
         <span class="line grad-text">A Bigger World.</span>
       </h1>
       <p class="hero-meaning reveal" style="--d:.16s"><b>B</b>eyond <b>L</b>imits · <b>U</b>nited <b>M</b>inds · <b>I</b>nnovation</p>
-      <p class="hero-sub reveal" style="--d:.22s">A new digital experience built around creativity, technology, and community.</p>
+      <p class="hero-sub reveal" style="--d:.22s" data-i18n="hero.sub">A new digital experience built around creativity, technology, and community.</p>
       <div class="hero-actions reveal" style="--d:.3s">
-        <a href="#about" class="btn btn-primary">Explore BLUMI
+        <a href="#about" class="btn btn-primary"><span data-i18n="hero.explore">Explore BLUMI</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a href="#vision" class="btn btn-ghost">Discover Our Vision</a>
-        <a href="#token" class="btn btn-ghost">BLUMI Token</a>
+        <a href="#vision" class="btn btn-ghost" data-i18n="hero.vision">Discover Our Vision</a>
+        <a href="#token" class="btn btn-ghost" data-i18n="hero.token">BLUMI Token</a>
       </div>
     </div>
 
-    <div class="hero-visual reveal" style="--d:.15s" aria-hidden="false">
+    <div class="hero-visual reveal" style="--d:.15s">
       <div class="halo" aria-hidden="true"></div>
       <div class="orbit" aria-hidden="true"></div>
       <div class="orbit o2" aria-hidden="true"></div>
@@ -428,8 +577,8 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
       <span class="bubble" aria-hidden="true" style="width:24px;height:24px;right:4%;top:8%;--t:9s;--dl:-2s"></span>
       <span class="bubble" aria-hidden="true" style="width:32px;height:32px;right:0;bottom:22%;--t:8s;--dl:-4s"></span>
       <span class="bubble" aria-hidden="true" style="width:16px;height:16px;left:12%;bottom:12%;--t:6s;--dl:-1s"></span>
-      <span class="chip" aria-hidden="true" style="left:-4%;bottom:26%;--t:9s"><i></i>CREATIVITY</span>
-      <span class="chip" aria-hidden="true" style="right:-6%;top:30%;--t:10s;--dl:-3s"><i></i>COMMUNITY</span>
+      <span class="chip" aria-hidden="true" style="left:-4%;bottom:26%;--t:9s"><i></i><span data-i18n="chip.creativity">CREATIVITY</span></span>
+      <span class="chip" aria-hidden="true" style="right:-6%;top:30%;--t:10s;--dl:-3s"><i></i><span data-i18n="chip.community">COMMUNITY</span></span>
     </div>
   </div>
   <a href="#about" class="scroll-cue" aria-label="Scroll to About"><span></span>SCROLL</a>
@@ -439,9 +588,9 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
 <section class="section" id="about" aria-labelledby="about-title">
   <div class="container">
     <div class="section-head center">
-      <span class="eyebrow reveal">About BLUMI</span>
-      <h2 class="section-title reveal" id="about-title" style="--d:.06s">More Than a Name.<br><span class="grad-text">A Bigger Vision.</span></h2>
-      <p class="section-lead reveal" style="--d:.12s">Five letters, three principles. BLUMI is an independent digital brand focused on creativity, community, technology, and innovation.</p>
+      <span class="eyebrow reveal" data-i18n="about.eyebrow">About BLUMI</span>
+      <h2 class="section-title reveal" id="about-title" style="--d:.06s" data-i18n="about.title">More Than a Name.<br><span class="grad-text">A Bigger Vision.</span></h2>
+      <p class="section-lead reveal" style="--d:.12s" data-i18n="about.lead">Five letters, three principles. BLUMI is an independent digital brand focused on creativity, community, technology, and innovation.</p>
     </div>
 
     <div class="principles">
@@ -449,25 +598,53 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
         <span class="p-letter" aria-hidden="true">BL</span>
         <div class="p-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></div>
         <h3>BEYOND LIMITS</h3>
-        <p>We believe innovation should never be restricted by boundaries.</p>
+        <p data-i18n="about.p1">We believe innovation should never be restricted by boundaries.</p>
       </article>
       <article class="p-card reveal" style="--d:.1s">
         <span class="p-letter" aria-hidden="true">UM</span>
         <div class="p-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9.5" r="2.5"/><path d="M2.5 20c.6-3.6 3.3-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><path d="M16 14.6c2.6-.2 4.9 1.3 5.5 4.4"/></svg></div>
         <h3>UNITED MINDS</h3>
-        <p>Great ideas become stronger when people come together.</p>
+        <p data-i18n="about.p2">Great ideas become stronger when people come together.</p>
       </article>
       <article class="p-card reveal" style="--d:.2s">
         <span class="p-letter" aria-hidden="true">I</span>
         <div class="p-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg></div>
         <h3>INNOVATION</h3>
-        <p>We embrace creativity and technology to explore new possibilities.</p>
+        <p data-i18n="about.p3">We embrace creativity and technology to explore new possibilities.</p>
       </article>
     </div>
 
     <div class="philosophy reveal">
-      <blockquote>“Bringing people, creativity, and technology together to shape a more connected digital world.”</blockquote>
-      <cite>The BLUMI Philosophy</cite>
+      <blockquote data-i18n="about.quote">“Bringing people, creativity, and technology together to shape a more connected digital world.”</blockquote>
+      <cite data-i18n="about.cite">The BLUMI Philosophy</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MASCOT ================= -->
+<section class="section mascot-sec" id="mascot" aria-labelledby="mascot-title">
+  <div class="container mascot-grid">
+    <div class="mascot-stage reveal" aria-hidden="true">
+      <span class="ripple"></span><span class="ripple"></span><span class="ripple"></span>
+      <div class="mascot-tile"><img src="assets/blumi-mascot-720.webp" alt="" width="720" height="720" loading="lazy"></div>
+    </div>
+    <div class="mascot-copy">
+      <span class="eyebrow reveal" data-i18n="mascot.eyebrow">Meet the Mascot</span>
+      <h2 class="section-title reveal" id="mascot-title" style="--d:.06s" data-i18n="mascot.title">A little drop with a <span class="grad-text">big world inside.</span></h2>
+      <p class="mascot-story reveal" style="--d:.12s" data-i18n="mascot.s1">Every ocean starts with a single drop. The BLUMI mascot is that drop: small, curious and always ready to flow into something bigger.</p>
+      <p class="mascot-story reveal" style="--d:.16s" data-i18n="mascot.s2">Wherever it goes, it carries the spirit of the brand: going beyond limits, bringing minds together and making room for new ideas. On its own it's a little blue. Together with the community, it becomes a bigger world.</p>
+      <div class="traits reveal" style="--d:.2s">
+        <span class="trait"><i aria-hidden="true">💧</i><span data-i18n="trait.1">Curious</span></span>
+        <span class="trait"><i aria-hidden="true">🤝</i><span data-i18n="trait.2">Friendly</span></span>
+        <span class="trait"><i aria-hidden="true">✨</i><span data-i18n="trait.3">Optimistic</span></span>
+        <span class="trait"><i aria-hidden="true">🚀</i><span data-i18n="trait.4">Futuristic</span></span>
+        <span class="trait"><i aria-hidden="true">🌊</i><span data-i18n="trait.5">Always flowing</span></span>
+      </div>
+      <div class="facts">
+        <div class="fact reveal" style="--d:.05s"><small data-i18n="fact.1k">Shape</small><strong data-i18n="fact.1v">A single water drop</strong><p data-i18n="fact.1p">Small on its own, powerful together.</p></div>
+        <div class="fact reveal" style="--d:.1s"><small data-i18n="fact.2k">Colour</small><strong data-i18n="fact.2v">Electric blue</strong><p data-i18n="fact.2p">A little blue, building on Base.</p></div>
+        <div class="fact reveal" style="--d:.15s"><small data-i18n="fact.3k">Superpower</small><strong data-i18n="fact.3v">Making ripples</strong><p data-i18n="fact.3p">One small idea, spreading far.</p></div>
+      </div>
     </div>
   </div>
 </section>
@@ -476,50 +653,91 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
 <section class="section eco-sec" id="ecosystem" aria-labelledby="eco-title">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow reveal">The BLUMI Ecosystem</span>
-      <h2 class="section-title reveal" id="eco-title" style="--d:.06s">One brand.<br>Four worlds to grow into.</h2>
-      <p class="section-lead reveal" style="--d:.12s">The ecosystem is designed to grow step by step. Each division below is a planned concept that will be shaped together with the community.</p>
+      <span class="eyebrow reveal" data-i18n="eco.eyebrow">The BLUMI Ecosystem</span>
+      <h2 class="section-title reveal" id="eco-title" style="--d:.06s" data-i18n="eco.title">One brand.<br>Four worlds to grow into.</h2>
+      <p class="section-lead reveal" style="--d:.12s" data-i18n="eco.lead">The ecosystem is designed to grow step by step. Each division below is a planned concept that will be shaped together with the community.</p>
     </div>
 
     <div class="eco-grid">
       <article class="eco-card reveal">
         <div class="eco-top">
           <div class="eco-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/></svg></div>
-          <span class="tag">Concept</span>
+          <span class="tag" data-i18n="tag.concept">Concept</span>
         </div>
         <h3>BLUMI</h3><h4>Community</h4>
-        <p>A welcoming community where people connect, collaborate, and share ideas.</p>
+        <p data-i18n="eco.c1">A welcoming community where people connect, collaborate, and share ideas.</p>
       </article>
       <article class="eco-card reveal" style="--d:.08s">
         <div class="eco-top">
           <div class="eco-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="7" width="19" height="11" rx="5.5"/><path d="M7 11v3M5.5 12.5h3M15.5 11.5h.01M18 13.5h.01"/></svg></div>
-          <span class="tag">Concept</span>
+          <span class="tag" data-i18n="tag.preview">Preview live</span>
         </div>
         <h3>BLUMI</h3><h4>Playground</h4>
-        <p>An interactive digital experience featuring games and community activities.</p>
+        <p data-i18n="eco.c2">An interactive digital experience featuring games and community activities. Try the first mini game below.</p>
       </article>
       <article class="eco-card reveal" style="--d:.16s">
         <div class="eco-top">
           <div class="eco-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5c3.5 4.2 6.5 7.6 6.5 11.4a6.5 6.5 0 0 1-13 0C5.5 10.1 8.5 6.7 12 2.5z"/><path d="M9.5 14.5a2.6 2.6 0 0 0 2.5 2"/></svg></div>
-          <span class="tag">Future concept</span>
+          <span class="tag" data-i18n="tag.future">Future concept</span>
         </div>
         <h3>BLUMI</h3><h4>Collectibles</h4>
-        <p>A future digital collectibles concept inspired by the BLUMI mascot.</p>
+        <p data-i18n="eco.c3">A future digital collectibles concept inspired by the BLUMI mascot.</p>
       </article>
       <article class="eco-card reveal" style="--d:.24s">
         <div class="eco-top">
           <div class="eco-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6.5L4.6 18.4A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.4-2.6L14 9.5V3"/><path d="M7.5 15h9"/></svg></div>
-          <span class="tag">Concept</span>
+          <span class="tag" data-i18n="tag.concept">Concept</span>
         </div>
         <h3>BLUMI</h3><h4>Labs</h4>
-        <p>An innovation space exploring creative digital products and Web3 experiences.</p>
+        <p data-i18n="eco.c4">An innovation space exploring creative digital products and Web3 experiences.</p>
       </article>
     </div>
 
     <p class="notice reveal">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.8h.01"/></svg>
-      <span>These divisions are planned concepts, not live products. Their scope, timing and availability may evolve as BLUMI develops, and updates will be shared through official BLUMI channels.</span>
+      <span data-i18n="eco.notice">These divisions are planned concepts, not live products. Their scope, timing and availability may evolve as BLUMI develops, and updates will be shared through official BLUMI channels.</span>
     </p>
+  </div>
+</section>
+
+<!-- ================= PLAYGROUND ================= -->
+<section class="section play-sec" id="playground" aria-labelledby="play-title">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow reveal" data-i18n="play.eyebrow">BLUMI Playground · Preview</span>
+      <h2 class="section-title reveal" id="play-title" style="--d:.06s" data-i18n="play.title">Catch the <span class="grad-text">drops.</span></h2>
+      <p class="section-lead reveal" style="--d:.12s" data-i18n="play.lead">A tiny first taste of BLUMI Playground. Move BLUMI and catch as many drops as you can in 30 seconds.</p>
+    </div>
+    <div class="game-card reveal" id="gameCard">
+      <canvas id="game" tabindex="0" aria-label="BLUMI Catch the Drops mini game"></canvas>
+      <div class="hud" aria-hidden="true">
+        <div class="hud-l">
+          <span class="chip-h"><small data-i18n="hud.score">Score</small><b data-g="score">0</b></span>
+          <span class="chip-h"><small data-i18n="hud.time">Time</small><b data-g="time">30</b></span>
+        </div>
+        <span class="chip-h"><small data-i18n="hud.best">Best</small><b data-g="best">0</b></span>
+      </div>
+      <div class="overlay" data-g="start">
+        <h3 data-i18n="g.title">Catch the Drops</h3>
+        <p data-i18n="g.how">Drag, move your mouse or use ← → keys to move BLUMI.</p>
+        <div class="legend">
+          <span><i style="background:linear-gradient(#e6f4ff,#7cc1ff)"></i><span data-i18n="g.l1">Drop +1</span></span>
+          <span><i style="background:linear-gradient(#fff3c2,#ffc21a)"></i><span data-i18n="g.l2">Golden drop +5</span></span>
+          <span><i style="background:#1a1f3d;border-radius:50%;box-shadow:0 0 0 2px #ff6b8b"></i><span data-i18n="g.l3">Glitch −3</span></span>
+        </div>
+        <div class="actions"><button class="btn btn-primary" type="button" data-g="play" data-i18n="g.play">Play</button></div>
+      </div>
+      <div class="overlay" data-g="over" hidden aria-live="polite">
+        <span class="eyebrow" style="color:#cfe7ff" data-i18n="g.over">Time's up!</span>
+        <div class="big-score" data-g="final">0</div>
+        <span class="newbest" data-g="newbest" hidden data-i18n="g.newbest">NEW BEST!</span>
+        <div class="actions">
+          <button class="btn btn-primary" type="button" data-g="again" data-i18n="g.again">Play again</button>
+          <a class="btn btn-ghost" data-g="share" href="#" target="_blank" rel="noopener noreferrer" data-i18n="g.share">Share on X</a>
+        </div>
+      </div>
+    </div>
+    <p class="game-note reveal" data-i18n="play.note">Just for fun: no prizes, no tokens, nothing to buy or connect.</p>
   </div>
 </section>
 
@@ -527,37 +745,37 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
 <section class="section" id="vision" aria-labelledby="vision-title">
   <div class="container">
     <div class="section-head center">
-      <span class="eyebrow reveal">Vision &amp; Mission</span>
-      <h2 class="section-title reveal" id="vision-title" style="--d:.06s">Where we're <span class="grad-text">headed.</span></h2>
+      <span class="eyebrow reveal" data-i18n="vis.eyebrow">Vision &amp; Mission</span>
+      <h2 class="section-title reveal" id="vision-title" style="--d:.06s" data-i18n="vis.title">Where we're <span class="grad-text">headed.</span></h2>
     </div>
     <div class="vm-grid">
       <article class="vision-card reveal">
         <span class="ring" aria-hidden="true"></span><span class="ring r2" aria-hidden="true"></span>
-        <span class="eyebrow">Our Vision</span>
-        <blockquote>To create a recognizable digital brand that connects creativity, technology, and people across the Web3 world.</blockquote>
+        <span class="eyebrow" data-i18n="vis.v">Our Vision</span>
+        <blockquote data-i18n="vis.text">To create a recognizable digital brand that connects creativity, technology, and people across the Web3 world.</blockquote>
         <div class="mini" aria-hidden="true"><img src="assets/blumi-mascot-160.webp" alt="" width="76" height="76" loading="lazy"></div>
       </article>
       <article class="mission-card reveal" style="--d:.1s">
-        <span class="eyebrow">Our Mission</span>
+        <span class="eyebrow" data-i18n="vis.m">Our Mission</span>
         <ol class="mission-list">
-          <li>Build a strong digital identity.</li>
-          <li>Create meaningful community experiences.</li>
-          <li>Explore innovative digital products.</li>
-          <li>Encourage creativity and collaboration.</li>
-          <li>Develop an evolving digital ecosystem.</li>
+          <li data-i18n="mis.1">Build a strong digital identity.</li>
+          <li data-i18n="mis.2">Create meaningful community experiences.</li>
+          <li data-i18n="mis.3">Explore innovative digital products.</li>
+          <li data-i18n="mis.4">Encourage creativity and collaboration.</li>
+          <li data-i18n="mis.5">Develop an evolving digital ecosystem.</li>
         </ol>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ================= TOKEN (hidden until launch) ================= -->
+<!-- ================= TOKEN ================= -->
 <section class="section token-sec" id="token" aria-labelledby="token-title">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow reveal">The BLUMI Token</span>
-      <h2 class="section-title reveal" id="token-title" style="--d:.06s" data-t="title">Coming <span class="grad-text">soon on Base.</span></h2>
-      <p class="section-lead reveal" style="--d:.12s" data-t="lead">The BLUMI token has not launched yet. When it does, the official contract address will be published right here and through BLUMI's official channels.</p>
+      <span class="eyebrow reveal" data-i18n="tok.eyebrow">The BLUMI Token</span>
+      <h2 class="section-title reveal" id="token-title" style="--d:.06s" data-t="title"></h2>
+      <p class="section-lead reveal" style="--d:.12s" data-t="lead"></p>
     </div>
     <div class="token-card reveal">
       <div class="token-id">
@@ -569,18 +787,18 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
       </div>
       <div class="token-body">
         <div class="token-stats" data-t="stats"></div>
-        <p class="ca-label" id="ca-label">Official contract address</p>
+        <p class="ca-label" id="ca-label" data-i18n="tok.ca">Official contract address</p>
         <div class="ca-box">
           <code data-t="contract" aria-labelledby="ca-label"></code>
           <button class="copy-btn" type="button" data-copy>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>
-            <span>Copy</span>
+            <span data-t="copylabel">Copy</span>
           </button>
         </div>
         <div class="token-actions" data-t="actions"></div>
         <p class="token-warn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>
-          <span data-t="warn">Until the official launch, any token using the BLUMI name is not ours. BLUMI will never DM you first or ask for your seed phrase.</span>
+          <span data-t="warn"></span>
         </p>
       </div>
     </div>
@@ -592,45 +810,45 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
   <div class="container">
     <div class="section-head">
       <span class="eyebrow reveal">Roadmap</span>
-      <h2 class="section-title reveal" id="road-title" style="--d:.06s">Brand first. Ecosystem next.</h2>
-      <p class="section-lead reveal" style="--d:.12s">A four-phase plan for how BLUMI intends to grow. Every phase describes goals, not finished achievements.</p>
+      <h2 class="section-title reveal" id="road-title" style="--d:.06s" data-i18n="road.title">Brand first. Ecosystem next.</h2>
+      <p class="section-lead reveal" style="--d:.12s" data-i18n="road.lead">A four-phase plan for how BLUMI intends to grow. Every phase describes goals, not finished achievements.</p>
     </div>
     <div class="road">
       <div class="road-line" aria-hidden="true"></div>
       <article class="phase current reveal">
         <div class="phase-node" aria-hidden="true">01</div>
         <div class="phase-card">
-          <div class="phase-meta"><span class="phase-num">PHASE 01</span><span class="status">Current focus</span></div>
-          <h3>Foundation</h3>
-          <ul><li>Establish BLUMI identity</li><li>Official website launch</li><li>Introduce the mascot</li><li>Build initial community</li></ul>
+          <div class="phase-meta"><span class="phase-num" data-i18n="road.p1">PHASE 01</span><span class="status" data-i18n="road.now">Current focus</span></div>
+          <h3 data-i18n="road.h1">Foundation</h3>
+          <ul data-i18n="road.l1"><li>Establish BLUMI identity</li><li>Official website launch</li><li>Introduce the mascot</li><li>Build initial community</li></ul>
         </div>
       </article>
       <article class="phase reveal" style="--d:.08s">
         <div class="phase-node" aria-hidden="true">02</div>
         <div class="phase-card">
-          <div class="phase-meta"><span class="phase-num">PHASE 02</span><span class="status">Planned</span></div>
-          <h3>Community</h3>
-          <ul><li>Community expansion</li><li>Interactive campaigns</li><li>Community activities</li><li>Social presence development</li></ul>
+          <div class="phase-meta"><span class="phase-num" data-i18n="road.p2">PHASE 02</span><span class="status" data-i18n="road.planned">Planned</span></div>
+          <h3 data-i18n="road.h2">Community</h3>
+          <ul data-i18n="road.l2"><li>Community expansion</li><li>Interactive campaigns</li><li>Community activities</li><li>Social presence development</li></ul>
         </div>
       </article>
       <article class="phase reveal" style="--d:.16s">
         <div class="phase-node" aria-hidden="true">03</div>
         <div class="phase-card">
-          <div class="phase-meta"><span class="phase-num">PHASE 03</span><span class="status">Planned</span></div>
-          <h3>Innovation</h3>
-          <ul><li>Explore interactive experiences</li><li>Develop digital collectibles concepts</li><li>Introduce community-focused features</li></ul>
+          <div class="phase-meta"><span class="phase-num" data-i18n="road.p3">PHASE 03</span><span class="status" data-i18n="road.planned">Planned</span></div>
+          <h3 data-i18n="road.h3">Innovation</h3>
+          <ul data-i18n="road.l3"><li>Explore interactive experiences</li><li>Develop digital collectibles concepts</li><li>Introduce community-focused features</li></ul>
         </div>
       </article>
       <article class="phase reveal" style="--d:.24s">
         <div class="phase-node" aria-hidden="true">04</div>
         <div class="phase-card">
-          <div class="phase-meta"><span class="phase-num">PHASE 04</span><span class="status">Planned</span></div>
-          <h3>Expansion</h3>
-          <ul><li>Explore Base ecosystem integrations</li><li>Strategic collaborations</li><li>Expand the BLUMI ecosystem</li></ul>
+          <div class="phase-meta"><span class="phase-num" data-i18n="road.p4">PHASE 04</span><span class="status" data-i18n="road.planned">Planned</span></div>
+          <h3 data-i18n="road.h4">Expansion</h3>
+          <ul data-i18n="road.l4"><li>Explore Base ecosystem integrations</li><li>Strategic collaborations</li><li>Expand the BLUMI ecosystem</li></ul>
         </div>
       </article>
     </div>
-    <p class="road-note reveal">Roadmap items are goals and may change. No dates are committed.</p>
+    <p class="road-note reveal" data-i18n="road.note">Roadmap items are goals and may change. No dates are committed.</p>
   </div>
 </section>
 
@@ -639,10 +857,111 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
   <div class="container">
     <div class="community-wrap reveal">
       <div class="mascot-tile"><img src="assets/blumi-mascot-160.webp" alt="" width="96" height="96" loading="lazy"></div>
-      <span class="eyebrow">Community</span>
+      <span class="eyebrow" data-i18n="com.eyebrow">Community</span>
       <h2 class="section-title" id="comm-title">Together, We Go Beyond.</h2>
-      <p class="section-lead">Every great idea starts with people. Join the BLUMI community and become part of a growing digital movement.</p>
+      <p class="section-lead" data-i18n="com.lead">Every great idea starts with people. Join the BLUMI community and become part of a growing digital movement.</p>
       <div class="socials" data-socials></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="section" id="faq" aria-labelledby="faq-title">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow reveal">FAQ</span>
+      <h2 class="section-title reveal" id="faq-title" style="--d:.06s" data-i18n="faq.title">Questions, <span class="grad-text">answered.</span></h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item reveal"><summary><span data-i18n="faq.q1">What is BLUMI?</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="faq-a" data-i18n="faq.a1">BLUMI is an independent digital brand being built within the Base ecosystem. It focuses on creativity, community, technology and innovation, with the BLUMI mascot as its face. The plan is simple: brand first, ecosystem next.</div></details>
+      <details class="faq-item reveal"><summary><span data-i18n="faq.q2">Has the BLUMI token launched?</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="faq-a" data-faq-token></div></details>
+      <details class="faq-item reveal"><summary><span data-i18n="faq.q3">Is BLUMI affiliated with Base or Coinbase?</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="faq-a" data-i18n="faq.a3">No. BLUMI is an independent project building on Base. It is not affiliated with, sponsored by or endorsed by Base or Coinbase.</div></details>
+      <details class="faq-item reveal"><summary><span data-i18n="faq.q4">What does BLUMI stand for?</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="faq-a" data-i18n="faq.a4"><b>B</b>eyond <b>L</b>imits, <b>U</b>nited <b>M</b>inds, <b>I</b>nnovation: the three principles behind everything we build.</div></details>
+      <details class="faq-item reveal"><summary><span data-i18n="faq.q5">How can I join the community?</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="faq-a" data-faq-join></div></details>
+      <details class="faq-item reveal"><summary><span data-i18n="faq.q6">Are the ecosystem products live?</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="faq-a" data-i18n="faq.a6">Not yet. Community, Playground, Collectibles and Labs are planned concepts that will be shaped together with the community. The mini game on this page is a small, just-for-fun preview of the Playground idea.</div></details>
+      <details class="faq-item reveal"><summary><span data-i18n="faq.q7">How do I stay safe from scams?</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="faq-a" data-i18n="faq.a7">Only trust the links listed under <a href="#official">Official Channels</a>. BLUMI will never DM you first, never ask for your seed phrase or private key, and never ask you to send crypto to receive something back.</div></details>
+      <details class="faq-item reveal"><summary><span data-i18n="faq.q8">Can I use the BLUMI mascot in my own content?</span><span class="pm" aria-hidden="true"></span></summary>
+        <div class="faq-a" data-i18n="faq.a8">Yes, for fan art, memes and community content. Use the files from the <a href="#brand-kit">Brand Kit</a>, keep the mascot's original shape and colours, and don't use it to suggest something is official when it isn't.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= OFFICIAL CHANNELS ================= -->
+<section class="section official-sec" id="official" aria-labelledby="off-title">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow reveal" data-i18n="off.eyebrow">Official Channels</span>
+      <h2 class="section-title reveal" id="off-title" style="--d:.06s" data-i18n="off.title">Only trust <span class="grad-text">these.</span></h2>
+      <p class="section-lead reveal" style="--d:.12s" data-i18n="off.lead">Scammers often copy names and logos. These are the only official BLUMI channels. Bookmark this page and check here before you click, join or buy anything.</p>
+    </div>
+    <div class="off-grid">
+      <div class="off-list reveal" data-official></div>
+      <aside class="never reveal" style="--d:.1s">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5 4 5.5v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10v-6z"/><path d="M12 8v5M12 16h.01"/></svg><span data-i18n="never.title">BLUMI will never</span></h3>
+        <ul data-i18n="never.list">
+          <li>DM you first about tokens, presales or airdrops</li>
+          <li>Ask for your seed phrase or private key</li>
+          <li>Ask you to send crypto to "verify" or receive rewards</li>
+          <li>Share a contract address only in DMs or replies</li>
+          <li>Ask you to connect your wallet on another site</li>
+        </ul>
+        <p data-i18n="never.p">Spotted a fake? Let us know in the official Telegram so the community can stay safe.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BRAND KIT ================= -->
+<section class="section" id="brand-kit" aria-labelledby="kit-title">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow reveal">Brand Kit</span>
+      <h2 class="section-title reveal" id="kit-title" style="--d:.06s" data-i18n="kit.title">Create with <span class="grad-text">BLUMI.</span></h2>
+      <p class="section-lead reveal" style="--d:.12s" data-i18n="kit.lead">Official assets for fan art, memes and community content. Please keep the mascot exactly as it is.</p>
+    </div>
+    <div class="kit-grid">
+      <article class="kit-card reveal">
+        <div class="kit-prev"><img src="assets/brand/thumb-mascot.webp" alt="BLUMI mascot on blue background" width="180" height="180" loading="lazy"></div>
+        <div class="kit-body"><h3 data-i18n="kit.a1">Mascot · Square</h3><p>PNG · 1024 × 1024</p>
+          <a class="btn btn-primary" href="assets/brand/blumi-mascot-1024.png" download="BLUMI-mascot-1024.png"><span data-i18n="kit.dl">Download</span></a></div>
+      </article>
+      <article class="kit-card reveal" style="--d:.08s">
+        <div class="kit-prev"><img class="round" src="assets/brand/thumb-icon.webp" alt="BLUMI app-style rounded icon" width="180" height="180" loading="lazy"></div>
+        <div class="kit-body"><h3 data-i18n="kit.a2">Mascot · Rounded icon</h3><p data-i18n="kit.a2p">PNG · 1024 × 1024 · transparent corners</p>
+          <a class="btn btn-primary" href="assets/brand/blumi-icon-rounded-1024.png" download="BLUMI-icon-rounded-1024.png"><span data-i18n="kit.dl">Download</span></a></div>
+      </article>
+      <article class="kit-card reveal" style="--d:.16s">
+        <div class="kit-prev"><img src="assets/brand/thumb-banner.webp" alt="BLUMI social preview banner" width="300" height="158" loading="lazy"></div>
+        <div class="kit-body"><h3 data-i18n="kit.a3">Social banner</h3><p>PNG · 1200 × 630</p>
+          <a class="btn btn-primary" href="assets/og-image.png" download="BLUMI-banner-1200x630.png"><span data-i18n="kit.dl">Download</span></a></div>
+      </article>
+    </div>
+    <div class="kit-row">
+      <div class="panel reveal">
+        <h3 data-i18n="kit.colors">Colours</h3>
+        <div class="swatches" data-swatches></div>
+      </div>
+      <div class="panel reveal" style="--d:.08s">
+        <h3 data-i18n="kit.type">Typography</h3>
+        <div class="fonts">
+          <div class="font-s"><div class="aa">Sora</div><small data-i18n="kit.f1">Headlines & display</small></div>
+          <div class="font-s"><div class="aa body">Manrope</div><small data-i18n="kit.f2">Body text & UI</small></div>
+        </div>
+      </div>
+    </div>
+    <div class="panel reveal" style="margin-top:18px">
+      <h3 data-i18n="kit.usage">Using the mascot</h3>
+      <div class="dodont">
+        <div class="do"><h4 data-i18n="kit.do">Do</h4><ul data-i18n="kit.dolist"><li>Keep the original shape, proportions and colours</li><li>Give it room to breathe on blue or light backgrounds</li><li>Use it for fan art, memes and community content</li></ul></div>
+        <div class="dont"><h4 data-i18n="kit.dont">Don't</h4><ul data-i18n="kit.dontlist"><li>Stretch, squash, recolour or redraw it</li><li>Use it on unofficial tokens, sales or giveaways</li><li>Imply that your content is official BLUMI content</li></ul></div>
+      </div>
     </div>
   </div>
 </section>
@@ -655,50 +974,63 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
     <div class="footer-grid">
       <div>
         <a href="#home" class="brand"><img src="assets/blumi-mascot-160.webp" alt="" width="38" height="38" loading="lazy">BLUMI</a>
-        <p class="footer-statement">Bringing people, creativity, and technology together to shape a more connected digital world.</p>
+        <p class="footer-statement" data-i18n="foot.statement">Bringing people, creativity, and technology together to shape a more connected digital world.</p>
         <p class="footer-tag">A LITTLE BLUE, A BIGGER WORLD.</p>
         <div style="margin-top:22px"><span class="base-badge"><span class="dot" aria-hidden="true"></span>Build on Base</span></div>
       </div>
       <div>
-        <h4>Explore</h4>
-        <ul data-footer-nav></ul>
+        <h4 data-i18n="foot.explore">Explore</h4>
+        <ul data-footer-nav="explore"></ul>
       </div>
       <div>
-        <h4>Community</h4>
+        <h4 data-i18n="foot.resources">Resources</h4>
+        <ul data-footer-nav="resources"></ul>
+      </div>
+      <div>
+        <h4 data-i18n="com.eyebrow">Community</h4>
         <ul data-footer-socials></ul>
       </div>
     </div>
-    <p class="disclaimer" data-disclaimer>BLUMI is an independent project being developed within the Base ecosystem. It is not affiliated with, sponsored by, or endorsed by Base or Coinbase. BLUMI has not launched a token. Any token, sale or contract address using the BLUMI name is not official unless announced through BLUMI's own channels.</p>
+    <p class="disclaimer" data-disclaimer></p>
     <div class="footer-bottom">
-      <span>© <span id="year">2026</span> BLUMI. All rights reserved.</span>
-      <a href="#home" class="to-top">Back to top
+      <span>© <span id="year">2026</span> BLUMI. <span data-i18n="foot.rights">All rights reserved.</span></span>
+      <a href="#home" class="to-top"><span data-i18n="foot.top">Back to top</span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
     </div>
   </div>
 </footer>
 <div class="toast" role="status" aria-live="polite" data-toast></div>
-
 <script>
 /* ==========================================================
    BLUMI SITE CONFIG — single source of truth.
-   Add official social URLs here when they exist; cards switch
-   from "Coming soon" to live links automatically.
-   `web3` is reserved for future Base integrations. Nothing in
-   it is active: no wallet, no contract, no token.
    ========================================================== */
 const BLUMI_CONFIG = {
+  /* header: shown in the desktop top bar · group: footer column */
   nav: [
-    { id: "home", label: "Home" },
-    { id: "about", label: "About" },
-    { id: "ecosystem", label: "Ecosystem" },
-    { id: "vision", label: "Vision" },
-    { id: "token", label: "Token" },
-    { id: "roadmap", label: "Roadmap" },
-    { id: "community", label: "Community" }
+    { id: "home",       en: "Home",       id_: "Beranda",    header: true,  group: "explore" },
+    { id: "about",      en: "About",      id_: "Tentang",    header: true,  group: "explore" },
+    { id: "mascot",     en: "Mascot",     id_: "Maskot",     header: false, group: "explore" },
+    { id: "ecosystem",  en: "Ecosystem",  id_: "Ekosistem",  header: true,  group: "explore" },
+    { id: "playground", en: "Play",       id_: "Main",       header: true,  group: "explore" },
+    { id: "vision",     en: "Vision",     id_: "Visi",       header: false, group: "explore" },
+    { id: "token",      en: "Token",      id_: "Token",      header: true,  group: "explore" },
+    { id: "roadmap",    en: "Roadmap",    id_: "Roadmap",    header: true,  group: "explore" },
+    { id: "community",  en: "Community",  id_: "Komunitas",  header: true,  group: "explore" },
+    { id: "faq",        en: "FAQ",        id_: "FAQ",        header: false, group: "resources" },
+    { id: "official",   en: "Official Channels", id_: "Kanal Resmi", header: false, group: "resources" },
+    { id: "brand-kit",  en: "Brand Kit",  id_: "Brand Kit",  header: false, group: "resources" }
   ],
   socials: [
-    { key: "x",        label: "X / Twitter", url: "https://x.com/blumidotworld" },
-    { key: "telegram", label: "Telegram",    url: "https://t.me/blumicommunity", cta: "Join the community chat" }
+    { key: "x",        label: "X / Twitter", handle: "@blumidotworld",       url: "https://x.com/blumidotworld" },
+    { key: "telegram", label: "Telegram",    handle: "t.me/blumicommunity",  url: "https://t.me/blumicommunity" }
+  ],
+  colors: [
+    { name: "Electric Blue", id_: "Biru Elektrik",  hex: "#0A5CFF" },
+    { name: "Deep Ocean",    id_: "Biru Samudra",   hex: "#06173D" },
+    { name: "Sky Blue",      id_: "Biru Langit",    hex: "#5FB4FF" },
+    { name: "Ice Blue",      id_: "Biru Es",        hex: "#E8F3FF" },
+    { name: "Pure White",    id_: "Putih",          hex: "#FFFFFF" },
+    { name: "Base Blue",     id_: "Biru Base",      hex: "#0000FF" }
   ],
   web3: {
     network: "Base",
@@ -709,8 +1041,8 @@ const BLUMI_CONFIG = {
        Leave false until the token is live. When it is live:
        1. fill in the fields below with the REAL values
        2. set tokenLaunched to true
-       The Token section, nav link, hero button and footer note
-       then appear automatically. Empty optional fields stay hidden.
+       Token section, FAQ answer, Official Channels and footer note
+       update automatically. Empty optional fields stay hidden.
        ---------------------------------------------------------- */
     tokenLaunched: false,
     token: {
@@ -724,9 +1056,115 @@ const BLUMI_CONFIG = {
   }
 };
 
+/* ==========================================================
+   INDONESIAN TRANSLATIONS (English lives in the HTML itself)
+   ========================================================== */
+const I18N_ID = {
+  "skip": "Lewati ke konten",
+  "cta.join": "Gabung Komunitas",
+  "hero.sub": "Pengalaman digital baru yang dibangun di atas kreativitas, teknologi, dan komunitas.",
+  "hero.explore": "Jelajahi BLUMI",
+  "hero.vision": "Lihat Visi Kami",
+  "hero.token": "Token BLUMI",
+  "chip.creativity": "KREATIVITAS",
+  "chip.community": "KOMUNITAS",
+  "about.eyebrow": "Tentang BLUMI",
+  "about.title": "Lebih dari Sekadar Nama.<br><span class=\"grad-text\">Visi yang Lebih Besar.</span>",
+  "about.lead": "Lima huruf, tiga prinsip. BLUMI adalah brand digital independen yang berfokus pada kreativitas, komunitas, teknologi, dan inovasi.",
+  "about.p1": "Kami percaya inovasi tidak boleh dibatasi oleh batasan apa pun.",
+  "about.p2": "Ide hebat jadi makin kuat saat orang-orang bersatu.",
+  "about.p3": "Kami merangkul kreativitas dan teknologi untuk menjelajahi kemungkinan baru.",
+  "about.quote": "“Menyatukan manusia, kreativitas, dan teknologi untuk membentuk dunia digital yang lebih terhubung.”",
+  "about.cite": "Filosofi BLUMI",
+  "mascot.eyebrow": "Kenalan dengan Maskot",
+  "mascot.title": "Setetes kecil dengan <span class=\"grad-text\">dunia besar di dalamnya.</span>",
+  "mascot.s1": "Setiap samudra berawal dari satu tetes. Maskot BLUMI adalah tetes itu: kecil, penasaran, dan selalu siap mengalir menjadi sesuatu yang lebih besar.",
+  "mascot.s2": "Ke mana pun ia pergi, ia membawa semangat brand ini: melampaui batas, menyatukan pikiran, dan memberi ruang untuk ide-ide baru. Sendirian ia hanya sedikit biru. Bersama komunitas, ia menjadi dunia yang lebih besar.",
+  "trait.1": "Penasaran", "trait.2": "Ramah", "trait.3": "Optimis", "trait.4": "Futuristik", "trait.5": "Selalu mengalir",
+  "fact.1k": "Bentuk", "fact.1v": "Setetes air", "fact.1p": "Kecil sendirian, kuat bersama-sama.",
+  "fact.2k": "Warna", "fact.2v": "Biru elektrik", "fact.2p": "Sedikit biru, membangun di Base.",
+  "fact.3k": "Kekuatan super", "fact.3v": "Menciptakan riak", "fact.3p": "Satu ide kecil, menyebar jauh.",
+  "eco.eyebrow": "Ekosistem BLUMI",
+  "eco.title": "Satu brand.<br>Empat dunia untuk bertumbuh.",
+  "eco.lead": "Ekosistem ini dirancang untuk tumbuh selangkah demi selangkah. Setiap divisi di bawah adalah konsep yang direncanakan dan akan dibentuk bersama komunitas.",
+  "tag.concept": "Konsep", "tag.preview": "Preview tersedia", "tag.future": "Konsep masa depan",
+  "eco.c1": "Komunitas yang ramah, tempat orang terhubung, berkolaborasi, dan berbagi ide.",
+  "eco.c2": "Pengalaman digital interaktif berisi game dan aktivitas komunitas. Coba mini game pertamanya di bawah.",
+  "eco.c3": "Konsep koleksi digital masa depan yang terinspirasi dari maskot BLUMI.",
+  "eco.c4": "Ruang inovasi untuk mengeksplorasi produk digital kreatif dan pengalaman Web3.",
+  "eco.notice": "Divisi-divisi ini adalah konsep yang direncanakan, bukan produk yang sudah berjalan. Cakupan, waktu, dan ketersediaannya bisa berubah seiring perkembangan BLUMI, dan kabar terbaru akan dibagikan lewat kanal resmi BLUMI.",
+  "play.eyebrow": "BLUMI Playground · Preview",
+  "play.title": "Tangkap <span class=\"grad-text\">tetesannya.</span>",
+  "play.lead": "Cicipan kecil pertama dari BLUMI Playground. Gerakkan BLUMI dan tangkap tetesan sebanyak mungkin dalam 30 detik.",
+  "play.note": "Cuma buat seru-seruan: tanpa hadiah, tanpa token, tidak ada yang perlu dibeli atau dihubungkan.",
+  "hud.score": "Skor", "hud.time": "Waktu", "hud.best": "Terbaik",
+  "g.title": "Tangkap Tetesannya",
+  "g.how": "Geser, gerakkan mouse, atau pakai tombol ← → untuk menggerakkan BLUMI.",
+  "g.l1": "Tetes +1", "g.l2": "Tetes emas +5", "g.l3": "Glitch −3",
+  "g.play": "Main", "g.over": "Waktu habis!", "g.newbest": "REKOR BARU!", "g.again": "Main lagi", "g.share": "Bagikan ke X",
+  "vis.eyebrow": "Visi &amp; Misi",
+  "vis.title": "Ke mana kami <span class=\"grad-text\">melangkah.</span>",
+  "vis.v": "Visi Kami",
+  "vis.text": "Menciptakan brand digital yang dikenal luas, yang menghubungkan kreativitas, teknologi, dan manusia di seluruh dunia Web3.",
+  "vis.m": "Misi Kami",
+  "mis.1": "Membangun identitas digital yang kuat.",
+  "mis.2": "Menciptakan pengalaman komunitas yang bermakna.",
+  "mis.3": "Mengeksplorasi produk digital yang inovatif.",
+  "mis.4": "Mendorong kreativitas dan kolaborasi.",
+  "mis.5": "Mengembangkan ekosistem digital yang terus berkembang.",
+  "tok.eyebrow": "Token BLUMI",
+  "tok.ca": "Alamat kontrak resmi",
+  "road.title": "Brand dulu. Ekosistem kemudian.",
+  "road.lead": "Rencana empat fase tentang bagaimana BLUMI ingin bertumbuh. Setiap fase berisi tujuan, bukan pencapaian yang sudah selesai.",
+  "road.p1": "FASE 01", "road.p2": "FASE 02", "road.p3": "FASE 03", "road.p4": "FASE 04",
+  "road.now": "Fokus saat ini", "road.planned": "Direncanakan",
+  "road.h1": "Fondasi", "road.h2": "Komunitas", "road.h3": "Inovasi", "road.h4": "Ekspansi",
+  "road.l1": "<li>Membangun identitas BLUMI</li><li>Peluncuran website resmi</li><li>Memperkenalkan maskot</li><li>Membangun komunitas awal</li>",
+  "road.l2": "<li>Memperluas komunitas</li><li>Kampanye interaktif</li><li>Aktivitas komunitas</li><li>Mengembangkan kehadiran di media sosial</li>",
+  "road.l3": "<li>Mengeksplorasi pengalaman interaktif</li><li>Mengembangkan konsep koleksi digital</li><li>Menghadirkan fitur yang berfokus pada komunitas</li>",
+  "road.l4": "<li>Mengeksplorasi integrasi ekosistem Base</li><li>Kolaborasi strategis</li><li>Memperluas ekosistem BLUMI</li>",
+  "road.note": "Isi roadmap adalah tujuan dan bisa berubah. Belum ada tanggal yang dijanjikan.",
+  "com.eyebrow": "Komunitas",
+  "com.lead": "Setiap ide hebat berawal dari manusia. Gabung dengan komunitas BLUMI dan jadilah bagian dari gerakan digital yang terus bertumbuh.",
+  "faq.title": "Pertanyaan, <span class=\"grad-text\">terjawab.</span>",
+  "faq.q1": "Apa itu BLUMI?",
+  "faq.a1": "BLUMI adalah brand digital independen yang sedang dibangun di ekosistem Base. Fokusnya pada kreativitas, komunitas, teknologi, dan inovasi, dengan maskot BLUMI sebagai wajahnya. Rencananya sederhana: brand dulu, ekosistem kemudian.",
+  "faq.q2": "Apakah token BLUMI sudah launch?",
+  "faq.q3": "Apakah BLUMI berafiliasi dengan Base atau Coinbase?",
+  "faq.a3": "Tidak. BLUMI adalah proyek independen yang membangun di Base. BLUMI tidak berafiliasi dengan, tidak disponsori, dan tidak didukung secara resmi oleh Base maupun Coinbase.",
+  "faq.q4": "BLUMI singkatan dari apa?",
+  "faq.a4": "<b>B</b>eyond <b>L</b>imits, <b>U</b>nited <b>M</b>inds, <b>I</b>nnovation: melampaui batas, menyatukan pikiran, dan inovasi. Tiga prinsip di balik semua yang kami bangun.",
+  "faq.q5": "Bagaimana cara gabung komunitas?",
+  "faq.q6": "Apakah produk ekosistemnya sudah tersedia?",
+  "faq.a6": "Belum. Community, Playground, Collectibles, dan Labs masih berupa konsep yang akan dibentuk bersama komunitas. Mini game di halaman ini hanyalah preview kecil dari ide Playground, buat seru-seruan saja.",
+  "faq.q7": "Bagaimana supaya aman dari penipuan?",
+  "faq.a7": "Hanya percayai link yang ada di <a href=\"#official\">Kanal Resmi</a>. BLUMI tidak akan pernah DM kamu duluan, tidak akan meminta seed phrase atau private key, dan tidak akan meminta kamu mengirim kripto untuk mendapatkan sesuatu.",
+  "faq.q8": "Bolehkah saya memakai maskot BLUMI di konten saya?",
+  "faq.a8": "Boleh, untuk fan art, meme, dan konten komunitas. Pakai file dari <a href=\"#brand-kit\">Brand Kit</a>, jaga bentuk dan warna asli maskot, dan jangan gunakan untuk membuat sesuatu terlihat resmi padahal bukan.",
+  "off.eyebrow": "Kanal Resmi",
+  "off.title": "Hanya percayai <span class=\"grad-text\">ini.</span>",
+  "off.lead": "Penipu sering meniru nama dan logo. Ini satu-satunya kanal resmi BLUMI. Simpan halaman ini dan cek di sini sebelum kamu mengklik, bergabung, atau membeli apa pun.",
+  "never.title": "BLUMI tidak akan pernah",
+  "never.list": "<li>DM kamu duluan soal token, presale, atau airdrop</li><li>Meminta seed phrase atau private key kamu</li><li>Memintamu mengirim kripto untuk \"verifikasi\" atau mendapat hadiah</li><li>Membagikan alamat kontrak hanya lewat DM atau balasan komentar</li><li>Memintamu menghubungkan wallet di situs lain</li>",
+  "never.p": "Menemukan akun atau token palsu? Kabari kami di Telegram resmi supaya komunitas tetap aman.",
+  "kit.title": "Berkarya bersama <span class=\"grad-text\">BLUMI.</span>",
+  "kit.lead": "Aset resmi untuk fan art, meme, dan konten komunitas. Tolong jaga maskotnya tetap seperti aslinya.",
+  "kit.a1": "Maskot · Kotak", "kit.a2": "Maskot · Ikon bulat", "kit.a2p": "PNG · 1024 × 1024 · sudut transparan", "kit.a3": "Banner sosial",
+  "kit.dl": "Unduh", "kit.colors": "Warna", "kit.type": "Tipografi", "kit.f1": "Judul & tampilan besar", "kit.f2": "Teks isi & antarmuka",
+  "kit.usage": "Memakai maskot", "kit.do": "Boleh", "kit.dont": "Jangan",
+  "kit.dolist": "<li>Pertahankan bentuk, proporsi, dan warna aslinya</li><li>Beri ruang lega di latar biru atau terang</li><li>Pakai untuk fan art, meme, dan konten komunitas</li>",
+  "kit.dontlist": "<li>Meregangkan, memipihkan, mengganti warna, atau menggambar ulang</li><li>Memakainya untuk token, penjualan, atau giveaway tidak resmi</li><li>Membuat kontenmu seolah-olah konten resmi BLUMI</li>",
+  "foot.statement": "Menyatukan manusia, kreativitas, dan teknologi untuk membentuk dunia digital yang lebih terhubung.",
+  "foot.explore": "Jelajahi", "foot.resources": "Sumber", "foot.rights": "Hak cipta dilindungi.", "foot.top": "Kembali ke atas"
+};
+
 const ICONS = {
   x: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.8 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.2-8.3L1.9 3h6.4l4.4 5.8L17.8 3zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5z"/></svg>',
-  telegram: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.4 3.6 2.9 10.7c-1.3.5-1.3 1.2-.2 1.6l4.7 1.5 1.8 5.6c.2.6.1.9.8.9.5 0 .7-.2 1-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.8c.3-1.3-.5-1.9-1.5-1.4zM8.6 13.5l9.7-6.1c.5-.3.9-.1.5.2l-8.3 7.5-.3 3.4-1.6-5z"/></svg>'
+  telegram: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.4 3.6 2.9 10.7c-1.3.5-1.3 1.2-.2 1.6l4.7 1.5 1.8 5.6c.2.6.1.9.8.9.5 0 .7-.2 1-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.8c.3-1.3-.5-1.9-1.5-1.4zM8.6 13.5l9.7-6.1c.5-.3.9-.1.5.2l-8.3 7.5-.3 3.4-1.6-5z"/></svg>',
+  web: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.8 3.9 6 3.9 9.5s-1.3 6.7-3.9 9.5c-2.6-2.8-3.9-6-3.9-9.5s1.3-6.7 3.9-9.5z"/></svg>',
+  coin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 6.5c2 2.4 3.6 4.3 3.6 6.4a3.6 3.6 0 0 1-7.2 0c0-2.1 1.6-4 3.6-6.4z"/></svg>',
+  copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>',
+  open: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>'
 };
 const ARROW = '<svg class="s-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>';
 
@@ -734,76 +1172,164 @@ const ARROW = '<svg class="s-arrow" viewBox="0 0 24 24" fill="none" stroke="curr
   document.body.classList.remove("no-js");
   const $ = (s, r=document) => r.querySelector(s);
   const $$ = (s, r=document) => [...r.querySelectorAll(s)];
-
-  /* ---------- token launch state ---------- */
-  const W = BLUMI_CONFIG.web3, T = W.token;
-  const TOKEN_LIVE = !!(W.tokenLaunched && /^0x[a-fA-F0-9]{40}$/.test((T.contract||"").trim()));
-  if (W.tokenLaunched && !TOKEN_LIVE) console.warn("BLUMI: tokenLaunched is true but contract address is missing or invalid; Token section stays hidden.");
   const esc = v => String(v).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const safeUrl = u => /^https:\/\//.test(u||"") ? u : "";
+  const store = { get(k){ try { return localStorage.getItem(k); } catch(_) { return null; } }, set(k,v){ try { localStorage.setItem(k,v); } catch(_) {} } };
 
-  if (TOKEN_LIVE) {
-    const ca = T.contract.trim();
-    $("#token").hidden = false;
-    $$("[data-token-only]").forEach(e => e.hidden = false);
-    $('[data-t="name"]').textContent = T.name || "BLUMI";
-    const tk = $('[data-t="ticker"]'); if (T.ticker) tk.textContent = T.ticker; else tk.remove();
-    const stats = [["Network", W.network], ["Ticker", T.ticker], ["Total supply", T.totalSupply]].filter(x => x[1]);
-    $('[data-t="stats"]').innerHTML = stats.map(([k,v]) => `<div class="token-stat"><span>${esc(k)}</span><strong>${esc(v)}</strong></div>`).join("");
-    $('[data-t="contract"]').textContent = ca;
-    const ext = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>';
-    const acts = [];
-    if (safeUrl(T.buyUrl)) acts.push(`<a class="btn btn-primary" href="${esc(T.buyUrl)}" target="_blank" rel="noopener noreferrer">Buy ${esc(T.ticker||"BLUMI")} ${ext}</a>`);
-    acts.push(`<a class="btn btn-ghost" href="${esc(W.explorer + ca)}" target="_blank" rel="noopener noreferrer">View on Basescan ${ext}</a>`);
-    if (safeUrl(T.chartUrl)) acts.push(`<a class="btn btn-ghost" href="${esc(T.chartUrl)}" target="_blank" rel="noopener noreferrer">View Chart ${ext}</a>`);
-    $('[data-t="actions"]').innerHTML = acts.join("");
-    $('[data-t="title"]').innerHTML = 'Officially <span class="grad-text">on Base.</span>';
-    $('[data-t="lead"]').textContent = "Always check the contract address below before you interact with any BLUMI token. This is the only official one.";
-    $('[data-t="warn"]').textContent = "Beware of fake tokens. BLUMI will never DM you first, ask for your seed phrase, or announce a different contract address outside this website and its official channels.";
-    $("[data-disclaimer]").textContent = `BLUMI is an independent project built on Base. It is not affiliated with, sponsored by, or endorsed by Base or Coinbase. The only official BLUMI token contract is ${ca}. Any other address using the BLUMI name is not ours. Nothing on this website is financial advice.`;
+  /* ---------- language ---------- */
+  const LANG = "en";   // site is English-only; Indonesian strings in I18N_ID are kept for later use
+  const EN_HTML = new Map();
+  $$("[data-i18n]").forEach(el => EN_HTML.set(el, el.innerHTML));
+  const L = (en, id) => LANG === "id" ? id : en;                 // inline pairs for dynamic text
+  const navLabel = n => L(n.en, n.id_);
 
-    /* copy contract address */
-    const toast = $("[data-toast]"); let tt;
-    const showToast = msg => { toast.textContent = msg; toast.classList.add("show"); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove("show"), 2200); };
-    const btnCopy = $("[data-copy]");
-    btnCopy.addEventListener("click", async () => {
-      let ok = false;
-      try { await navigator.clipboard.writeText(ca); ok = true; } catch (_) {
-        try { const r = document.createRange(); r.selectNodeContents($('[data-t="contract"]')); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); ok = document.execCommand("copy"); } catch (_) {}
-      }
-      if (ok) { btnCopy.classList.add("done"); btnCopy.querySelector("span").textContent = "Copied"; showToast("Contract address copied");
-        setTimeout(() => { btnCopy.classList.remove("done"); btnCopy.querySelector("span").textContent = "Copy"; }, 2000); }
-      else showToast("Address selected, copy it manually");
-    });
+  /* ---------- routing mode (clean paths on the real site, #hash in embedded previews) ---------- */
+  const SECTION_IDS = BLUMI_CONFIG.nav.map(n => n.id);
+  let PATH_MODE = false;
+  try { PATH_MODE = window.self === window.top && /^https?:$/.test(location.protocol); } catch (_) {}
+  const urlFor = id => PATH_MODE ? (id === "home" ? "/" : "/" + id) : "#" + id;
+  const BASE_TITLE = "BLUMI — A Little Blue, A Bigger World";
+  const titleFor = id => id === "home" ? BASE_TITLE : `${navLabel(BLUMI_CONFIG.nav.find(n => n.id === id))} — BLUMI`;
+  const linkify = (root=document) => $$('a[href^="#"]', root).forEach(a => {
+    const id = a.getAttribute("href").slice(1);
+    if (!SECTION_IDS.includes(id)) return;
+    a.dataset.target = id; a.setAttribute("href", urlFor(id));
+  });
+
+  /* ---------- toast + copy helper ---------- */
+  const toast = $("[data-toast]"); let tt;
+  const showToast = msg => { toast.textContent = msg; toast.classList.add("show"); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove("show"), 2200); };
+  const copyText = async (text, okMsg) => {
+    let ok = false;
+    try { await navigator.clipboard.writeText(text); ok = true; } catch (_) {
+      try { const ta = document.createElement("textarea"); ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0"; document.body.appendChild(ta); ta.select(); ok = document.execCommand("copy"); ta.remove(); } catch (_) {}
+    }
+    showToast(ok ? okMsg : L("Couldn't copy, please copy it manually", "Gagal menyalin, silakan salin manual"));
+    return ok;
+  };
+
+  /* ---------- token state ---------- */
+  const W = BLUMI_CONFIG.web3, T = W.token;
+  const TOKEN_LIVE = !!(W.tokenLaunched && /^0x[a-fA-F0-9]{40}$/.test((T.contract||"").trim()));
+  if (W.tokenLaunched && !TOKEN_LIVE) console.warn("BLUMI: tokenLaunched is true but contract address is missing or invalid; Token section stays in SOON state.");
+  const CA = TOKEN_LIVE ? T.contract.trim() : "";
+
+  function renderToken(){
+    const ext = ICONS.open.replace('aria-hidden="true"', 'aria-hidden="true" width="18" height="18"');
+    $('[data-t="name"]').textContent = TOKEN_LIVE ? (T.name || "BLUMI") : "BLUMI";
+    const tk = $('[data-t="ticker"]');
+    $('[data-t="copylabel"]').textContent = L("Copy", "Salin");
+    if (TOKEN_LIVE) {
+      if (T.ticker) { tk.textContent = T.ticker; tk.hidden = false; } else tk.hidden = true;
+      const stats = [[L("Network","Jaringan"), W.network], ["Ticker", T.ticker], [L("Total supply","Total suplai"), T.totalSupply]].filter(x => x[1]);
+      $('[data-t="stats"]').innerHTML = stats.map(([k,v]) => `<div class="token-stat"><span>${esc(k)}</span><strong>${esc(v)}</strong></div>`).join("");
+      $('[data-t="contract"]').textContent = CA;
+      const acts = [];
+      if (safeUrl(T.buyUrl)) acts.push(`<a class="btn btn-primary" href="${esc(T.buyUrl)}" target="_blank" rel="noopener noreferrer">${L("Buy","Beli")} ${esc(T.ticker||"BLUMI")} ${ext}</a>`);
+      acts.push(`<a class="btn btn-ghost" href="${esc(W.explorer + CA)}" target="_blank" rel="noopener noreferrer">${L("View on Basescan","Lihat di Basescan")} ${ext}</a>`);
+      if (safeUrl(T.chartUrl)) acts.push(`<a class="btn btn-ghost" href="${esc(T.chartUrl)}" target="_blank" rel="noopener noreferrer">${L("View Chart","Lihat Chart")} ${ext}</a>`);
+      $('[data-t="actions"]').innerHTML = acts.join("");
+      $('[data-t="title"]').innerHTML = L('Officially <span class="grad-text">on Base.</span>', 'Resmi <span class="grad-text">di Base.</span>');
+      $('[data-t="lead"]').textContent = L("Always check the contract address below before you interact with any BLUMI token. This is the only official one.", "Selalu cek alamat kontrak di bawah sebelum berinteraksi dengan token BLUMI mana pun. Hanya ini yang resmi.");
+      $('[data-t="warn"]').textContent = L("Beware of fake tokens. BLUMI will never DM you first, ask for your seed phrase, or announce a different contract address outside this website and its official channels.", "Waspadai token palsu. BLUMI tidak akan pernah DM kamu duluan, meminta seed phrase, atau mengumumkan alamat kontrak lain di luar website ini dan kanal resminya.");
+    } else {
+      tk.hidden = false; tk.innerHTML = '<span class="soon-pill">SOON</span>'; tk.classList.add("soon");
+      $('[data-t="stats"]').innerHTML = [[L("Network","Jaringan"), W.network, false], ["Ticker", "SOON", true], [L("Total supply","Total suplai"), "SOON", true]]
+        .map(([k,v,soon]) => `<div class="token-stat"><span>${k}</span><strong class="${soon ? "soon" : ""}">${v}</strong></div>`).join("");
+      $('[data-t="contract"]').textContent = "SOON";
+      $(".ca-box").classList.add("soon");
+      const cb = $("[data-copy]"); cb.disabled = true; cb.setAttribute("aria-label", L("Copy contract address (available after launch)", "Salin alamat kontrak (tersedia setelah launch)"));
+      $('[data-t="actions"]').innerHTML = [L("Buy BLUMI","Beli BLUMI"), L("View on Basescan","Lihat di Basescan"), L("View Chart","Lihat Chart")]
+        .map((l,i) => `<span class="btn ${i ? "btn-ghost" : "btn-primary"} is-disabled" aria-disabled="true">${l} · Soon</span>`).join("");
+      $('[data-t="title"]').innerHTML = L('Coming <span class="grad-text">soon on Base.</span>', 'Segera <span class="grad-text">hadir di Base.</span>');
+      $('[data-t="lead"]').textContent = L("The BLUMI token has not launched yet. When it does, the official contract address will be published right here and through BLUMI's official channels.", "Token BLUMI belum launch. Saat sudah launch, alamat kontrak resminya akan diumumkan di sini dan lewat kanal resmi BLUMI.");
+      $('[data-t="warn"]').textContent = L("Until the official launch, any token using the BLUMI name is not ours. BLUMI will never DM you first or ask for your seed phrase.", "Sampai launch resmi, token apa pun yang memakai nama BLUMI bukan milik kami. BLUMI tidak akan pernah DM kamu duluan atau meminta seed phrase.");
+    }
+    $("[data-disclaimer]").textContent = TOKEN_LIVE
+      ? L(`BLUMI is an independent project built on Base. It is not affiliated with, sponsored by, or endorsed by Base or Coinbase. The only official BLUMI token contract is ${CA}. Any other address using the BLUMI name is not ours. Nothing on this website is financial advice.`,
+          `BLUMI adalah proyek independen yang dibangun di Base. BLUMI tidak berafiliasi dengan, tidak disponsori, dan tidak didukung secara resmi oleh Base maupun Coinbase. Satu-satunya kontrak token BLUMI yang resmi adalah ${CA}. Alamat lain yang memakai nama BLUMI bukan milik kami. Tidak ada isi website ini yang merupakan nasihat keuangan.`)
+      : L("BLUMI is an independent project being developed within the Base ecosystem. It is not affiliated with, sponsored by, or endorsed by Base or Coinbase. BLUMI has not launched a token. Any token, sale or contract address using the BLUMI name is not official unless announced through BLUMI's own channels.",
+          "BLUMI adalah proyek independen yang sedang dikembangkan di ekosistem Base. BLUMI tidak berafiliasi dengan, tidak disponsori, dan tidak didukung secara resmi oleh Base maupun Coinbase. BLUMI belum meluncurkan token. Token, penjualan, atau alamat kontrak apa pun yang memakai nama BLUMI tidak resmi kecuali diumumkan lewat kanal resmi BLUMI.");
+    // FAQ answers that depend on live data
+    $("[data-faq-token]").innerHTML = TOKEN_LIVE
+      ? L(`Yes. The only official contract is <code>${esc(CA)}</code>. You'll always find it in the <a href="#token">Token</a> section and under <a href="#official">Official Channels</a>.`,
+          `Sudah. Satu-satunya kontrak resmi adalah <code>${esc(CA)}</code>. Kamu selalu bisa menemukannya di bagian <a href="#token">Token</a> dan di <a href="#official">Kanal Resmi</a>.`)
+      : L(`Not yet. When it launches, the ticker and official contract address will be published in the <a href="#token">Token</a> section and on our official channels. Until then, any token using the BLUMI name is not ours.`,
+          `Belum. Saat launch, ticker dan alamat kontrak resminya akan diumumkan di bagian <a href="#token">Token</a> dan di kanal resmi kami. Sampai saat itu, token apa pun yang memakai nama BLUMI bukan milik kami.`);
+    const sx = BLUMI_CONFIG.socials;
+    $("[data-faq-join]").innerHTML = L(
+      `Follow <a href="${sx[0].url}" target="_blank" rel="noopener noreferrer">${sx[0].handle}</a> on X for updates and join the conversation on <a href="${sx[1].url}" target="_blank" rel="noopener noreferrer">Telegram</a>. Everyone is welcome.`,
+      `Follow <a href="${sx[0].url}" target="_blank" rel="noopener noreferrer">${sx[0].handle}</a> di X untuk kabar terbaru, dan ikut ngobrol di <a href="${sx[1].url}" target="_blank" rel="noopener noreferrer">Telegram</a>. Semua orang dipersilakan.`);
   }
 
-  if (!TOKEN_LIVE) {
-    /* ---- SOON state: shown until the token is launched ---- */
-    $('[data-t="name"]').textContent = "BLUMI";
-    const tk = $('[data-t="ticker"]'); tk.innerHTML = '<span class="soon-pill">SOON</span>'; tk.classList.add("soon");
-    $('[data-t="stats"]').innerHTML = [["Network", W.network, false], ["Ticker", "SOON", true], ["Total supply", "SOON", true]]
-      .map(([k,v,soon]) => `<div class="token-stat"><span>${k}</span><strong class="${soon ? "soon" : ""}">${v}</strong></div>`).join("");
-    $('[data-t="contract"]').textContent = "SOON";
-    $(".ca-box").classList.add("soon");
-    const cb = $("[data-copy]"); cb.disabled = true; cb.setAttribute("aria-label", "Copy contract address (available after launch)");
-    $('[data-t="actions"]').innerHTML = ["Buy BLUMI", "View on Basescan", "View Chart"]
-      .map((l,i) => `<span class="btn ${i ? "btn-ghost" : "btn-primary"} is-disabled" aria-disabled="true">${l} · Soon</span>`).join("");
+  if (TOKEN_LIVE) $("[data-copy]").addEventListener("click", async e => {
+    const b = e.currentTarget;
+    if (await copyText(CA, L("Contract address copied", "Alamat kontrak disalin"))) {
+      b.classList.add("done"); $('[data-t="copylabel"]').textContent = L("Copied", "Tersalin");
+      setTimeout(() => { b.classList.remove("done"); $('[data-t="copylabel"]').textContent = L("Copy", "Salin"); }, 2000);
+    }
+  });
+
+  /* ---------- navigation ---------- */
+  function renderNav(){
+    $("[data-nav]").innerHTML = BLUMI_CONFIG.nav.filter(n => n.header)
+      .map(n => `<li><a href="${urlFor(n.id)}" data-target="${n.id}" data-link="${n.id}">${navLabel(n)}</a></li>`).join("");
+    const groups = [["explore", L("Explore","Jelajahi")], ["resources", L("Resources","Sumber")]];
+    let i = 0;
+    $("[data-mobile-nav]").innerHTML = groups.map(([g,label]) => `<span class="m-group">${label}</span>` +
+      BLUMI_CONFIG.nav.filter(n => n.group === g).map(n => { i++;
+        return `<a href="${urlFor(n.id)}" data-target="${n.id}" data-link="${n.id}" style="transition-delay:${.04+i*.025}s">${navLabel(n)}<small>${String(i).padStart(2,"0")}</small></a>`; }).join("")).join("");
+    $$("[data-footer-nav]").forEach(ul => ul.innerHTML = BLUMI_CONFIG.nav.filter(n => n.group === ul.dataset.footerNav)
+      .map(n => `<li><a href="${urlFor(n.id)}" data-target="${n.id}">${navLabel(n)}</a></li>`).join(""));
   }
 
-  /* ---------- render navigation ---------- */
-  $("[data-nav]").innerHTML = BLUMI_CONFIG.nav.map(n => `<li><a href="#${n.id}" data-link="${n.id}">${n.label}</a></li>`).join("");
-  $("[data-mobile-nav]").innerHTML = BLUMI_CONFIG.nav.map((n,i) =>
-    `<a href="#${n.id}" data-link="${n.id}" style="transition-delay:${.05+i*.04}s">${n.label}<small>0${i+1}</small></a>`).join("");
-  $("[data-footer-nav]").innerHTML = BLUMI_CONFIG.nav.map(n => `<li><a href="#${n.id}">${n.label}</a></li>`).join("");
+  /* ---------- socials ---------- */
+  function renderSocials(){
+    const cta = s => s.key === "x" ? L(`Follow ${s.handle}`, `Follow ${s.handle}`) : L("Join the community chat", "Gabung grup komunitas");
+    $("[data-socials]").innerHTML = BLUMI_CONFIG.socials.map(s => s.url
+      ? `<a class="social" href="${s.url}" target="_blank" rel="noopener noreferrer"><span class="s-icon">${ICONS[s.key]}</span><span><strong>${s.label}</strong><span>${cta(s)}</span></span>${ARROW}</a>`
+      : `<div class="social" aria-disabled="true"><span class="s-icon">${ICONS[s.key]}</span><span><strong>${s.label}</strong><span>${L("Official link coming soon","Link resmi segera hadir")}</span></span></div>`).join("");
+    $("[data-footer-socials]").innerHTML = BLUMI_CONFIG.socials.map(s => s.url
+      ? `<li><a href="${s.url}" target="_blank" rel="noopener noreferrer">${s.label}</a></li>`
+      : `<li><span>${s.label}<em>Soon</em></span></li>`).join("");
+  }
 
-  /* ---------- render socials (placeholders until URLs exist) ---------- */
-  $("[data-socials]").innerHTML = BLUMI_CONFIG.socials.map(s => s.url
-    ? `<a class="social" href="${s.url}" target="_blank" rel="noopener noreferrer"><span class="s-icon">${ICONS[s.key]}</span><span><strong>${s.label}</strong><span>${s.cta || "Follow @blumidotworld"}</span></span>${ARROW}</a>`
-    : `<div class="social" aria-disabled="true"><span class="s-icon">${ICONS[s.key]}</span><span><strong>${s.label}</strong><span>Official link coming soon</span></span></div>`
-  ).join("");
-  $("[data-footer-socials]").innerHTML = BLUMI_CONFIG.socials.map(s => s.url
-    ? `<li><a href="${s.url}" target="_blank" rel="noopener noreferrer">${s.label}</a></li>`
-    : `<li><span>${s.label}<em>Soon</em></span></li>`).join("");
+  /* ---------- official channels ---------- */
+  function renderOfficial(){
+    const site = { value: L("This website", "Website ini"), href: PATH_MODE ? location.origin : null };   // domain intentionally not printed
+    const rows = [
+      { icon: ICONS.web, label: L("Website","Website"), value: site.value, href: site.href, copy: site.href },
+      ...BLUMI_CONFIG.socials.map(s => ({ icon: ICONS[s.key], label: s.label, value: s.handle, href: s.url, copy: s.url })),
+      { icon: ICONS.coin, label: L("Token contract (Base)","Kontrak token (Base)"), value: TOKEN_LIVE ? CA : "SOON", soon: !TOKEN_LIVE, href: TOKEN_LIVE ? W.explorer + CA : null, copy: TOKEN_LIVE ? CA : null }
+    ];
+    $("[data-official]").innerHTML = rows.map((r,i) => `<div class="off-row">
+      <span class="off-ic">${r.icon}</span>
+      <div class="off-main"><small>${esc(r.label)}</small><strong class="${r.soon ? "soon" : ""}">${esc(r.value)}</strong></div>
+      <div class="off-acts">
+        <button class="icon-btn" type="button" data-off-copy="${i}" ${r.copy ? "" : "disabled"} aria-label="${L("Copy","Salin")} ${esc(r.label)}">${ICONS.copy}</button>
+        ${r.href ? `<a class="icon-btn" href="${esc(r.href)}" target="_blank" rel="noopener noreferrer" aria-label="${L("Open","Buka")} ${esc(r.label)}">${ICONS.open}</a>` : `<button class="icon-btn" type="button" disabled aria-label="${L("Not available yet","Belum tersedia")}">${ICONS.open}</button>`}
+      </div></div>`).join("");
+    $$("[data-off-copy]").forEach(b => b.addEventListener("click", () => copyText(rows[+b.dataset.offCopy].copy, L("Copied","Tersalin"))));
+  }
+
+  /* ---------- brand kit colours ---------- */
+  function renderSwatches(){
+    $("[data-swatches]").innerHTML = BLUMI_CONFIG.colors.map(c => `<button class="swatch" type="button" data-hex="${c.hex}" aria-label="${L("Copy","Salin")} ${c.hex}">
+      <div class="c" style="background:${c.hex};${c.hex === "#FFFFFF" ? "box-shadow:inset 0 -1px 0 var(--line)" : ""}"></div>
+      <div class="m"><b>${L(c.name, c.id_)}</b><code>${c.hex}</code></div></button>`).join("");
+    $$("[data-hex]").forEach(b => b.addEventListener("click", () => copyText(b.dataset.hex, `${b.dataset.hex} ${L("copied","disalin")}`)));
+  }
+
+  /* ---------- apply language everywhere ---------- */
+  function applyLang(){
+    document.documentElement.lang = LANG;
+    $$("[data-i18n]").forEach(el => { const k = el.dataset.i18n; el.innerHTML = (LANG === "id" && I18N_ID[k] != null) ? I18N_ID[k] : EN_HTML.get(el); });
+    renderNav(); renderSocials(); renderToken(); renderOfficial(); renderSwatches();
+    linkify();
+    if (window.__blumiGame) window.__blumiGame.refresh();
+    if (typeof setActive === "function") setActive(true);
+    document.title = titleFor(currentUrlId);
+  }
 
   /* ---------- year ---------- */
   $("#year").textContent = new Date().getFullYear();
@@ -822,7 +1348,7 @@ const ARROW = '<svg class="s-arrow" viewBox="0 0 24 24" fill="none" stroke="curr
     document.body.style.overflow = open ? "hidden" : "";
   };
   btn.addEventListener("click", () => setMenu(!document.body.classList.contains("menu-open")));
-  $$("#mobileNav a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+  $("#mobileNav").addEventListener("click", e => { if (e.target.closest("a")) setMenu(false); });
   document.addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
   window.addEventListener("resize", () => { if (window.innerWidth >= 960) setMenu(false); });
 
@@ -836,27 +1362,9 @@ const ARROW = '<svg class="s-arrow" viewBox="0 0 24 24" fill="none" stroke="curr
   } else reveals.forEach(r => r.classList.add("in"));
 
   /* ==========================================================
-     ROUTING — clean URLs (/about, /token, /roadmap …)
-     Clean paths are used when the site runs as its own page
-     (Vercel). Inside an embedded preview it falls back to #hash.
-     vercel.json rewrites each section path to index.html.
+     ROUTING — /about, /token, /faq … (vercel.json rewrites them)
      ========================================================== */
-  const SECTION_IDS = BLUMI_CONFIG.nav.map(n => n.id);
-  let PATH_MODE = false;
-  try { PATH_MODE = window.self === window.top && /^https?:$/.test(location.protocol); } catch (_) {}
-  const urlFor = id => PATH_MODE ? (id === "home" ? "/" : "/" + id) : "#" + id;
-  const BASE_TITLE = "BLUMI — A Little Blue, A Bigger World";
-  const titleFor = id => id === "home" ? BASE_TITLE : `${BLUMI_CONFIG.nav.find(n => n.id === id).label} — BLUMI`;
   const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // every in-page link to a section gets a real, shareable href
-  $$('a[href^="#"]').forEach(a => {
-    const id = a.getAttribute("href").slice(1);
-    if (!SECTION_IDS.includes(id)) return;          // e.g. #main skip link stays as is
-    a.dataset.target = id;
-    a.setAttribute("href", urlFor(id));
-  });
-
   const sectionFromLocation = () => {
     const fromPath = location.pathname.replace(/^\/+|\/+$/g, "").toLowerCase();
     if (PATH_MODE && SECTION_IDS.includes(fromPath)) return fromPath;
@@ -864,8 +1372,7 @@ const ARROW = '<svg class="s-arrow" viewBox="0 0 24 24" fill="none" stroke="curr
     if (SECTION_IDS.includes(fromHash)) return fromHash;
     return "home";
   };
-
-  let lockUntil = 0;                                 // pause URL syncing while a click-scroll runs
+  let lockUntil = 0;
   const goTo = (id, behavior) => {
     const el = document.getElementById(id);
     if (!el) return;
@@ -873,7 +1380,6 @@ const ARROW = '<svg class="s-arrow" viewBox="0 0 24 24" fill="none" stroke="curr
     if (id === "home") window.scrollTo({ top: 0, behavior });
     else el.scrollIntoView({ behavior });
   };
-
   let currentUrlId = sectionFromLocation();
   const setUrl = (id, push) => {
     if (id === currentUrlId && !push) return;
@@ -884,44 +1390,41 @@ const ARROW = '<svg class="s-arrow" viewBox="0 0 24 24" fill="none" stroke="curr
       history[push ? "pushState" : "replaceState"]({ id }, "", url);
     } catch (_) {}
   };
-
   document.addEventListener("click", e => {
     const a = e.target.closest("a[data-target]");
-    if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;   // allow open-in-new-tab
+    if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
     e.preventDefault();
     const id = a.dataset.target;
     goTo(id, reduce() ? "auto" : "smooth");
     if (id !== currentUrlId) setUrl(id, true);
   });
-
   window.addEventListener("popstate", () => {
     const id = sectionFromLocation();
     currentUrlId = id; document.title = titleFor(id);
     goTo(id, reduce() ? "auto" : "smooth");
   });
 
-  /* ---------- active section in nav + URL follows scrolling ---------- */
-  const links = $$("[data-link]");
+  /* active section + URL follows scrolling */
   const sections = SECTION_IDS.map(id => document.getElementById(id)).filter(Boolean);
-  const setActive = () => {
+  var setActive = (force) => {
     const y = window.scrollY + window.innerHeight * .35;
     let current = sections[0].id;
     sections.forEach(s => { if (s.offsetTop <= y) current = s.id; });
     if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) current = sections[sections.length-1].id;
-    links.forEach(l => l.classList.toggle("active", l.dataset.link === current));
+    $$("[data-link]").forEach(l => l.classList.toggle("active", l.dataset.link === current));
     if (Date.now() > lockUntil) setUrl(current, false);
   };
 
-  // land on the section in the URL (e.g. someone opens blumi's /token link)
   const startId = sectionFromLocation();
+  if (startId !== "home") lockUntil = Date.now() + 1500;   // keep the deep-link URL while we jump there
+  applyLang();
   document.title = titleFor(startId);
   if (startId !== "home") {
-    history.scrollRestoration = "manual";
-    lockUntil = Date.now() + 600;
-    requestAnimationFrame(() => goTo(startId, "auto"));
-    window.addEventListener("load", () => goTo(startId, "auto"), { once: true });
+    try { history.scrollRestoration = "manual"; } catch (_) {}
+    requestAnimationFrame(() => goTo(startId, "instant"));
+    window.addEventListener("load", () => goTo(startId, "instant"), { once: true });
   }
-  setActive(); window.addEventListener("scroll", setActive, { passive: true });
+  setActive(); window.addEventListener("scroll", () => setActive(), { passive: true });
 
   /* ---------- subtle mascot parallax (pointer devices only) ---------- */
   const tile = $(".hero-visual");
@@ -933,6 +1436,169 @@ const ARROW = '<svg class="s-arrow" viewBox="0 0 24 24" fill="none" stroke="curr
     }, { passive: true });
     tile.style.transition = "translate .6s cubic-bezier(.22,.8,.24,1)";
   }
+
+  /* ==========================================================
+     BLUMI PLAYGROUND — Catch the Drops (preview mini game)
+     ========================================================== */
+  (function game(){
+    const card = $("#gameCard"), cv = $("#game"), ctx = cv.getContext("2d");
+    const ui = k => $(`[data-g="${k}"]`, card);
+    const img = new Image(); img.src = "assets/blumi-mascot-160.webp";
+    const DURATION = 30;
+    let Wd = 0, Ht = 0, dpr = 1, state = "idle", score = 0, timeLeft = DURATION, best = +(store.get("blumi-best") || 0);
+    let items = [], parts = [], floats = [], spawnT = 0, elapsed = 0, last = 0, shake = 0, raf = 0, paused = false;
+    const P = { x: 0, tx: 0, size: 64, tilt: 0 };
+    const keys = { l: false, r: false };
+
+    function resize(){
+      const r = cv.getBoundingClientRect(); dpr = Math.min(2, window.devicePixelRatio || 1);
+      Wd = r.width; Ht = r.height; cv.width = Math.round(Wd * dpr); cv.height = Math.round(Ht * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      P.size = Math.max(52, Math.min(78, Wd * .11));
+      if (!P.x) P.x = P.tx = Wd / 2;
+      P.x = Math.min(Math.max(P.x, P.size/2), Wd - P.size/2); P.tx = P.x;
+    }
+    const groundY = () => Ht - 26;
+    const hud = () => { ui("score").textContent = score; ui("time").textContent = Math.ceil(timeLeft); ui("best").textContent = best; };
+
+    function spawn(){
+      const p = Math.min(1, elapsed / DURATION), r = Math.random();
+      const type = (elapsed > 3 && r < .13 + p * .1) ? "bad" : (r > .93 ? "gold" : "drop");
+      const size = type === "gold" ? 15 : type === "bad" ? 15 : 13 + Math.random() * 4;
+      items.push({ type, x: 24 + Math.random() * (Wd - 48), y: -30, vy: Ht * (.32 + p * .42) * (.85 + Math.random() * .3), r: size, wob: Math.random() * 6.28 });
+    }
+    function burst(x, y, color, n=12){ for (let i=0;i<n;i++){ const a = Math.random()*6.28, s = 60 + Math.random()*160; parts.push({ x, y, vx: Math.cos(a)*s, vy: Math.sin(a)*s - 80, life: .6 + Math.random()*.3, t: 0, color, r: 2 + Math.random()*3 }); } }
+
+    function drawDrop(x, y, r, type, t){
+      ctx.save(); ctx.translate(x, y);
+      if (type === "bad"){
+        ctx.rotate(t * 2);
+        ctx.shadowColor = "rgba(255,90,140,.8)"; ctx.shadowBlur = 16;
+        ctx.fillStyle = "#1a1f3d"; ctx.beginPath();
+        for (let i=0;i<16;i++){ const a = i/16*Math.PI*2, rr = i%2 ? r*.72 : r*1.15; ctx.lineTo(Math.cos(a)*rr, Math.sin(a)*rr); }
+        ctx.closePath(); ctx.fill(); ctx.shadowBlur = 0;
+        ctx.strokeStyle = "#ff6b8b"; ctx.lineWidth = 2.4; ctx.lineCap = "round";
+        ctx.beginPath(); ctx.moveTo(-r*.32,-r*.32); ctx.lineTo(r*.32,r*.32); ctx.moveTo(r*.32,-r*.32); ctx.lineTo(-r*.32,r*.32); ctx.stroke();
+      } else {
+        const gold = type === "gold";
+        if (gold){ ctx.shadowColor = "rgba(255,210,60,.9)"; ctx.shadowBlur = 22; }
+        const g = ctx.createLinearGradient(0, -r*1.6, 0, r);
+        g.addColorStop(0, gold ? "#fff7d6" : "#ffffff"); g.addColorStop(1, gold ? "#ffbf1a" : "#7cc1ff");
+        ctx.fillStyle = g; ctx.beginPath();
+        ctx.moveTo(0, -r*1.7);
+        ctx.bezierCurveTo(r*.6, -r*.9, r, -r*.3, r, r*.15);
+        ctx.arc(0, r*.15, r, 0, Math.PI, false);
+        ctx.bezierCurveTo(-r, -r*.3, -r*.6, -r*.9, 0, -r*1.7);
+        ctx.fill(); ctx.shadowBlur = 0;
+        ctx.fillStyle = "rgba(255,255,255,.85)"; ctx.beginPath(); ctx.ellipse(-r*.38, -r*.05, r*.2, r*.32, -.4, 0, Math.PI*2); ctx.fill();
+      }
+      ctx.restore();
+    }
+    function rr(x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+
+    function draw(t){
+      ctx.save();
+      if (shake > 0) ctx.translate((Math.random()-.5)*shake, (Math.random()-.5)*shake);
+      ctx.clearRect(-20, -20, Wd+40, Ht+40);
+      // light rays + bubbles background
+      const bg = ctx.createRadialGradient(Wd*.5, -Ht*.1, 10, Wd*.5, Ht*.2, Ht*1.1);
+      bg.addColorStop(0, "rgba(255,255,255,.28)"); bg.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.fillStyle = bg; ctx.fillRect(0, 0, Wd, Ht);
+      for (let i=0;i<14;i++){ const bx = (i*137.5 % Wd), by = Ht - ((t*18 + i*97) % (Ht+40)), br = 3 + (i%4)*2;
+        ctx.strokeStyle = "rgba(255,255,255,.22)"; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.arc(bx + Math.sin(t+i)*8, by, br, 0, Math.PI*2); ctx.stroke(); }
+      // water line
+      ctx.fillStyle = "rgba(255,255,255,.12)"; ctx.beginPath(); ctx.moveTo(0, groundY());
+      for (let x=0; x<=Wd; x+=12) ctx.lineTo(x, groundY() + Math.sin(x*.03 + t*2.2)*4);
+      ctx.lineTo(Wd, Ht); ctx.lineTo(0, Ht); ctx.closePath(); ctx.fill();
+      // items
+      items.forEach(it => drawDrop(it.x + Math.sin(t*3 + it.wob)*(it.type==="bad"?0:2), it.y, it.r, it.type, t));
+      // particles
+      parts.forEach(p => { ctx.globalAlpha = Math.max(0, 1 - p.t/p.life); ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill(); });
+      ctx.globalAlpha = 1;
+      // player (original mascot image, uniform scale, rounded like the brand icon)
+      const s = P.size, bob = state === "play" ? 0 : Math.sin(t*2)*4, px = P.x - s/2, py = groundY() - s - 6 + bob;
+      ctx.save(); ctx.translate(P.x, py + s/2); ctx.rotate(P.tilt); ctx.translate(-P.x, -(py + s/2));
+      ctx.shadowColor = "rgba(0,20,80,.45)"; ctx.shadowBlur = 18; ctx.shadowOffsetY = 8;
+      rr(px, py, s, s, s*.28); ctx.fillStyle = "#2f7bff"; ctx.fill(); ctx.shadowColor = "transparent";
+      ctx.save(); rr(px, py, s, s, s*.28); ctx.clip(); if (img.complete && img.naturalWidth) ctx.drawImage(img, px, py, s, s); ctx.restore();
+      ctx.strokeStyle = "rgba(255,255,255,.55)"; ctx.lineWidth = 1.5; rr(px+.75, py+.75, s-1.5, s-1.5, s*.28); ctx.stroke();
+      ctx.restore();
+      // floating score text
+      ctx.textAlign = "center"; ctx.font = "700 18px Sora, sans-serif";
+      floats.forEach(f => { ctx.globalAlpha = Math.max(0, 1 - f.t/.9); ctx.fillStyle = f.color; ctx.fillText(f.txt, f.x, f.y - f.t*50); });
+      ctx.globalAlpha = 1;
+      ctx.restore();
+    }
+
+    function step(now){
+      raf = requestAnimationFrame(step);
+      const t = now / 1000; let dt = Math.min(.05, (now - (last || now)) / 1000); last = now;
+      if (paused) dt = 0;
+      if (state === "play" && dt > 0){
+        elapsed += dt; timeLeft = Math.max(0, DURATION - elapsed);
+        spawnT -= dt; const p = Math.min(1, elapsed / DURATION);
+        if (spawnT <= 0){ spawn(); spawnT = (.62 - p*.34) * (.75 + Math.random()*.5); }
+        const speed = Wd * 1.25;
+        if (keys.l) P.tx -= speed * dt; if (keys.r) P.tx += speed * dt;
+        P.tx = Math.min(Math.max(P.tx, P.size/2), Wd - P.size/2);
+        const top = groundY() - P.size - 6;
+        items.forEach(it => {
+          it.y += it.vy * dt;
+          if (!it.done && it.y + it.r > top + 6 && it.y - it.r < top + P.size*.55 && Math.abs(it.x - P.x) < P.size*.55 + it.r*.4){
+            it.done = true;
+            if (it.type === "bad"){ score = Math.max(0, score - 3); shake = 10; burst(it.x, it.y, "#ff6b8b", 14); floats.push({ x: it.x, y: top, txt: "−3", color: "#ffd0da", t: 0 }); }
+            else { const v = it.type === "gold" ? 5 : 1; score += v; burst(it.x, it.y, it.type === "gold" ? "#ffd34d" : "#e6f4ff", it.type === "gold" ? 18 : 10); floats.push({ x: it.x, y: top, txt: "+" + v, color: it.type === "gold" ? "#ffe27a" : "#ffffff", t: 0 }); }
+          }
+          if (!it.done && it.y - it.r > groundY()){ it.done = true; if (it.type !== "bad") burst(it.x, groundY(), "rgba(255,255,255,.7)", 5); }
+        });
+        items = items.filter(it => !it.done);
+        if (timeLeft <= 0) end();
+        hud();
+      }
+      // ease player toward target, tilt with movement
+      const dx = P.tx - P.x; P.x += dx * Math.min(1, dt * 14 || .2); P.tilt += ((Math.max(-1, Math.min(1, dx / 60)) * .18) - P.tilt) * Math.min(1, dt * 10 || .2);
+      parts.forEach(p => { p.t += dt; p.vy += 420*dt; p.x += p.vx*dt; p.y += p.vy*dt; }); parts = parts.filter(p => p.t < p.life);
+      floats.forEach(f => f.t += dt); floats = floats.filter(f => f.t < .9);
+      shake = Math.max(0, shake - dt * 40);
+      if (state !== "play" && !items.length && Math.random() < .02) items.push({ type: Math.random() < .1 ? "gold" : "drop", x: 24 + Math.random()*(Wd-48), y: -20, vy: Ht*.18, r: 13, wob: Math.random()*6, done: false });
+      if (state !== "play") { items.forEach(it => { it.y += it.vy * dt; if (it.y > groundY()) it.done = true; }); items = items.filter(i => !i.done); }
+      draw(t);
+    }
+
+    function start(){
+      state = "play"; score = 0; elapsed = 0; timeLeft = DURATION; items = []; parts = []; floats = []; spawnT = .3;
+      card.classList.add("playing"); ui("start").hidden = true; ui("over").hidden = true; hud(); cv.focus({ preventScroll: true });
+    }
+    function end(){
+      state = "over"; card.classList.remove("playing");
+      const isBest = score > best; if (isBest){ best = score; store.set("blumi-best", String(best)); }
+      ui("final").textContent = score; ui("newbest").hidden = !isBest; ui("over").hidden = false; hud(); updateShare();
+    }
+    function updateShare(){
+      const page = PATH_MODE ? ` ${location.origin}/playground` : "";
+      const text = L(`I caught ${score} drops in BLUMI Playground 💧 Can you beat me? @blumidotworld${page}`, `Aku dapat ${score} tetes di BLUMI Playground 💧 Bisa kalahin? @blumidotworld${page}`);
+      ui("share").href = "https://x.com/intent/tweet?text=" + encodeURIComponent(text);
+    }
+
+    ui("play").addEventListener("click", start);
+    ui("again").addEventListener("click", start);
+    const setTarget = e => { const r = cv.getBoundingClientRect(); P.tx = Math.min(Math.max(e.clientX - r.left, P.size/2), Wd - P.size/2); };
+    cv.addEventListener("pointermove", e => { if (state === "play") setTarget(e); });
+    cv.addEventListener("pointerdown", e => { if (state === "play") { setTarget(e); try { cv.setPointerCapture(e.pointerId); } catch(_){} } });
+    window.addEventListener("keydown", e => {
+      if (state !== "play") return;
+      if (["ArrowLeft","a","A"].includes(e.key)) { keys.l = true; e.preventDefault(); }
+      if (["ArrowRight","d","D"].includes(e.key)) { keys.r = true; e.preventDefault(); }
+    });
+    window.addEventListener("keyup", e => { if (["ArrowLeft","a","A"].includes(e.key)) keys.l = false; if (["ArrowRight","d","D"].includes(e.key)) keys.r = false; });
+    document.addEventListener("visibilitychange", () => { paused = document.hidden; last = 0; });
+    window.addEventListener("resize", resize);
+
+    // only animate while the game is on screen
+    const vis = new IntersectionObserver(([en]) => { if (en.isIntersecting) { if (!raf) { last = 0; raf = requestAnimationFrame(step); } } else if (state !== "play") { cancelAnimationFrame(raf); raf = 0; } });
+    resize(); hud(); vis.observe(card);
+    window.__blumiGame = { refresh(){ hud(); updateShare(); }, _state: () => ({ state, score, timeLeft, best, P, items: items.length }), _start: start };
+  })();
 })();
 </script>
 </body>

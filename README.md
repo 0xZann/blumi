@@ -1,21 +1,26 @@
 # BLUMI — official website
 
-Static, dependency-free site. Open `index.html` or deploy the folder to any static host (Vercel, Netlify, Cloudflare Pages, GitHub Pages).
+Static, dependency-free site. Deploy the folder as-is (Vercel, Framework Preset: Other).
 
-## Structure
-- `index.html` — all sections, the design system (CSS tokens at the top of `<style>`), and the site script
-- `assets/` — the mascot in optimised sizes, plus the favicon
+## Files
+- `index.html` — all sections, styles, translations and scripts
+- `vercel.json` — clean URLs (`/about`, `/token`, `/faq` …). Keep it next to `index.html`.
+- `assets/` — mascot images, favicon, social preview, and `assets/brand/` downloads for the Brand Kit
+
+## Sections & addresses
+Home `/` · About `/about` · Mascot `/mascot` · Ecosystem `/ecosystem` · Playground `/playground` · Vision `/vision` · Token `/token` · Roadmap `/roadmap` · Community `/community` · FAQ `/faq` · Official Channels `/official` · Brand Kit `/brand-kit`
 
 ## Updating content
-Everything that changes over time is in the `BLUMI_CONFIG` object near the bottom of `index.html`:
-- `socials[].url`: add the official X and Telegram links. The cards switch from "coming soon" to live links automatically.
-- `nav`: the section links used by the header, mobile menu and footer.
-- `web3`: reserved for future Base integrations. Nothing is active: no wallet, no contract, no token.
+Everything that changes lives in `BLUMI_CONFIG` near the bottom of `index.html`:
+- `socials` — official X and Telegram links (also used by FAQ and Official Channels)
+- `colors` — Brand Kit palette
+- `web3.token` + `tokenLaunched` — token launch switch (see below)
+
+## Languages
+English text is written in the HTML. Indonesian translations are in `I18N_ID` (same keys as the `data-i18n` attributes). The site picks Indonesian automatically for Indonesian browsers and remembers the visitor's choice.
 
 ## Launching the token
-In `BLUMI_CONFIG.web3` inside `index.html`:
-1. Fill in `token.name`, `token.ticker` and `token.contract` (a real 0x… address on Base).
-2. Optional: `token.totalSupply`, `token.buyUrl` (swap link) and `token.chartUrl` (chart link). Empty fields stay hidden.
+1. Fill in `token.name`, `token.ticker` and `token.contract` (real 0x… address on Base).
+2. Optional: `token.totalSupply`, `token.buyUrl`, `token.chartUrl`.
 3. Set `tokenLaunched: true`.
-
-Until then the Token section shows "SOON" everywhere with disabled buttons. Launching fills in the real data, enables the Copy button and Basescan link for the contract address, and an updated footer note. If the contract address is missing or invalid, the section stays in the SOON state.
+The Token section, FAQ answer, Official Channels and footer note update automatically. If the address is missing or invalid, everything stays in the SOON state.
