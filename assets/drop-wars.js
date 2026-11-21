@@ -1,6 +1,6 @@
 /* BLUMI Playground — Drop Wars (artillery duel, 10 levels). Loaded only when picked. Mounts into #warsCard. */
-(function(){ if(document.getElementById('dw-style')) return; const st=document.createElement('style'); st.id='dw-style'; st.textContent="#warsCard canvas{display:block;width:100%;touch-action:none}\n#warsCard .hud{position:absolute;left:10px;right:10px;top:10px;display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:start;pointer-events:none;color:#fff}\n#warsCard .hp{display:flex;flex-direction:column;gap:5px;padding:8px 10px;border-radius:14px;background:rgba(5,12,35,.55);border:1px solid rgba(160,210,255,.18);backdrop-filter:blur(6px)}\n#warsCard .hp.r{text-align:right}\n#warsCard .hp b{font:700 11px/1 Unbounded,sans-serif;letter-spacing:.06em}\n#warsCard .bar{height:7px;border-radius:9px;background:rgba(255,255,255,.12);overflow:hidden}\n#warsCard .bar i{display:block;height:100%;width:100%;border-radius:9px;transition:width .4s}\n#warsCard .hp.l .bar i{background:linear-gradient(90deg,#5fb4ff,#2f7bff)}\n#warsCard .hp.r .bar i{background:linear-gradient(90deg,#ff6b8b,#ff9ab3);margin-left:auto}\n#warsCard .mid{display:flex;flex-direction:column;align-items:center;gap:5px;padding:7px 10px;border-radius:14px;background:rgba(5,12,35,.55);border:1px solid rgba(160,210,255,.18);backdrop-filter:blur(6px);min-width:92px}\n#warsCard .mid small{font:600 9px/1 Inter,system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(200,225,255,.75)}\n#warsCard .mid b{font:700 12px/1 Unbounded,sans-serif}\n#warsCard .turn{position:absolute;left:0;right:0;top:74px;text-align:center;pointer-events:none;font:800 13px/1 Unbounded,sans-serif;letter-spacing:.14em;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.6);transition:opacity .3s}\n#warsCard .weap{position:absolute;left:10px;right:10px;bottom:10px;display:flex;gap:8px;justify-content:center;pointer-events:auto}\n#warsCard .wb{appearance:none;border:1px solid rgba(160,210,255,.25);background:rgba(5,12,35,.62);color:#fff;border-radius:14px;padding:8px 12px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;min-width:84px;backdrop-filter:blur(6px);font-family:inherit}\n#warsCard .wb b{font:700 11px/1 Unbounded,sans-serif}\n#warsCard .wb small{font-size:10.5px;color:rgba(200,225,255,.75)}\n#warsCard .wb.on{background:linear-gradient(135deg,#2f7bff,#0a5cff);border-color:transparent;box-shadow:0 10px 24px -10px rgba(10,92,255,.9)}\n#warsCard .wb:disabled{opacity:.35;cursor:default}\n#warsCard .ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px;color:#fff;background:linear-gradient(180deg,rgba(3,10,35,.55),rgba(2,6,20,.8));backdrop-filter:blur(4px);transition:opacity .35s}\n#warsCard .ov.hide{opacity:0;pointer-events:none}\n#warsCard .ov h2{font:800 28px/1.1 Unbounded,sans-serif}\n#warsCard .ov p{margin-top:12px;max-width:360px;font-size:14.5px;line-height:1.55;color:rgba(255,255,255,.9)}\n#warsCard .ov .sc{margin-top:10px;font:800 40px/1 Unbounded,sans-serif}\n#warsCard .ov button{margin-top:22px;appearance:none;border:0;cursor:pointer;padding:15px 34px;border-radius:999px;background:#fff;color:var(--blue);font:800 15px/1 Unbounded,sans-serif;letter-spacing:.04em;box-shadow:0 14px 30px -10px rgba(0,0,0,.35)}\n#warsCard .lvgrid{display:grid;grid-template-columns:repeat(5,40px);gap:8px;margin-top:18px;justify-content:center}\n#warsCard .ov .lvgrid .lv{appearance:none;margin:0;padding:0;width:40px;height:40px;border-radius:12px;border:1px solid rgba(255,255,255,.6);background:#fff;color:#0a5cff;font:800 14px/1 Unbounded,sans-serif;letter-spacing:0;cursor:pointer;display:grid;place-items:center;box-shadow:0 8px 18px -8px rgba(0,0,0,.5)}\n#warsCard .ov .lvgrid .lv.done{background:linear-gradient(135deg,#2f7bff,#0a5cff);border-color:transparent;color:#fff}\n#warsCard .ov .lvgrid .lv.locked{cursor:default;background:rgba(255,255,255,.06);border-color:rgba(160,210,255,.25);color:rgba(200,225,255,.55);box-shadow:none}\n#warsCard .ov .how{margin-top:16px;font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.8);max-width:340px}\n#warsCard{background:#050b1f}\n#warsCard .dw-stage{position:relative;margin:0 auto}\n#warsCard .ov > button{color:#0a5cff}\n"; document.head.appendChild(st); })();
-const MARKUP="<div class=\"dw-stage\">\n    <canvas data-id=\"cv\" aria-label=\"Drop Wars battlefield\"></canvas>\n    <div class=\"hud\">\n      <div class=\"hp l\"><b>BLUMI <span data-id=\"lives\" style=\"color:#ff6b8b;letter-spacing:.08em\"></span></b><div class=\"bar\"><i data-id=\"hpA\"></i></div></div>\n      <div class=\"mid\"><small>Wind</small><b data-id=\"wind\">0</b><small data-id=\"lvl\">Level 1/10</small></div>\n      <div class=\"hp r\"><b>GLITCH</b><div class=\"bar\"><i data-id=\"hpB\"></i></div></div>\n    </div>\n    <div class=\"turn\" data-id=\"turn\"></div>\n    <div class=\"weap\" data-id=\"weap\">\n      <button class=\"wb on\" data-w=\"0\" type=\"button\"><b>Drop shell</b><small>\u221e</small></button>\n      <button class=\"wb\" data-w=\"1\" type=\"button\"><b>Triple</b><small data-id=\"am1\">x2</small></button>\n      <button class=\"wb\" data-w=\"2\" type=\"button\"><b>Mega drop</b><small data-id=\"am2\">x3</small></button>\n    </div>\n    <div class=\"ov\" data-id=\"ov\">\n      <h2 data-id=\"ovT\">Drop Wars</h2>\n      <div class=\"sc\" data-id=\"ovS\" style=\"display:none\"></div>\n      <p data-id=\"ovP\">BLUMI vs the Glitch. 10 levels, 3 lives. Beat a level to unlock the next one.</p>\n      <div class=\"lvgrid\" data-id=\"lvGrid\"></div>\n      <button data-id=\"ovB\">Play</button>\n      <div class=\"how\">Drag in any direction to aim (longer drag = more power), release to fire \u00b7 or \u2190 \u2192 \u2191 \u2193 and Space</div>\n    </div>\n</div>";
+(function(){ if(document.getElementById('dw-style')) return; const st=document.createElement('style'); st.id='dw-style'; st.textContent="#warsCard canvas{display:block;width:100%;touch-action:none}\n#warsCard .hud{position:absolute;left:10px;right:10px;top:10px;display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:start;pointer-events:none;color:#fff}\n#warsCard .hp{display:flex;flex-direction:column;gap:5px;padding:8px 10px;border-radius:14px;background:rgba(5,12,35,.55);border:1px solid rgba(160,210,255,.18);backdrop-filter:blur(6px)}\n#warsCard .hp.r{text-align:right}\n#warsCard .hp b{font:700 11px/1 Unbounded,sans-serif;letter-spacing:.06em}\n#warsCard .bar{height:7px;border-radius:9px;background:rgba(255,255,255,.12);overflow:hidden}\n#warsCard .bar i{display:block;height:100%;width:100%;border-radius:9px;transition:width .4s}\n#warsCard .hp.l .bar i{background:linear-gradient(90deg,#5fb4ff,#2f7bff)}\n#warsCard .hp.r .bar i{background:linear-gradient(90deg,#ff6b8b,#ff9ab3);margin-left:auto}\n#warsCard .mid{display:flex;flex-direction:column;align-items:center;gap:5px;padding:7px 10px;border-radius:14px;background:rgba(5,12,35,.55);border:1px solid rgba(160,210,255,.18);backdrop-filter:blur(6px);min-width:92px}\n#warsCard .mid small{font:600 9px/1 Inter,system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(200,225,255,.75)}\n#warsCard .mid b{font:700 12px/1 Unbounded,sans-serif}\n#warsCard .turn{position:absolute;left:0;right:0;top:74px;text-align:center;pointer-events:none;font:800 13px/1 Unbounded,sans-serif;letter-spacing:.14em;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.6);transition:opacity .3s}\n#warsCard .weap{position:absolute;left:10px;right:10px;bottom:10px;display:flex;gap:8px;justify-content:center;pointer-events:auto}\n#warsCard .wb{appearance:none;border:1px solid rgba(160,210,255,.25);background:rgba(5,12,35,.62);color:#fff;border-radius:14px;padding:8px 12px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;min-width:84px;backdrop-filter:blur(6px);font-family:inherit}\n#warsCard .wb b{font:700 11px/1 Unbounded,sans-serif}\n#warsCard .wb small{font-size:10.5px;color:rgba(200,225,255,.75)}\n#warsCard .wb.on{background:linear-gradient(135deg,#2f7bff,#0a5cff);border-color:transparent;box-shadow:0 10px 24px -10px rgba(10,92,255,.9)}\n#warsCard .wb:disabled{opacity:.35;cursor:default}\n#warsCard .ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px;color:#fff;background:linear-gradient(180deg,rgba(3,10,35,.55),rgba(2,6,20,.8));backdrop-filter:blur(4px);transition:opacity .35s}\n#warsCard .ov.hide{opacity:0;pointer-events:none}\n#warsCard .ov h2{font:800 28px/1.1 Unbounded,sans-serif}\n#warsCard .ov p{margin-top:12px;max-width:360px;font-size:14.5px;line-height:1.55;color:rgba(255,255,255,.9)}\n#warsCard .ov .sc{margin-top:10px;font:800 40px/1 Unbounded,sans-serif}\n#warsCard .ov button{margin-top:22px;appearance:none;border:0;cursor:pointer;padding:15px 34px;border-radius:999px;background:#fff;color:var(--blue);font:800 15px/1 Unbounded,sans-serif;letter-spacing:.04em;box-shadow:0 14px 30px -10px rgba(0,0,0,.35)}\n#warsCard .lvgrid{display:grid;grid-template-columns:repeat(5,40px);gap:8px;margin-top:18px;justify-content:center}\n#warsCard .ov .lvgrid .lv{appearance:none;margin:0;padding:0;width:40px;height:40px;border-radius:12px;border:1px solid rgba(255,255,255,.6);background:#fff;color:#0a5cff;font:800 14px/1 Unbounded,sans-serif;letter-spacing:0;cursor:pointer;display:grid;place-items:center;box-shadow:0 8px 18px -8px rgba(0,0,0,.5)}\n#warsCard .ov .lvgrid .lv.done{background:linear-gradient(135deg,#2f7bff,#0a5cff);border-color:transparent;color:#fff}\n#warsCard .ov .lvgrid .lv.locked{cursor:default;background:rgba(255,255,255,.06);border-color:rgba(160,210,255,.25);color:rgba(200,225,255,.55);box-shadow:none}\n#warsCard .chtabs{display:flex;gap:4px;margin-top:16px;justify-content:center;flex-wrap:nowrap}\n#warsCard .ov .chtabs .ch{appearance:none;margin:0;padding:7px 7px;border-radius:999px;border:1px solid rgba(160,210,255,.3);background:rgba(255,255,255,.06);color:rgba(220,235,255,.85);font:700 10px/1 Unbounded,sans-serif;letter-spacing:.02em;white-space:nowrap;cursor:pointer;box-shadow:none}\n#warsCard .ov .chtabs .ch span{opacity:.6}\n#warsCard .ov{z-index:3}\n#warsCard .ov .chtabs .ch.on{background:#fff;color:#0a5cff;border-color:#fff}\n#warsCard .ov .chtabs .ch:disabled{opacity:.4;cursor:default}\n#warsCard .ov .lvgrid{margin-top:12px}\n#warsCard .ov button.reset{margin-top:12px;padding:11px 22px;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55);font-size:12px;box-shadow:none}\n#warsCard .ov button[hidden]{display:none}\n#warsCard .ov .how{margin-top:16px;font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.8);max-width:340px}\n#warsCard{background:#050b1f}\n#warsCard .dw-stage{position:relative;margin:0 auto}\n#warsCard .ov > button{color:#0a5cff}\n"; document.head.appendChild(st); })();
+const MARKUP="<div class=\"dw-stage\">\n    <canvas data-id=\"cv\" aria-label=\"Drop Wars battlefield\"></canvas>\n    <div class=\"hud\">\n      <div class=\"hp l\"><b>BLUMI <span data-id=\"lives\" style=\"color:#ff6b8b;letter-spacing:.08em\"></span></b><div class=\"bar\"><i data-id=\"hpA\"></i></div></div>\n      <div class=\"mid\"><small>Wind</small><b data-id=\"wind\">0</b><small data-id=\"lvl\">Level 1/30</small></div>\n      <div class=\"hp r\"><b>GLITCH</b><div class=\"bar\"><i data-id=\"hpB\"></i></div></div>\n    </div>\n    <div class=\"turn\" data-id=\"turn\"></div>\n    <div class=\"weap\" data-id=\"weap\">\n      <button class=\"wb on\" data-w=\"0\" type=\"button\"><b>Drop shell</b><small>\u221e</small></button>\n      <button class=\"wb\" data-w=\"1\" type=\"button\"><b>Triple</b><small data-id=\"am1\">x2</small></button>\n      <button class=\"wb\" data-w=\"2\" type=\"button\"><b>Mega drop</b><small data-id=\"am2\">x3</small></button>\n    </div>\n    <div class=\"ov\" data-id=\"ov\">\n      <h2 data-id=\"ovT\">Drop Wars</h2>\n      <div class=\"sc\" data-id=\"ovS\" style=\"display:none\"></div>\n      <p data-id=\"ovP\">BLUMI vs the Glitch. 30 levels across 3 worlds, 3 lives. Beat a level to unlock the next one.</p>\n      <div class=\"chtabs\" data-id=\"chTabs\"></div>\n      <div class=\"lvgrid\" data-id=\"lvGrid\"></div>\n      <button data-id=\"ovB\">Play</button>\n      <button data-id=\"ovR\" class=\"reset\" type=\"button\" hidden>Reset to level 1</button>\n      <div class=\"how\">Drag in any direction to aim (longer drag = more power), release to fire \u00b7 or \u2190 \u2192 \u2191 \u2193 and Space</div>\n    </div>\n</div>";
 (() => {
 const card=document.getElementById("warsCard");
 if(!card || window.BlumiWars) return;
@@ -61,7 +61,7 @@ function explode(x,y,w,owner){
   const R=w===2?60:w===1?26:36, maxD=w===2?70:w===1?24:42;
   carve(x,y,R*.85);
   rings.push({x,y,r:R,t:0}); shake=Math.max(shake,w===2?1:.55);
-  for(let i=0;i<(w===2?60:30);i++){ const a=rnd(Math.PI,2*Math.PI),v=rnd(120,420)*(w===2?1.3:1); parts.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,r:rnd(1.5,4),t:0,l:rnd(.6,1.3),c:Math.random()<.5?"#2a3a66":"#9fd0ff",g:1}); }
+  for(let i=0;i<(w===2?60:30);i++){ const a=rnd(Math.PI,2*Math.PI),v=rnd(120,420)*(w===2?1.3:1); parts.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,r:rnd(1.5,4),t:0,l:rnd(.6,1.3),c:Math.random()<.5?TH().debris:"#9fd0ff",g:1}); }
   for(let i=0;i<(w===2?14:8);i++) smoke.push({x:x+rnd(-R*.4,R*.4),y:y+rnd(-R*.3,0),r:rnd(10,22)*(w===2?1.4:1),t:0,l:rnd(1.2,2.2),vx:wind*.08+rnd(-12,12),vy:-rnd(14,40)});
   for(const tk of tanks){ const d=Math.hypot(x-tk.x,y-(tk.y-12)); if(d<R+24){ const dmg=Math.round(maxD*(1-clamp((d-8)/(R+24),0,1))); if(dmg>0){ tk.hp=Math.max(0,tk.hp-dmg); if(tk.hp<=0) destroy(tk); floats.push({x:tk.x,y:tk.y-50,txt:"-"+dmg,t:0,c:tk.team?"#ff9ab3":"#9fd0ff"}); if(owner===0&&tk.team===1) score+=dmg; } } }
   hud();
@@ -98,52 +98,65 @@ function planAI(){
   for(let deg=30;deg<=75;deg+=3){ const ang=-Math.PI+deg*Math.PI/180*-1; // pointing up-left
     const a=-(Math.PI-deg*Math.PI/180);
     for(let pow=220;pow<=820;pow+=12){ const [x,y]=simulate(me,a,pow); const e=Math.hypot(x-foe.x,(y===9999?400:y)-(foe.y-12)); if(!best||e<best.e) best={a,pow,e}; } }
-  const err=Math.max(1, LV().err-turn*.3);
-  let w=0; if(ammo2.ai[2]>0 && (me.hp<me.max*.5 || level>=6) && Math.random()<.5) w=2; else if(ammo2.ai[1]>0 && Math.random()<.3) w=1;
+  const err=Math.max(3.2, LV().err-turn*.2);
+  let w=0; if(ammo2.ai[2]>0 && me.hp<me.max*.6 && Math.random()<.4) w=2; else if(ammo2.ai[1]>0 && Math.random()<.3) w=1;
   return {a:best.a+rnd(-err,err)*Math.PI/180, pow:best.pow+rnd(-err,err)*9, w};
 }
 const ammo2={ai:[Infinity,2,1]};
-const LEVELS=[
-  {name:"Training Grounds", hp:80,  err:13, wind:.5, hill:.7, ai:[Infinity,0,0]},
-  {name:"Moonlit Hills",    hp:100, err:11, wind:.7, hill:.9, ai:[Infinity,1,0]},
-  {name:"Windy Ridge",      hp:110, err:9.5,wind:1.3,hill:.9, ai:[Infinity,1,0]},
-  {name:"Crater Field",     hp:120, err:8.5,wind:.9, hill:1,  ai:[Infinity,2,1]},
-  {name:"Twin Peaks",       hp:130, err:7.5,wind:1,  hill:1.3,ai:[Infinity,2,1]},
-  {name:"Storm Front",      hp:140, err:6.5,wind:1.6,hill:1,  ai:[Infinity,2,1]},
-  {name:"Glitch Outpost",   hp:150, err:5.5,wind:1.1,hill:1.15,ai:[Infinity,2,1]},
-  {name:"Deep Valley",      hp:165, err:4.5,wind:1.2,hill:1.4,ai:[Infinity,2,2]},
-  {name:"Night Siege",      hp:180, err:3.5,wind:1.4,hill:1.2,ai:[Infinity,3,2]},
-  {name:"Glitch Core",      hp:220, err:2.5,wind:1.3,hill:1.3,ai:[Infinity,3,3]}];
-const LKEY="blumi-wars-level"; let lives=3; const LV=()=>LEVELS[level-1];
+const LNAMES=["Training Grounds","Moonlit Hills","Windy Ridge","Crater Field","Twin Peaks","Storm Front","Glitch Outpost","Deep Valley","Night Siege","Night Core",
+ "Frozen Gate","Ice Shelf","Snowdrift","Aurora Ridge","Frost Canyon","Blizzard Line","Glacier Pass","Crystal Caves","Polar Siege","Frost Core",
+ "Static Plains","Pixel Dunes","Corrupted Ridge","Null Valley","Neon Ruins","Data Storm","Broken Grid","Void Peaks","Glitch Throne","Glitch Core"];
+const WINDY=/Windy|Storm|Blizzard/;
+const LEVELS=LNAMES.map((name,i)=>{ const d=i/29, k=i%10;
+  return {name, hp:100, err:+(12.5-7*d-k*.12).toFixed(2), wind:+(.5+.8*d+(WINDY.test(name)?.45:0)).toFixed(2), hill:+(.75+.55*d+(k===4||k===7?.15:0)).toFixed(2),
+    ai:[Infinity, Math.min(2,Math.floor((i+2)/5)), i<5?0:i<15?1:2]}; });
+const CHAPTERS=[{name:"Moonlit Night"},{name:"Frost Lands"},{name:"Glitch Wastes"}];
+const THEMES=[
+ {sky:["#020617","#071a4d","#123a8c","#1d4fb0"], hills:["#081640","#0b1f52"], ter:["#22345f","#16244a","#0b1430"], line:"124,193,255", vein:"140,180,255", debris:"#2a3a66", moon:"#eaf4ff", glow:"220,238,255"},
+ {sky:["#04121f","#0c3352","#1b6a92","#5fb3d6"], hills:["#14456a","#1b5680"], ter:["#4f86ad","#2c5c84","#163754"], line:"240,250,255", vein:"220,240,255", debris:"#9ec6e4", moon:"#ffffff", glow:"200,240,255", snow:true, aurora:true},
+ {sky:["#05010f","#1d0838","#46126a","#8a1f6e"], hills:["#170631","#230b45"], ter:["#2a1048","#1a0933","#0a0318"], line:"255,92,200", vein:"120,230,255", debris:"#5a2a80", moon:"#ff5cc8", glow:"255,92,200", glitch:true}];
+const CH=()=>Math.floor((level-1)/10), TH=()=>THEMES[CH()];
+const DONEKEY="blumi-wars-done";
+const LKEY="blumi-wars-level"; let lives=3, tab=0; const LV=()=>LEVELS[level-1];
 
 /* ---------- drawing ---------- */
 function sky(){
   if(skyDirty){ skyC.width=cv.width; skyC.height=cv.height; const c0=ctx; ctx=skyC.getContext('2d'); ctx.setTransform(DPR*S,0,0,DPR*S,0,0); skyStatic(); ctx=c0; skyDirty=false; }
   ctx.drawImage(skyC,0,0,skyC.width,skyC.height,-12,-12,LW+24,LH+24);
-  for(const [x,y,r,p] of stars){ if(y>LH*.42) continue; ctx.globalAlpha=.25+.35*Math.sin(t*1.3+p); ctx.fillStyle="#fff"; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill(); } ctx.globalAlpha=1;
+  const T=TH();
+  for(const [x,y,r,p] of stars){ if(y>LH*.42) continue; ctx.globalAlpha=.25+.35*Math.sin(t*1.3+p); ctx.fillStyle=T.glitch?(p>3?"#7ce6ff":"#ff8ad8"):"#fff"; if(T.glitch) ctx.fillRect(x-r,y-r,r*2,r*2); else { ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill(); } } ctx.globalAlpha=1;
+  if(T.aurora){ for(let k=0;k<3;k++){ ctx.beginPath(); for(let x=0;x<=LW;x+=10){ const y=70+k*34+18*Math.sin(x*.012+t*.35+k*1.7)+10*Math.sin(x*.031-t*.5+k); x?ctx.lineTo(x,y):ctx.moveTo(x,y); } ctx.strokeStyle=`rgba(${k===1?"120,255,220":"110,200,255"},${.12+.06*Math.sin(t*.8+k)})`; ctx.lineWidth=26-k*6; ctx.stroke(); } }
+  if(T.snow){ ctx.fillStyle="rgba(255,255,255,.8)"; for(let i=0;i<70;i++){ const sp=18+(i*37)%30, x=((i*97)+t*(8+i%5*3)+Math.sin(t*.9+i)*12)%(LW+20)-10, y=((i*53)+t*sp)%(LH+20)-10; ctx.globalAlpha=.35+(i%4)*.15; ctx.beginPath(); ctx.arc(x,y,1+(i%3)*.6,0,7); ctx.fill(); } ctx.globalAlpha=1; }
+  if(T.glitch){ const q=Math.floor(t*7); for(let i=0;i<3;i++){ const r=Math.sin(q*12.9898+i*78.233)*43758.5453, f=r-Math.floor(r); if(f<.55) continue; const y=(f*9301%1)*LH*.55, hh=2+f*6; ctx.fillStyle=i%2?"rgba(120,230,255,.18)":"rgba(255,92,200,.2)"; ctx.fillRect(-12,y,LW+24,hh); } }
 }
 function skyStatic(){
-  const g=ctx.createLinearGradient(0,0,0,LH); g.addColorStop(0,"#020617"); g.addColorStop(.45,"#071a4d"); g.addColorStop(.75,"#123a8c"); g.addColorStop(1,"#1d4fb0"); ctx.fillStyle=g; ctx.fillRect(0,0,LW,LH);
-  // moon
-  const mg=ctx.createRadialGradient(400,110,0,400,110,110); mg.addColorStop(0,"rgba(220,238,255,.55)"); mg.addColorStop(1,"rgba(150,200,255,0)"); ctx.fillStyle=mg; ctx.beginPath(); ctx.arc(400,110,110,0,7); ctx.fill();
-  ctx.fillStyle="#eaf4ff"; ctx.beginPath(); ctx.arc(400,110,24,0,7); ctx.fill(); ctx.fillStyle="rgba(150,180,230,.35)"; ctx.beginPath(); ctx.arc(393,104,5,0,7); ctx.arc(409,118,3.5,0,7); ctx.fill();
-  // distant hills
-  hills.forEach((row,k)=>{ ctx.fillStyle=k?"#0b1f52":"#081640"; ctx.beginPath(); ctx.moveTo(0,LH); row.forEach((y,i)=>ctx.lineTo(i*10,y)); ctx.lineTo(LW,LH); ctx.fill(); });
+  const T=TH(); const g=ctx.createLinearGradient(0,0,0,LH); g.addColorStop(0,T.sky[0]); g.addColorStop(.45,T.sky[1]); g.addColorStop(.75,T.sky[2]); g.addColorStop(1,T.sky[3]); ctx.fillStyle=g; ctx.fillRect(0,0,LW,LH);
+  const mx=400,my=T.glitch?140:110, mr=T.glitch?46:24;
+  const mg=ctx.createRadialGradient(mx,my,0,mx,my,mr*4.5); mg.addColorStop(0,`rgba(${T.glow},.5)`); mg.addColorStop(1,`rgba(${T.glow},0)`); ctx.fillStyle=mg; ctx.beginPath(); ctx.arc(mx,my,mr*4.5,0,7); ctx.fill();
+  if(T.glitch){ // sliced neon sun
+    ctx.save(); ctx.beginPath(); ctx.arc(mx,my,mr,0,7); ctx.clip(); const sg=ctx.createLinearGradient(0,my-mr,0,my+mr); sg.addColorStop(0,"#ff8ad8"); sg.addColorStop(1,"#7a3cff"); ctx.fillStyle=sg; ctx.fillRect(mx-mr,my-mr,mr*2,mr*2);
+    ctx.fillStyle=T.sky[2]; for(let i=0;i<6;i++){ const y=my+4+i*7; ctx.fillRect(mx-mr,y,mr*2,1.5+i*.9); } ctx.restore();
+  } else { ctx.fillStyle=T.moon; ctx.beginPath(); ctx.arc(mx,my,mr,0,7); ctx.fill(); ctx.fillStyle="rgba(150,180,230,.35)"; ctx.beginPath(); ctx.arc(393,104,5,0,7); ctx.arc(409,118,3.5,0,7); ctx.fill(); }
+  hills.forEach((row,k)=>{ ctx.fillStyle=T.hills[k]; ctx.beginPath(); ctx.moveTo(0,LH); row.forEach((y,i)=>ctx.lineTo(i*10,y)); ctx.lineTo(LW,LH); ctx.fill();
+    if(T.snow){ ctx.strokeStyle=`rgba(235,248,255,${.25+k*.15})`; ctx.lineWidth=2; ctx.beginPath(); row.forEach((y,i)=>i?ctx.lineTo(i*10,y):ctx.moveTo(0,y)); ctx.stroke(); }
+    if(T.glitch){ ctx.strokeStyle=`rgba(255,92,200,${.2+k*.15})`; ctx.lineWidth=1.4; ctx.beginPath(); row.forEach((y,i)=>i?ctx.lineTo(i*10,y):ctx.moveTo(0,y)); ctx.stroke(); } });
 }
 function terrain(){
   if(terDirty){ terC.width=cv.width; terC.height=cv.height; const c0=ctx; ctx=terC.getContext('2d'); ctx.setTransform(DPR*S,0,0,DPR*S,0,0); terrainStatic(); ctx=c0; terDirty=false; }
   ctx.drawImage(terC,0,0,terC.width,terC.height,0,0,LW,LH);
 }
 function terrainStatic(){
+  const T=TH();
   ctx.beginPath(); ctx.moveTo(0,LH); for(let x=0;x<=LW;x+=2) ctx.lineTo(x,h[x]); ctx.lineTo(LW,LH); ctx.closePath();
-  const g=ctx.createLinearGradient(0,LH*.35,0,LH); g.addColorStop(0,"#22345f"); g.addColorStop(.5,"#16244a"); g.addColorStop(1,"#0b1430"); ctx.fillStyle=g; ctx.fill();
+  const g=ctx.createLinearGradient(0,LH*.35,0,LH); g.addColorStop(0,T.ter[0]); g.addColorStop(.5,T.ter[1]); g.addColorStop(1,T.ter[2]); ctx.fillStyle=g; ctx.fill();
   ctx.save(); ctx.clip();
-  for(let k=1;k<9;k++){ ctx.strokeStyle=`rgba(140,180,255,${.05-k*.004})`; ctx.lineWidth=1.2; ctx.beginPath(); for(let x=0;x<=LW;x+=4) ctx.lineTo(x,h[x]+k*16+4*Math.sin(x*.05+k)); ctx.stroke(); }
-  for(let i=0;i<90;i++){ const x=(i*67)%LW, y=h[x]+12+((i*131)%220); ctx.fillStyle="rgba(10,20,50,.5)"; ctx.beginPath(); ctx.arc(x,y,1.5+(i%3),0,7); ctx.fill(); }
+  if(T.glitch){ ctx.strokeStyle="rgba(120,230,255,.12)"; ctx.lineWidth=1; for(let y=LH*.35;y<LH;y+=18){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(LW,y); ctx.stroke(); } for(let x=0;x<=LW;x+=26){ ctx.beginPath(); ctx.moveTo(x,LH*.35); ctx.lineTo(x,LH); ctx.stroke(); } }
+  else for(let k=1;k<9;k++){ ctx.strokeStyle=`rgba(${T.vein},${.05-k*.004})`; ctx.lineWidth=1.2; ctx.beginPath(); for(let x=0;x<=LW;x+=4) ctx.lineTo(x,h[x]+k*16+4*Math.sin(x*.05+k)); ctx.stroke(); }
+  for(let i=0;i<90;i++){ const x=(i*67)%LW, y=h[x]+12+((i*131)%220); ctx.fillStyle=T.snow?"rgba(255,255,255,.12)":"rgba(10,20,50,.5)"; ctx.beginPath(); ctx.arc(x,y,1.5+(i%3),0,7); ctx.fill(); }
   ctx.restore();
-  // moonlit top edge
-  ctx.beginPath(); for(let x=0;x<=LW;x+=2) ctx.lineTo(x,h[x]); ctx.strokeStyle="rgba(124,193,255,.85)"; ctx.lineWidth=2.2; ctx.stroke();
-  ctx.strokeStyle="rgba(124,193,255,.18)"; ctx.lineWidth=7; ctx.stroke();
+  if(T.snow){ ctx.beginPath(); for(let x=0;x<=LW;x+=2) ctx.lineTo(x,h[x]+1); for(let x=LW;x>=0;x-=2) ctx.lineTo(x,h[x]+6+2.5*Math.sin(x*.09)); ctx.closePath(); ctx.fillStyle="rgba(245,252,255,.95)"; ctx.fill(); }
+  ctx.beginPath(); for(let x=0;x<=LW;x+=2) ctx.lineTo(x,h[x]); ctx.strokeStyle=`rgba(${T.line},.85)`; ctx.lineWidth=2.2; ctx.stroke();
+  ctx.strokeStyle=`rgba(${T.line},.18)`; ctx.lineWidth=7; ctx.stroke();
 }
 function tank(tk){
   const tilt=slope(tk.x)*.9, blue=tk.team===0, dead=tk.hp<=0;
@@ -207,29 +220,36 @@ function unlocked(){ return clamp(store.get(LKEY)||1,1,LEVELS.length); }
 function startBattle(lv){
   level=lv;
   genTerrain(); skyDirty=terDirty=true; makeTanks(); shots=[]; parts=[]; smoke=[]; rings=[]; floats=[]; trail=[]; blasts=[]; flying=[];
-  ammo=[Infinity,2,3]; ammo2.ai=LV().ai.slice(); weapon=0; turn=0; newWind(); state="aim"; hud(); updWeap(); $("ov").classList.add("hide"); banner("LEVEL "+level+" · "+LV().name.toUpperCase());
+  ammo=[Infinity,2,3]; ammo2.ai=LV().ai.slice(); weapon=0; turn=0; newWind(); state="aim"; hud(); updWeap(); $("ov").classList.add("hide"); banner((level%10===1&&level>1?"NEW WORLD · ":"")+"LEVEL "+level+" · "+LV().name.toUpperCase());
 }
 function showMenu(){
   state="menu"; $("ovT").textContent="Drop Wars"; $("ovS").style.display="none";
-  $("ovP").textContent="Beat each level to unlock the next one. You have "+lives+" "+(lives===1?"life":"lives")+" for this run.";
-  levelGrid(); $("ovB").textContent="Play level "+unlocked(); $("ovB").onclick=()=>startBattle(unlocked()); $("ov").classList.remove("hide");
+  const done=store.get(DONEKEY)>0;
+  $("ovP").textContent=done?"All 30 levels cleared. Replay any level, or reset and climb again.":"Beat each level to unlock the next one. You have "+lives+" "+(lives===1?"life":"lives")+" for this run.";
+  tab=Math.floor((unlocked()-1)/10); levelGrid(); $("ovB").textContent="Play level "+unlocked(); $("ovB").onclick=()=>startBattle(unlocked());
+  $("ovR").hidden=!done; $("ovR").onclick=e=>{ e.stopPropagation(); store.set(LKEY,1); store.set(DONEKEY,0); lives=3; score=0; showMenu(); };
+  $("ov").classList.remove("hide");
 }
 function levelGrid(){
-  const g=$("lvGrid"), u=unlocked(); g.innerHTML="";
-  LEVELS.forEach((L,i)=>{ const n=i+1, b=document.createElement("button"); b.type="button"; b.className="lv"+(n<=u?"":" locked")+(n<u?" done":""); b.disabled=n>u;
+  const g=$("lvGrid"), tb=$("chTabs"), u=unlocked(); g.innerHTML=""; tb.innerHTML="";
+  CHAPTERS.forEach((C,ci)=>{ const b=document.createElement("button"); b.type="button"; b.className="ch"+(ci===tab?" on":""); b.disabled=ci*10+1>u; b.innerHTML='<span>'+(ci*10+1)+"–"+(ci*10+10)+'</span> '+C.name.split(" ")[0];
+    b.title=C.name; b.onclick=e=>{ e.stopPropagation(); tab=ci; levelGrid(); }; tb.appendChild(b); });
+  for(let n=tab*10+1;n<=tab*10+10;n++){ const L=LEVELS[n-1], b=document.createElement("button"); b.type="button"; b.className="lv"+(n<=u?"":" locked")+(n<u||store.get(DONEKEY)>0?" done":""); b.disabled=n>u;
     b.innerHTML=n>u?'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>':String(n);
     b.title=n+" · "+L.name; b.setAttribute("aria-label","Level "+n+(n>u?" (locked)":""));
-    b.onclick=e=>{ e.stopPropagation(); if(n<=u) startBattle(n); }; g.appendChild(b); });
+    b.onclick=e=>{ e.stopPropagation(); if(n<=u) startBattle(n); }; g.appendChild(b); }
 }
 function nextTurn(){
-  if(tanks[1].hp<=0){ state="won"; score+=250*level; const last=level>=LEVELS.length; if(!last) store.set(LKEY,Math.max(unlocked(),level+1)); const best=store.get(KEY); if(score>best) store.set(KEY,score);
+  if(tanks[1].hp<=0){ state="won"; score+=250*level; const last=level>=LEVELS.length; if(!last) store.set(LKEY,Math.max(unlocked(),level+1)); else store.set(DONEKEY,1); const best=store.get(KEY); if(score>best) store.set(KEY,score);
     setTimeout(()=>{ if(state!=="won") return; $("ovS").style.display="block"; $("ovS").textContent=score.toLocaleString("en-US");
-      if(last){ $("ovT").textContent="All levels cleared"; $("ovP").textContent="The Glitch Core is down. BLUMI rules the battlefield."; $("ovB").textContent="Back to levels"; $("ovB").onclick=()=>{ lives=3; score=0; showMenu(); }; }
+      $("ovR").hidden=!last; $("ovR").onclick=e=>{ e.stopPropagation(); store.set(LKEY,1); store.set(DONEKEY,0); lives=3; score=0; showMenu(); };
+      if(last){ $("ovT").textContent="All 30 levels cleared"; $("ovP").textContent="The Glitch Core is down. BLUMI rules every world. Reset to start again from level 1."; $("ovB").textContent="Back to levels"; $("ovB").onclick=()=>{ lives=3; score=0; showMenu(); }; }
+      else if(level%10===0){ const nc=CHAPTERS[level/10]; $("ovT").textContent="World "+(level/10)+" cleared"; $("ovP").textContent="New world unlocked: "+nc.name+". Level "+(level+1)+" · "+LEVELS[level].name+"."; $("ovB").textContent="Enter "+nc.name; $("ovB").onclick=()=>startBattle(level+1); }
       else { $("ovT").textContent="Level "+level+" cleared"; $("ovP").textContent="Level "+(level+1)+" · "+LEVELS[level].name+" is unlocked."; $("ovB").textContent="Next level"; $("ovB").onclick=()=>startBattle(level+1); }
-      levelGrid(); $("ov").classList.remove("hide"); },2600); return; }
+      tab=CH(); if(last) tab=2; else if(level%10===0) tab=Math.floor(level/10); levelGrid(); $("ov").classList.remove("hide"); },2600); return; }
   if(tanks[0].hp<=0){ state="lost"; lives--; hud();
     setTimeout(()=>{ if(state!=="lost") return; $("ovS").style.display="block"; $("ovS").textContent=score.toLocaleString("en-US");
-      if(lives>0){ $("ovT").textContent="Tank destroyed"; $("ovP").textContent=lives+" "+(lives===1?"life":"lives")+" left. Try level "+level+" again."; $("ovB").textContent="Retry level "+level; $("ovB").onclick=()=>startBattle(level); }
+      $("ovR").hidden=true; if(lives>0){ $("ovT").textContent="Tank destroyed"; $("ovP").textContent=lives+" "+(lives===1?"life":"lives")+" left. Try level "+level+" again."; $("ovB").textContent="Retry level "+level; $("ovB").onclick=()=>startBattle(level); }
       else { const best=store.get(KEY); if(score>best) store.set(KEY,score); $("ovT").textContent="Game over"; $("ovP").textContent=(score>best&&score>0?"New best score! ":"Best: "+Math.max(best,score).toLocaleString("en-US")+". ")+"Your unlocked levels are saved."; $("ovB").textContent="New run"; $("ovB").onclick=()=>{ lives=3; score=0; showMenu(); }; }
       levelGrid(); $("ov").classList.remove("hide"); },2600); return; }
   turn++; newWind(); hud();
