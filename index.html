@@ -490,7 +490,6 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
   .overlay .big-score{font-size:52px}
 }
 @media(max-width:560px) and (max-height:760px){.overlay .small{display:none}}
-[data-t="ticker"][hidden]{display:none!important}
 .game-note{margin-top:18px;text-align:center;font-size:13.5px;color:var(--ink-soft)}
 /* game picker */
 .game-pick{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 18px}
@@ -1096,18 +1095,18 @@ html[data-theme="dark"] .theme-btn .moon{color:#9fd0ff}
     </div>
     <div class="road">
       <div class="road-line" aria-hidden="true"></div>
-      <article class="phase reveal">
+      <article class="phase current reveal">
         <div class="phase-node" aria-hidden="true">01</div>
         <div class="phase-card">
-          <div class="phase-meta"><span class="phase-num" data-i18n="road.p1">PHASE 01</span><span class="status">Done</span></div>
+          <div class="phase-meta"><span class="phase-num" data-i18n="road.p1">PHASE 01</span><span class="status" data-i18n="road.now">Current focus</span></div>
           <h3 data-i18n="road.h1">Foundation</h3>
           <ul data-i18n="road.l1"><li>Establish the BLUMI identity</li><li>Official website launch</li><li>Introduce the mascot</li><li>Build the initial community</li><li>Playground: 4 free mini games</li></ul>
         </div>
       </article>
-      <article class="phase current reveal" style="--d:.08s">
+      <article class="phase reveal" style="--d:.08s">
         <div class="phase-node" aria-hidden="true">02</div>
         <div class="phase-card">
-          <div class="phase-meta"><span class="phase-num" data-i18n="road.p2">PHASE 02</span><span class="status">Live now</span></div>
+          <div class="phase-meta"><span class="phase-num" data-i18n="road.p2">PHASE 02</span><span class="status" data-i18n="road.planned">Planned</span></div>
           <h3 data-i18n="road.h2">Launch</h3>
           <ul data-i18n="road.l2"><li>BLUMI token launch on Base</li><li>Official contract address published on this website and official channels</li><li>Trading on a Base DEX</li><li>Community growth</li></ul>
         </div>
@@ -1268,11 +1267,11 @@ const BLUMI_CONFIG = {
        Token section, FAQ answer, Official Channels and footer note
        update automatically. Empty optional fields stay hidden.
        ---------------------------------------------------------- */
-    tokenLaunched: true,
+    tokenLaunched: false,
     token: {
-      name: "BLUMI",     // e.g. "BLUMI"
+      name: "",          // e.g. "BLUMI"
       ticker: "",        // e.g. "$XXXX"
-      contract: "0x261f2253c2beb7dff11a243e6894a952e1a3cccc",      // 0x… address on Base (required)
+      contract: "",      // 0x… address on Base (required)
       totalSupply: "",   // optional, shown as written
       buyUrl: "",        // optional: Uniswap / Aerodrome swap link
       chartUrl: ""       // optional: DexScreener / GeckoTerminal link
