@@ -1,4 +1,4 @@
-/* BLUMI Playground — extra mini games: Bubble Hop, Glitch Gates, Bubble Stack.
+/* BLUMI Playground — Glitch Gates.
    Loaded only when one of these games is picked. Mounts into #extraCard. */
 (() => {
   const card = document.getElementById("extraCard");
@@ -72,11 +72,18 @@
     ctx.fillStyle = "#ff6b8b"; ctx.fillRect(-r*.35, -1.5, r*.7, 3); ctx.fillRect(-1.5, -r*.35, 3, r*.7);
     ctx.restore();
   }
-  function player(x, y, s, tilt = 0){
-    glow(x, y, s * 1.1, "160,215,255", .55);
-    ctx.save(); ctx.translate(x, y); ctx.rotate(tilt);
-    if (mascot.complete && mascot.naturalWidth) ctx.drawImage(mascot, -s/2, -s/2, s, s); // same width and height: proportions kept
-    else { ctx.fillStyle = "#2f7bff"; rr(-s/2, -s/2, s, s, s * .28); ctx.fill(); }
+  function player(x, y, s, tilt = 0, sq = 0){
+    glow(x, y, s * 1.15, "160,215,255", .55);
+    ctx.save(); ctx.translate(x, y); ctx.rotate(tilt); ctx.scale(1 + sq, 1 - sq);
+    const r = s / 2;
+    ctx.save(); ctx.beginPath(); ctx.arc(0, 0, r, 0, 7); ctx.clip();
+    if (mascot.complete && mascot.naturalWidth) ctx.drawImage(mascot, -r * 1.16, -r * 1.16, r * 2.32, r * 2.32); // same width and height: proportions kept
+    else { ctx.fillStyle = "#2f7bff"; ctx.fillRect(-r, -r, s, s); }
+    const sh = ctx.createLinearGradient(0, -r, 0, r); sh.addColorStop(0, "rgba(255,255,255,.28)"); sh.addColorStop(.45, "rgba(255,255,255,0)"); sh.addColorStop(1, "rgba(0,30,120,.25)");
+    ctx.fillStyle = sh; ctx.fillRect(-r, -r, s, s);
+    ctx.restore();
+    ctx.lineWidth = Math.max(1.5, r * .1); ctx.strokeStyle = "rgba(255,255,255,.85)"; ctx.beginPath(); ctx.arc(0, 0, r - ctx.lineWidth / 2, 0, 7); ctx.stroke();
+    ctx.fillStyle = "rgba(255,255,255,.75)"; ctx.beginPath(); ctx.ellipse(-r * .42, -r * .5, r * .2, r * .11, -.6, 0, 7); ctx.fill();
     ctx.restore();
   }
   let parts = [], floats = [];
@@ -91,138 +98,94 @@
     ctx.globalAlpha = 1; ctx.restore();
   }
 
-  /* ---------- Bubble Hop ---------- */
-  const HOP = {
-    key: "blumi-best-hop", title: "Bubble Hop",
-    how: "Bounce from bubble to bubble and climb as high as you can. Pink bubbles pop after one bounce, gold ones move. Avoid the glitches and don't fall.",
-    ctl: "Hold the left or right side · or use ← →",
-    reset(){ this.p = { x: W/2, y: H - 120, vx: 0, vy: -620 }; this.cam = 0; this.top = this.p.y; this.score = 0; this.bonus = 0; this.pads = []; this.items = []; this.dir = 0; this.t = 0;
-      this.pads.push({ x: W/2, y: H - 60, w: 110, k: "base" }); let y = H - 60; while (y > -H){ y -= rnd(70, 110); this.addPad(y); } },
-    addPad(y){ const h = H - 60 - y, diff = clamp(h / 6000, 0, 1), r = Math.random();
-      const k = r < .12 + diff * .2 ? "pop" : r < .2 + diff * .25 ? "move" : "base", w = rnd(70, 100) - diff * 18;
-      this.pads.push({ x: rnd(w/2 + 8, W - w/2 - 8), y, w, k, vx: k === "move" ? rnd(50, 90) * (Math.random() < .5 ? -1 : 1) : 0, gone: 0 });
-      if (Math.random() < .35) this.items.push({ x: rnd(30, W - 30), y: y - rnd(30, 60), k: "drop" });
-      if (h > 700 && Math.random() < .10 + diff * .18) this.items.push({ x: rnd(30, W - 30), y: y - rnd(35, 55), k: "glitch", vx: Math.random() < .4 ? rnd(40, 80) : 0 });
-    },
-    press(x){ this.dir = x < W/2 ? -1 : 1; }, drag(x){ this.dir = x < W/2 ? -1 : 1; }, release(){ this.dir = 0; },
-    keyDown(k){ if (["ArrowLeft","a","A"].includes(k)){ this.dir = -1; return true; } if (["ArrowRight","d","D"].includes(k)){ this.dir = 1; return true; } },
-    keyUp(k){ if (["ArrowLeft","a","A","ArrowRight","d","D"].includes(k)) this.dir = 0; },
-    update(dt){
-      const p = this.p; this.t += dt;
-      p.vx += (this.dir * 900 - p.vx * 4.5) * dt; p.x += p.vx * dt; if (p.x < -20) p.x = W + 20; if (p.x > W + 20) p.x = -20;
-      p.vy += 1500 * dt; const prevY = p.y; p.y += p.vy * dt;
-      if (p.vy > 0) for (const d of this.pads){ if (d.gone) continue;
-        if (prevY + 18 <= d.y - 7 && p.y + 18 >= d.y - 7 && Math.abs(p.x - d.x) < d.w/2 + 12){ p.y = d.y - 25; p.vy = -760; burst(p.x, d.y - this.cam, "rgba(255,255,255,.9)", 6); if (d.k === "pop"){ d.gone = .0001; burst(d.x, d.y - this.cam, "#ff9ab3", 12); } break; } }
-      for (const d of this.pads){ if (d.k === "move"){ d.x += d.vx * dt; if (d.x < d.w/2 + 6 || d.x > W - d.w/2 - 6) d.vx *= -1; } if (d.gone) d.gone += dt; }
-      for (const it of this.items){ if (it.vx){ it.x += it.vx * dt; if (it.x < 20 || it.x > W - 20) it.vx *= -1; }
-        if (!it.got && Math.hypot(it.x - p.x, it.y - p.y) < 28){ if (it.k === "drop"){ it.got = 1; this.bonus += 25; float(it.x, it.y - this.cam, "+25"); burst(it.x, it.y - this.cam, "#bfe2ff", 8); } else return end(); } }
-      const target = p.y - H * .42; if (target < this.cam) this.cam += (target - this.cam) * Math.min(1, dt * 8);
-      this.top = Math.min(this.top, p.y);
-      this.score = Math.max(0, Math.round((H - 120 - this.top) / 10)) + this.bonus;
-      let minY = Math.min(...this.pads.map(d => d.y)); while (minY > this.cam - 60 - H){ minY -= rnd(70, 110) + clamp(-minY / 90, 0, 40); this.addPad(minY); }
-      this.pads = this.pads.filter(d => d.y < this.cam + H + 60 && !(d.gone > .3)); this.items = this.items.filter(i => i.y < this.cam + H + 60 && !i.got);
-      if (p.y - this.cam > H + 40) end();
-    },
-    draw(){
-      bg(this.t, this.cam); ctx.save(); ctx.translate(0, -this.cam);
-      for (const d of this.pads) pad(d.x, d.y, d.w, d.k, d.gone ? 1 - d.gone / .3 : 1);
-      for (const it of this.items) it.k === "drop" ? drop(it.x, it.y + Math.sin(this.t * 3 + it.x) * 3, 11) : glitch(it.x, it.y, 15, this.t);
-      const p = this.p; player(p.x, p.y, 40, clamp(p.vx / 1600, -.25, .25)); ctx.restore();
-    }
-  };
-
   /* ---------- Glitch Gates ---------- */
   const GATES = {
     key: "blumi-best-gates", title: "Glitch Gates",
-    how: "Tap to float up and slip through the gaps in the glitch walls. Every gate is +1, every gold drop in a gap is +3. It gets faster as you go.",
+    how: "Tap to float up and slip through the gaps in the glitch walls. Every gate is +1, a close call is +2, every gold drop is +3. Later the walls start to move.",
     ctl: "Tap anywhere · or press Space",
-    reset(){ this.p = { x: W * .3, y: H * .45, vy: 0 }; this.walls = []; this.score = 0; this.t = 0; this.spd = 150; this.next = .6; this.started = false; },
-    flap(){ this.started = true; this.p.vy = -360; burst(this.p.x - 14, this.p.y + 12, "rgba(255,255,255,.8)", 4); },
+    reset(){ this.p = { x: W * .28, y: H * .45, vy: 0, sq: 0 }; this.walls = []; this.score = 0; this.t = 0; this.dist = 0; this.spd = 165; this.next = .5; this.started = false; this.trail = []; this.dead = 0; this.flash = 0; this.shake = 0; },
+    flap(){ if (this.dead) return; this.started = true; this.p.vy = -370; this.p.sq = .18; for (let i = 0; i < 5; i++) this.trail.push({ x: this.p.x - 16, y: this.p.y + rnd(-8, 8), r: rnd(3, 6), t: 0, vx: -rnd(40, 90) }); },
     press(){ this.flap(); }, drag(){}, release(){},
     keyDown(k){ if ([" ","ArrowUp","w","W"].includes(k)){ this.flap(); return true; } }, keyUp(){},
+    gapAt(w){ return w.gy + (w.mv ? Math.sin(this.t * w.mf + w.ph) * w.mv : 0); },
     update(dt){
-      this.t += dt; const p = this.p;
-      if (!this.started){ p.y = H * .45 + Math.sin(this.t * 3) * 8; return; }
-      this.spd = Math.min(300, 150 + this.score * 4);
-      p.vy += 1050 * dt; p.vy = Math.min(p.vy, 520); p.y += p.vy * dt;
-      this.next -= dt; if (this.next <= 0){ const gap = clamp(190 - this.score * 2.2, 128, 190), gy = rnd(80 + gap/2, H - 60 - gap/2); this.walls.push({ x: W + 40, gy, gap, passed: 0, drop: Math.random() < .6 }); this.next = clamp(1.75 - this.score * .012, 1.15, 1.75); }
-      for (const w of this.walls){ w.x -= this.spd * dt;
-        if (!w.passed && w.x < p.x){ w.passed = 1; this.score++; float(p.x, p.y - 30, "+1"); }
-        if (w.drop && Math.abs(w.x - p.x) < 22 && Math.abs(w.gy - p.y) < 26){ w.drop = false; this.score += 3; float(p.x, p.y - 30, "+3"); burst(w.x, w.gy, "#ffe08a", 8); }
-        if (Math.abs(w.x - p.x) < 34 && Math.abs(p.y - w.gy) > w.gap/2 - 16) return end(); }
-      this.walls = this.walls.filter(w => w.x > -60);
-      if (p.y < 16){ p.y = 16; p.vy = Math.max(p.vy, 0); }
-      if (p.y > H - 18) end();
+      this.t += dt; const p = this.p; this.flash = Math.max(0, this.flash - dt * 2); this.shake = Math.max(0, this.shake - dt * 1.8);
+      p.sq += (0 - p.sq) * Math.min(1, dt * 10);
+      for (const b of this.trail){ b.t += dt; b.x += b.vx * dt; b.y -= 20 * dt; } this.trail = this.trail.filter(b => b.t < .7);
+      if (this.dead){ this.dead += dt; p.vy += 1300 * dt; p.y = Math.min(H - 30, p.y + p.vy * dt); if (this.dead > .9) end(); return; }
+      if (!this.started){ p.y = H * .45 + Math.sin(this.t * 3) * 8; this.dist += 60 * dt; return; }
+      this.spd = Math.min(310, 165 + this.score * 3.2); this.dist += this.spd * dt;
+      p.vy += 1080 * dt; p.vy = Math.min(p.vy, 540); p.y += p.vy * dt;
+      this.next -= dt;
+      if (this.next <= 0){
+        const gap = clamp(196 - this.score * 2, 132, 196), gy = rnd(90 + gap/2, H - 70 - gap/2);
+        const mv = this.score >= 12 && Math.random() < Math.min(.6, (this.score - 10) * .04) ? rnd(24, 48) : 0;
+        this.walls.push({ x: W + 50, gy: clamp(gy, 90 + gap/2 + mv, H - 70 - gap/2 - mv), gap, passed: 0, drop: Math.random() < .55, mv, mf: rnd(1.4, 2.4), ph: rnd(0, 6), close: 0 });
+        this.next = clamp(1.7 - this.score * .012, 1.12, 1.7);
+      }
+      const PW = 66, R = 18;
+      for (const w of this.walls){ w.x -= this.spd * dt; const gy = this.gapAt(w), top = gy - w.gap/2, bot = gy + w.gap/2;
+        if (Math.abs(w.x - p.x) < PW/2 + R){
+          if (p.y - R < top || p.y + R > bot){ return this.crash(); }
+          const m = Math.min(p.y - R - top, bot - p.y - R); if (m < 12) w.close = 1;
+        }
+        if (!w.passed && w.x + PW/2 < p.x - R){ w.passed = 1; const bonus = w.close ? 2 : 1; this.score += bonus; float(p.x, p.y - 34, w.close ? "+2 Close!" : "+1"); if (w.close) this.flash = .5; }
+        if (w.drop && Math.abs(w.x - p.x) < 24 && Math.abs(gy - p.y) < 28){ w.drop = false; this.score += 3; float(p.x, p.y - 34, "+3"); burst(w.x, gy, "#ffe08a", 12); }
+      }
+      this.walls = this.walls.filter(w => w.x > -90);
+      if (p.y < 18){ p.y = 18; p.vy = Math.max(p.vy, 0); }
+      if (p.y > H - 46) this.crash();
+    },
+    crash(){ if (this.dead) return; this.dead = .0001; this.shake = 1; this.p.vy = -260; burst(this.p.x, this.p.y, "#ff6b8b", 18); burst(this.p.x, this.p.y, "#bfe2ff", 14); if (navigator.vibrate) try { navigator.vibrate(30); } catch(e){} },
+    sky(){
+      const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, "#071a4d"); g.addColorStop(.55, "#0a5cff"); g.addColorStop(1, "#4a95ff"); ctx.fillStyle = g; ctx.fillRect(-20, -20, W + 40, H + 40);
+      const m = ctx.createRadialGradient(W * .8, H * .18, 0, W * .8, H * .18, H * .5); m.addColorStop(0, "rgba(200,230,255,.45)"); m.addColorStop(1, "rgba(200,230,255,0)"); ctx.fillStyle = m; ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = "rgba(255,255,255,.85)"; ctx.beginPath(); ctx.arc(W * .8, H * .18, 16, 0, 7); ctx.fill();
+      for (let i = 0; i < 26; i++){ const x = ((i * 97 - this.dist * .05) % (W + 20) + W + 20) % (W + 20) - 10, y = (i * 53) % (H * .45); ctx.globalAlpha = .3 + .3 * Math.sin(this.t * 1.5 + i); ctx.fillStyle = "#fff"; ctx.fillRect(x, y, 2, 2); } ctx.globalAlpha = 1;
+      // clouds
+      for (let i = 0; i < 5; i++){ const cw = 120 + (i % 3) * 50, x = ((i * 230 - this.dist * .18) % (W + cw * 2) + W + cw * 2) % (W + cw * 2) - cw, y = H * (.2 + (i % 3) * .1);
+        ctx.fillStyle = "rgba(255,255,255,.10)"; ctx.beginPath(); ctx.ellipse(x, y, cw * .5, 16, 0, 0, 7); ctx.ellipse(x + cw * .2, y - 10, cw * .3, 14, 0, 0, 7); ctx.fill(); }
+      // far hills and near hills (parallax)
+      const hill = (sp, base, amp, col) => { ctx.fillStyle = col; ctx.beginPath(); ctx.moveTo(-10, H); for (let x = -10; x <= W + 10; x += 8){ const u = (x + this.dist * sp) * .012; ctx.lineTo(x, base + Math.sin(u) * amp + Math.sin(u * 2.3 + 1) * amp * .4); } ctx.lineTo(W + 10, H); ctx.fill(); };
+      hill(.25, H * .72, 26, "rgba(10,40,130,.45)"); hill(.45, H * .8, 18, "rgba(8,30,100,.55)");
+    },
+    pillar(x, y1, y2, capDown){
+      const PW = 66, h = y2 - y1; if (h <= 0) return;
+      const g = ctx.createLinearGradient(x - PW/2, 0, x + PW/2, 0); g.addColorStop(0, "#141830"); g.addColorStop(.5, "#252b52"); g.addColorStop(1, "#0c1024");
+      ctx.fillStyle = g; ctx.fillRect(x - PW/2, y1, PW, h);
+      // scanlines that drift
+      ctx.save(); ctx.beginPath(); ctx.rect(x - PW/2, y1, PW, h); ctx.clip();
+      for (let yy = y1 + ((this.t * 40) % 12); yy < y2; yy += 12){ ctx.fillStyle = "rgba(255,107,139,.08)"; ctx.fillRect(x - PW/2, yy, PW, 2); }
+      for (let k = 0; k < 3; k++){ const gy = y1 + ((k * 73 + Math.floor(this.t * 6) * 37) % Math.max(1, h)); ctx.fillStyle = "rgba(124,193,255,.25)"; ctx.fillRect(x - PW/2 + ((k * 19 + Math.floor(this.t * 8) * 11) % (PW - 20)), gy, 18, 3); }
+      ctx.restore();
+      ctx.fillStyle = "#ff6b8b"; ctx.fillRect(x - PW/2, y1, 3, h); ctx.fillRect(x + PW/2 - 3, y1, 3, h);
+      // spiky cap facing the gap
+      const cy = capDown ? y2 : y1, dir = capDown ? 1 : -1;
+      glow(x, cy, 46, "255,107,139", .35);
+      ctx.fillStyle = "#1a1f3d"; ctx.fillRect(x - PW/2 - 6, capDown ? cy - 12 : cy, PW + 12, 12);
+      ctx.fillStyle = "#ff6b8b"; ctx.fillRect(x - PW/2 - 6, capDown ? cy - 2 : cy, PW + 12, 2);
+      ctx.fillStyle = "#1a1f3d"; ctx.beginPath(); for (let i = 0; i <= 6; i++){ const sx = x - PW/2 - 6 + i * (PW + 12) / 6; ctx.lineTo(sx, cy + (i % 2 ? 9 : 0) * dir); } ctx.lineTo(x + PW/2 + 6, cy); ctx.closePath(); ctx.fill();
     },
     draw(){
-      bg(this.t, this.t * 60);
-      for (const w of this.walls){
-        const top = w.gy - w.gap/2, bot = w.gy + w.gap/2;
-        for (let y = top - 18; y > -20; y -= 34) glitch(w.x, y, 15, this.t + y * .01);
-        for (let y = bot + 18; y < H + 20; y += 34) glitch(w.x, y, 15, this.t + y * .01);
-        if (w.drop) drop(w.x, w.gy + Math.sin(this.t * 4) * 4, 12, true);
-      }
-      ctx.fillStyle = "rgba(255,255,255,.18)"; ctx.fillRect(0, H - 8, W, 8);
-      const p = this.p; player(p.x, p.y, 40, clamp(p.vy / 900, -.4, .5));
-      if (state === "play" && !this.started){ ctx.fillStyle = "rgba(255,255,255,.92)"; ctx.font = "700 14px Unbounded, sans-serif"; ctx.textAlign = "center"; ctx.fillText("Tap to start", W/2, H * .72); }
-    }
-  };
-
-  /* ---------- Bubble Stack ---------- */
-  const STACK = {
-    key: "blumi-best-stack", title: "Bubble Stack", SH: 24,
-    how: "Tap to drop the sliding bubble block. Whatever hangs over the edge gets cut off. Land it perfectly to keep it whole, and 3 perfects in a row make it grow back.",
-    ctl: "Tap anywhere · or press Space",
-    reset(){ const w = Math.min(W * .62, 300); this.maxW = w; this.blocks = [{ x: W/2, w, y: H - 70 }]; this.score = 0; this.combo = 0; this.t = 0; this.cam = 0; this.camT = 0; this.debris = []; this.flash = 0; this.spawn(); },
-    resize(){ if (this.blocks && state !== "play") this.reset(); },
-    spawn(){ const top = this.blocks[this.blocks.length - 1], n = this.blocks.length, dir = n % 2 ? 1 : -1;
-      this.cur = { w: top.w, y: top.y - this.SH, x: top.x - dir * W * .55, dir, spd: Math.min(420, 190 + n * 7) }; },
-    press(){ this.drop(); }, drag(){}, release(){},
-    keyDown(k){ if ([" ","ArrowDown","Enter"].includes(k)){ this.drop(); return true; } }, keyUp(){},
-    drop(){ const c = this.cur, top = this.blocks[this.blocks.length - 1]; if (!c) return;
-      let dx = c.x - top.x;
-      if (Math.abs(dx) < 5){ dx = 0; c.x = top.x; this.combo++; this.flash = .35; burst(c.x, c.y + this.cam, "rgba(255,255,255,.95)", 14);
-        float(c.x, c.y + this.cam - 26, this.combo > 1 ? "Perfect ×" + this.combo : "Perfect");
-        if (this.combo >= 3 && c.w < this.maxW) c.w = Math.min(this.maxW, c.w + 14); }
-      else this.combo = 0;
-      const cL = c.x - c.w/2, cR = c.x + c.w/2, L = Math.max(cL, top.x - top.w/2), R = Math.min(cR, top.x + top.w/2), ov = R - L;
-      if (ov <= 0){ this.debris.push({ x: c.x, y: c.y, w: c.w, vy: 0, vx: c.dir * 60, r: 0, vr: c.dir * 1.5 }); this.cur = null; return end(); }
-      if (dx !== 0){ const a = dx > 0 ? R : cL, b = dx > 0 ? cR : L; this.debris.push({ x: (a + b)/2, y: c.y, w: b - a, vy: 0, vx: Math.sign(dx) * 80, r: 0, vr: Math.sign(dx) * 2 }); }
-      const nb = { x: dx === 0 ? c.x : (L + R)/2, w: dx === 0 ? c.w : ov, y: c.y };
-      this.blocks.push(nb); this.score += dx === 0 ? 2 : 1; this.spawn();
-      this.camT = Math.max(0, (H - 70 - nb.y) - H * .45);
-    },
-    update(dt){ this.t += dt; this.flash = Math.max(0, this.flash - dt);
-      const c = this.cur; if (c){ c.x += c.dir * c.spd * dt; if (c.x > W - c.w/2 + 40 && c.dir > 0) c.dir = -1; if (c.x < c.w/2 - 40 && c.dir < 0) c.dir = 1; }
-      this.cam += (this.camT - this.cam) * Math.min(1, dt * 6);
-      for (const d of this.debris){ d.vy += 1400 * dt; d.y += d.vy * dt; d.x += d.vx * dt; d.r += d.vr * dt; }
-      this.debris = this.debris.filter(d => d.y < H - this.cam + 200);
-    },
-    pal: [["#ffffff","#cfe8ff"],["#e6f4ff","#9fd0ff"],["#d6ecff","#7cc1ff"],["#c4e3ff","#5fb4ff"],["#b0d8ff","#3d9bff"],["#9fd0ff","#2f7bff"],["#fff3c2","#ffc21a"],["#9fd0ff","#2f7bff"],["#b0d8ff","#3d9bff"],["#c4e3ff","#5fb4ff"],["#d6ecff","#7cc1ff"],["#e6f4ff","#9fd0ff"]],
-    slab(x, y, w, i, a = 1, rot = 0){ const h = this.SH, [c1, c2] = this.pal[i % 12], r = Math.min(10, w/2);
-      ctx.save(); ctx.globalAlpha = a; ctx.translate(x, y); ctx.rotate(rot);
-      const g = ctx.createLinearGradient(0, -h/2, 0, h/2); g.addColorStop(0, c1); g.addColorStop(1, c2);
-      ctx.fillStyle = g; rr(-w/2, -h/2, w, h, r); ctx.fill();
-      ctx.fillStyle = "rgba(255,255,255,.7)"; rr(-w/2 + 6, -h/2 + 4, Math.max(0, w * .5 - 6), 3, 2); ctx.fill();
-      ctx.strokeStyle = "rgba(255,255,255,.5)"; ctx.lineWidth = 1; rr(-w/2, -h/2, w, h, r); ctx.stroke();
-      ctx.restore(); },
-    draw(){ bg(this.t, -this.cam * 2);
-      ctx.save(); ctx.translate(0, this.cam);
-      const from = Math.max(0, this.blocks.length - 40);
-      for (let i = from; i < this.blocks.length; i++){ const b = this.blocks[i]; this.slab(b.x, b.y, b.w, i); }
-      const top = this.blocks[this.blocks.length - 1];
-      if (this.flash){ const k = .35 - this.flash; ctx.strokeStyle = `rgba(255,255,255,${this.flash * 2.5})`; ctx.lineWidth = 3; rr(top.x - top.w/2 - k * 40, top.y - this.SH/2 - k * 20, top.w + k * 80, this.SH + k * 40, 14); ctx.stroke(); }
-      for (const d of this.debris) this.slab(d.x, d.y, d.w, this.blocks.length, .9, d.r);
-      if (this.cur){ const c = this.cur; this.slab(c.x, c.y, c.w, this.blocks.length); player(c.x, c.y - this.SH/2 - 20, 34, Math.sin(this.t * 6) * .05); }
-      else player(top.x, top.y - this.SH/2 - 20, 34);
+      ctx.save();
+      if (this.shake){ const k = this.shake * this.shake; ctx.translate(k * Math.sin(this.t * 31) * 8, k * Math.cos(this.t * 27) * 6); }
+      this.sky();
+      for (const w of this.walls){ const gy = this.gapAt(w); this.pillar(w.x, -20, gy - w.gap/2, true); this.pillar(w.x, gy + w.gap/2, H - 40, false); if (w.drop) drop(w.x, gy + Math.sin(this.t * 4) * 4, 12, true); }
+      // ground
+      const gg = ctx.createLinearGradient(0, H - 40, 0, H); gg.addColorStop(0, "#0a3fb5"); gg.addColorStop(1, "#06267a"); ctx.fillStyle = gg; ctx.fillRect(-20, H - 40, W + 40, 60);
+      ctx.fillStyle = "rgba(255,255,255,.55)"; ctx.fillRect(-20, H - 40, W + 40, 2);
+      ctx.fillStyle = "rgba(255,255,255,.12)"; for (let x = -((this.dist) % 28); x < W; x += 28) ctx.fillRect(x, H - 30, 14, 3);
+      for (const b of this.trail){ ctx.globalAlpha = 1 - b.t / .7; ctx.strokeStyle = "rgba(220,240,255,.9)"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, 7); ctx.stroke(); } ctx.globalAlpha = 1;
+      const p = this.p; if (!(this.dead > .5)) player(p.x, p.y, 40, clamp(p.vy / 900, -.45, .55), p.sq);
+      if (this.flash){ ctx.fillStyle = `rgba(255,255,255,${this.flash * .25})`; ctx.fillRect(0, 0, W, H); }
       ctx.restore();
-      if (state === "play" && this.blocks.length < 3){ ctx.fillStyle = "rgba(255,255,255,.92)"; ctx.font = "800 13px Unbounded, sans-serif"; ctx.textAlign = "center"; ctx.fillText("Tap to drop", W/2, H * .2); }
+      if (state === "play" && !this.started){ ctx.fillStyle = "rgba(255,255,255,.95)"; ctx.font = "800 15px Unbounded, sans-serif"; ctx.textAlign = "center"; ctx.fillText("Tap to start", W/2, H * .72); }
     }
   };
 
   /* ---------- shell ---------- */
-  const GAMES = { hop: HOP, gates: GATES, stack: STACK };
-  let game = HOP, state = "menu", paused = false, last = 0, raf = 0, active = false;
+  const GAMES = { gates: GATES };
+  let game = GATES, state = "menu", paused = false, last = 0, raf = 0, active = false;
   const hud = () => { X("score").textContent = fmt(game.score || 0); X("best").textContent = fmt(store.get(game.key)); };
   function menu(over){
     X("title").textContent = over ? "Game over" : game.title;
@@ -270,7 +233,7 @@
   window.BlumiExtra = {
     show(id){
       if (state === "play"){ state = "menu"; paused = false; }
-      game = GAMES[id] || HOP; active = true; parts = []; floats = [];
+      game = GAMES[id] || GATES; active = true; parts = []; floats = [];
       resize(); game.reset(); menu(false);
       if (!raf){ last = 0; raf = requestAnimationFrame(step); }
     },
