@@ -72,18 +72,13 @@
     ctx.fillStyle = "#ff6b8b"; ctx.fillRect(-r*.35, -1.5, r*.7, 3); ctx.fillRect(-1.5, -r*.35, 3, r*.7);
     ctx.restore();
   }
-  function player(x, y, s, tilt = 0, sq = 0){
-    glow(x, y, s * 1.15, "160,215,255", .55);
-    ctx.save(); ctx.translate(x, y); ctx.rotate(tilt); ctx.scale(1 + sq, 1 - sq);
-    const r = s / 2;
-    ctx.save(); ctx.beginPath(); ctx.arc(0, 0, r, 0, 7); ctx.clip();
-    if (mascot.complete && mascot.naturalWidth) ctx.drawImage(mascot, -r * 1.16, -r * 1.16, r * 2.32, r * 2.32); // same width and height: proportions kept
-    else { ctx.fillStyle = "#2f7bff"; ctx.fillRect(-r, -r, s, s); }
-    const sh = ctx.createLinearGradient(0, -r, 0, r); sh.addColorStop(0, "rgba(255,255,255,.28)"); sh.addColorStop(.45, "rgba(255,255,255,0)"); sh.addColorStop(1, "rgba(0,30,120,.25)");
-    ctx.fillStyle = sh; ctx.fillRect(-r, -r, s, s);
-    ctx.restore();
-    ctx.lineWidth = Math.max(1.5, r * .1); ctx.strokeStyle = "rgba(255,255,255,.85)"; ctx.beginPath(); ctx.arc(0, 0, r - ctx.lineWidth / 2, 0, 7); ctx.stroke();
-    ctx.fillStyle = "rgba(255,255,255,.75)"; ctx.beginPath(); ctx.ellipse(-r * .42, -r * .5, r * .2, r * .11, -.6, 0, 7); ctx.fill();
+  function player(x, y, s, tilt = 0){
+    // same look as Catch the Drops: the original mascot tile, uniform scale only
+    glow(x, y, s * 1.1, "160,215,255", .5);
+    ctx.save(); ctx.translate(x, y); ctx.rotate(tilt);
+    rr(-s/2, -s/2, s, s, s * .28); ctx.fillStyle = "#2f7bff"; ctx.fill();
+    ctx.save(); rr(-s/2, -s/2, s, s, s * .28); ctx.clip(); if (mascot.complete && mascot.naturalWidth) ctx.drawImage(mascot, -s/2, -s/2, s, s); ctx.restore();
+    ctx.strokeStyle = "rgba(255,255,255,.55)"; ctx.lineWidth = 1.5; rr(-s/2 + .75, -s/2 + .75, s - 1.5, s - 1.5, s * .28); ctx.stroke();
     ctx.restore();
   }
   let parts = [], floats = [];
@@ -104,7 +99,7 @@
     how: "Tap to float up and slip through the gaps in the glitch walls. Every gate is +1, a close call is +2, every gold drop is +3. Later the walls start to move.",
     ctl: "Tap anywhere · or press Space",
     reset(){ this.p = { x: W * .28, y: H * .45, vy: 0, sq: 0 }; this.walls = []; this.score = 0; this.t = 0; this.dist = 0; this.spd = 165; this.next = .5; this.started = false; this.trail = []; this.dead = 0; this.flash = 0; this.shake = 0; },
-    flap(){ if (this.dead) return; this.started = true; this.p.vy = -370; this.p.sq = .18; for (let i = 0; i < 5; i++) this.trail.push({ x: this.p.x - 16, y: this.p.y + rnd(-8, 8), r: rnd(3, 6), t: 0, vx: -rnd(40, 90) }); },
+    flap(){ if (this.dead) return; this.started = true; this.p.vy = -370; for (let i = 0; i < 5; i++) this.trail.push({ x: this.p.x - 16, y: this.p.y + rnd(-8, 8), r: rnd(3, 6), t: 0, vx: -rnd(40, 90) }); },
     press(){ this.flap(); }, drag(){}, release(){},
     keyDown(k){ if ([" ","ArrowUp","w","W"].includes(k)){ this.flap(); return true; } }, keyUp(){},
     gapAt(w){ return w.gy + (w.mv ? Math.sin(this.t * w.mf + w.ph) * w.mv : 0); },
@@ -176,7 +171,7 @@
       ctx.fillStyle = "rgba(255,255,255,.55)"; ctx.fillRect(-20, H - 40, W + 40, 2);
       ctx.fillStyle = "rgba(255,255,255,.12)"; for (let x = -((this.dist) % 28); x < W; x += 28) ctx.fillRect(x, H - 30, 14, 3);
       for (const b of this.trail){ ctx.globalAlpha = 1 - b.t / .7; ctx.strokeStyle = "rgba(220,240,255,.9)"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, 7); ctx.stroke(); } ctx.globalAlpha = 1;
-      const p = this.p; if (!(this.dead > .5)) player(p.x, p.y, 40, clamp(p.vy / 900, -.45, .55), p.sq);
+      const p = this.p; if (!(this.dead > .5)) player(p.x, p.y, 40, clamp(p.vy / 900, -.45, .55));
       if (this.flash){ ctx.fillStyle = `rgba(255,255,255,${this.flash * .25})`; ctx.fillRect(0, 0, W, H); }
       ctx.restore();
       if (state === "play" && !this.started){ ctx.fillStyle = "rgba(255,255,255,.95)"; ctx.font = "800 15px Unbounded, sans-serif"; ctx.textAlign = "center"; ctx.fillText("Tap to start", W/2, H * .72); }
