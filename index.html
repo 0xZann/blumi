@@ -305,7 +305,9 @@ html[data-theme="dark"] .chain-tab .csoon{background:rgba(120,170,255,.16);color
 .token-id .ring{position:absolute;right:-80px;bottom:-80px;width:260px;height:260px;border-radius:50%;border:1px solid rgba(255,255,255,.22)}
 .token-body{padding:36px 28px}
 @media(min-width:768px){.token-body{padding:52px 48px}}
-.token-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.token-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.token-stat{min-width:0}
+.token-stat.wide{grid-column:1/-1}
 .token-stat:last-child:nth-child(odd){grid-column:1/-1}
 .token-stat{padding:16px 18px;border-radius:var(--r-md);background:var(--ice-2);border:1px solid var(--line)}
 .token-stat span{display:block;font:600 11px/1 var(--font-display);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
@@ -1316,7 +1318,7 @@ const BLUMI_CONFIG = {
        then set launched to true. Until then the tab shows SOON.
        ---------------------------------------------------------- */
     robinhood: {
-      launched: false,
+      launched: true,
       network: "Robinhood Chain",
       explorer: "https://robinhoodchain.blockscout.com/token/",
       explorerName: "Blockscout",
@@ -1324,10 +1326,10 @@ const BLUMI_CONFIG = {
       token: {
         name: "Blumi",
         ticker: "$BLUMI",
-        contract: "",      // 0x… address on Robinhood Chain (required)
-        totalSupply: "",   // e.g. "1,000,000,000 (1B)"
-        buyUrl: "",        // the token page on Pons
-        chartUrl: ""
+        contract: "0xd21d386e704f3fcba43671794622971b5cd4bc83",
+        totalSupply: "1,000,000,000 (1B)",
+        buyUrl: "https://ponsfamily.com/launchpad/0xd21d386e704f3fcba43671794622971b5cd4bc83",
+        chartUrl: "https://dexscreener.com/robinhood/0xd21d386e704f3fcba43671794622971b5cd4bc83"
       }
     }
   }
@@ -1560,8 +1562,8 @@ const ARROW = '<svg class="s-arrow" viewBox="0 0 24 24" fill="none" stroke="curr
     $('[data-t="copylabel"]').textContent = L("Copy", "Salin");
     if (RH_LIVE) {
       if (RT.ticker) { tk.textContent = RT.ticker; tk.hidden = false; } else tk.hidden = true;
-      const stats = [[L("Network","Jaringan"), RH.network], ["Ticker", RT.ticker], [L("Total supply","Total suplai"), RT.totalSupply], ["Launchpad", RH.launchpad]].filter(x => x[1]);
-      $('[data-t="stats"]').innerHTML = stats.map(([k,v]) => `<div class="token-stat"><span>${esc(k)}</span><strong>${esc(v)}</strong></div>`).join("");
+      const stats = [[L("Network","Jaringan"), RH.network, 1], ["Ticker", RT.ticker], ["Launchpad", RH.launchpad], [L("Total supply","Total suplai"), RT.totalSupply, 1]].filter(x => x[1]);
+      $('[data-t="stats"]').innerHTML = stats.map(([k,v,w]) => `<div class="token-stat${w ? " wide" : ""}"><span>${esc(k)}</span><strong>${esc(v)}</strong></div>`).join("");
       $('[data-t="contract"]').textContent = RCA;
       const acts = [];
       if (safeUrl(RT.buyUrl)) acts.push(`<a class="btn btn-primary" href="${esc(RT.buyUrl)}" target="_blank" rel="noopener noreferrer">${L("Buy","Beli")} ${esc(RT.ticker||"BLUMI")} ${L("on","di")} ${esc(RH.launchpad)} ${ext}</a>`);
