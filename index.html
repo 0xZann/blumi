@@ -282,9 +282,10 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
 .chain-tab .cdot.ring{border-radius:50%;background:transparent;box-shadow:inset 0 0 0 2.5px currentColor}
 .chain-tab .csoon{padding:4px 7px;border-radius:999px;font:700 9.5px/1 var(--font-display);letter-spacing:.1em;background:rgba(10,92,255,.1);color:var(--electric)}
 .chain-tab[aria-selected="true"] .csoon{background:rgba(255,255,255,.22);color:#fff}
-@media(max-width:420px){.chain-tab{padding:10px 13px;font-size:13px;gap:7px}}
+@media(max-width:560px){.chain-tabs{display:grid;grid-template-columns:auto 1fr;width:100%;padding:5px;gap:4px}.chain-tab{justify-content:center;padding:11px 12px;font-size:13px;gap:7px;min-width:0}}
+@media(max-width:380px){.chain-tab{padding:10px 9px;font-size:12px;gap:6px}.chain-tab .csoon{padding:3px 5px;font-size:8.5px}.chain-tab .clogo{width:16px;height:16px}}
 @media(max-width:560px){.token-card.rh .token-stat strong{font-size:15px;word-break:normal;overflow-wrap:break-word}}
-.token-card.rh .token-net i{width:20px;height:20px;border-radius:6px;background:#ccff00 url(assets/robinhood-chain.webp) center/cover;box-shadow:0 0 0 2px rgba(255,255,255,.85)}
+.token-card.rh .token-net i{width:20px;height:20px;border-radius:6px;background:#ccff00 url("data:image/webp;base64,UklGRgIDAABXRUJQVlA4IPYCAAAQEgCdASpAAEAAPj0ai0QiIaEUCgWoIAPEsgBnGst8ANpI6r+MH4AdWDwh3PwXf2k7wB/GN0B+wG+AfoxwAHkxfrN8BX7K/rd7KWaAaAsfGfZPEClW0zbzsv737gPaP8+/8X3Cf5P/S/956t3sA9Bj9ZjlqmuFV4zprsrUmy6ehmsWhtaWaPJ8HcCibHyRo70HSysApY8AMjAA/vxwn7Ua/CMvw2bw2H0e6Stj24LgZvjEay3hKmzitrrE8/5f7z/5AhQPdP8Ubnx/iG4d6URjy2PXd93/73iN33xX5+lM7jNHnf8avDPYq5OZVD+9FIb2NGGSjelrvpS3M9qiovTzD4+00v+af+2gz1oW0I6vuF/l6fm/4ZUDlkCvfb+QWaYP5LEZ1jjQ/CMB/U0SYn6KyBntwL9SV2u6HnT4y+ub4fBISZN9xG+uOhGj58N4fkEFW2/1VD/87imcnW/B/DTUfRYCqI6ut9MRjD5xYRSONHzUw5cLl+5S13M/jf72foZbJ/GJvBq15iOu7VLaPEcZdyA3tPzGT0cTMEaaXNjJvP243f1H2Qf+E4qe0pkb9f29InJukIDi4SnqZsxkXIkh9mZW1XT++wgk26wUpzcgzRfomb+gStX4joiblqvqYXy7HcyHG9JP0iGr4rZ+D29yYkOJn7fDbI5uHhrvxj9vNo/9n+3ctSq4Rwyfnv/qf83Jd9bvU3Q26AfV7BYiLwOTePJUgH4rEXFL9KLHpnDiuPcc1FRk96LBZcxd/oMer7STn+Bq/bK2Z+CshXr/P+OaViowz9f/f1kb73Jp521r2vDxYFj/73ppEqljBGtUZOH/59M3/oTw5tS6NevW9LIS4PscHPV2ujnUY/3+W4ehFxIStBL1pxv4DO2Ph/jc4zB33L1GrA0YbMHlB5EVsXalFO/VlakTXgJivy26MHFLLX/jxSmhbKvc24+N3xrJ3PWmNxp7G51/k2+rMGNCoBaj5TOtSKZOhUCxZtwbDq+hA5WplAAAAA==") center/cover;box-shadow:0 0 0 2px rgba(255,255,255,.85)}
 .chain-tab .clogo{width:18px;height:18px;border-radius:5px;display:block;box-shadow:0 0 0 1.5px rgba(255,255,255,.9)}
 .token-card.swap{animation:chainSwap .45s var(--ease)}
 @keyframes chainSwap{from{opacity:.35;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -308,7 +309,8 @@ html[data-theme="dark"] .chain-tab .csoon{background:rgba(120,170,255,.16);color
 .token-stat:last-child:nth-child(odd){grid-column:1/-1}
 .token-stat{padding:16px 18px;border-radius:var(--r-md);background:var(--ice-2);border:1px solid var(--line)}
 .token-stat span{display:block;font:600 11px/1 var(--font-display);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
-.token-stat strong{display:block;margin-top:10px;font:700 18px/1.2 var(--font-display);word-break:break-word}
+.token-stat strong{display:block;margin-top:10px;font:700 18px/1.2 var(--font-display);word-break:normal;overflow-wrap:break-word}
+@media(max-width:420px){.token-stat{padding:14px 14px}.token-stat strong{font-size:16px}}
 .ca-label{margin-top:28px;font:600 11px/1 var(--font-display);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
 .ca-box{margin-top:10px;display:flex;align-items:center;gap:8px;padding:8px 8px 8px 18px;border-radius:16px;background:var(--ocean);color:#eaf3ff}
 .ca-box code{flex:1;min-width:0;font:500 14px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow-wrap:anywhere;user-select:all}
@@ -823,7 +825,7 @@ html[data-theme="dark"] .theme-btn .moon{color:#9fd0ff}
 
 <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
   <div data-mobile-nav style="display:flex;flex-direction:column"></div>
-  <span class="base-badge"><span class="dot" aria-hidden="true"></span>Base <span class="amp">+</span> <img class="rh-dot" src="assets/robinhood-chain.webp" alt="" width="18" height="18">Robinhood Chain</span>
+  <span class="base-badge"><span class="dot" aria-hidden="true"></span>Base <span class="amp">+</span> <img class="rh-dot" src="data:image/webp;base64,UklGRgIDAABXRUJQVlA4IPYCAAAQEgCdASpAAEAAPj0ai0QiIaEUCgWoIAPEsgBnGst8ANpI6r+MH4AdWDwh3PwXf2k7wB/GN0B+wG+AfoxwAHkxfrN8BX7K/rd7KWaAaAsfGfZPEClW0zbzsv737gPaP8+/8X3Cf5P/S/956t3sA9Bj9ZjlqmuFV4zprsrUmy6ehmsWhtaWaPJ8HcCibHyRo70HSysApY8AMjAA/vxwn7Ua/CMvw2bw2H0e6Stj24LgZvjEay3hKmzitrrE8/5f7z/5AhQPdP8Ubnx/iG4d6URjy2PXd93/73iN33xX5+lM7jNHnf8avDPYq5OZVD+9FIb2NGGSjelrvpS3M9qiovTzD4+00v+af+2gz1oW0I6vuF/l6fm/4ZUDlkCvfb+QWaYP5LEZ1jjQ/CMB/U0SYn6KyBntwL9SV2u6HnT4y+ub4fBISZN9xG+uOhGj58N4fkEFW2/1VD/87imcnW/B/DTUfRYCqI6ut9MRjD5xYRSONHzUw5cLl+5S13M/jf72foZbJ/GJvBq15iOu7VLaPEcZdyA3tPzGT0cTMEaaXNjJvP243f1H2Qf+E4qe0pkb9f29InJukIDi4SnqZsxkXIkh9mZW1XT++wgk26wUpzcgzRfomb+gStX4joiblqvqYXy7HcyHG9JP0iGr4rZ+D29yYkOJn7fDbI5uHhrvxj9vNo/9n+3ctSq4Rwyfnv/qf83Jd9bvU3Q26AfV7BYiLwOTePJUgH4rEXFL9KLHpnDiuPcc1FRk96LBZcxd/oMer7STn+Bq/bK2Z+CshXr/P+OaViowz9f/f1kb73Jp521r2vDxYFj/73ppEqljBGtUZOH/59M3/oTw5tS6NevW9LIS4PscHPV2ujnUY/3+W4ehFxIStBL1pxv4DO2Ph/jc4zB33L1GrA0YbMHlB5EVsXalFO/VlakTXgJivy26MHFLLX/jxSmhbKvc24+N3xrJ3PWmNxp7G51/k2+rMGNCoBaj5TOtSKZOhUCxZtwbDq+hA5WplAAAAA==" alt="" width="18" height="18">Robinhood Chain</span>
 </nav>
 
 <main id="main">
@@ -841,7 +843,7 @@ html[data-theme="dark"] .theme-btn .moon{color:#9fd0ff}
   </div>
   <div class="container hero-grid hero-solo">
     <div class="hero-copy">
-      <span class="base-badge reveal"><span class="dot" aria-hidden="true"></span>Base <span class="amp">+</span> <img class="rh-dot" src="assets/robinhood-chain.webp" alt="" width="18" height="18">Robinhood Chain <small>· Independent Brand</small></span>
+      <span class="base-badge reveal"><span class="dot" aria-hidden="true"></span>Base <span class="amp">+</span> <img class="rh-dot" src="data:image/webp;base64,UklGRgIDAABXRUJQVlA4IPYCAAAQEgCdASpAAEAAPj0ai0QiIaEUCgWoIAPEsgBnGst8ANpI6r+MH4AdWDwh3PwXf2k7wB/GN0B+wG+AfoxwAHkxfrN8BX7K/rd7KWaAaAsfGfZPEClW0zbzsv737gPaP8+/8X3Cf5P/S/956t3sA9Bj9ZjlqmuFV4zprsrUmy6ehmsWhtaWaPJ8HcCibHyRo70HSysApY8AMjAA/vxwn7Ua/CMvw2bw2H0e6Stj24LgZvjEay3hKmzitrrE8/5f7z/5AhQPdP8Ubnx/iG4d6URjy2PXd93/73iN33xX5+lM7jNHnf8avDPYq5OZVD+9FIb2NGGSjelrvpS3M9qiovTzD4+00v+af+2gz1oW0I6vuF/l6fm/4ZUDlkCvfb+QWaYP5LEZ1jjQ/CMB/U0SYn6KyBntwL9SV2u6HnT4y+ub4fBISZN9xG+uOhGj58N4fkEFW2/1VD/87imcnW/B/DTUfRYCqI6ut9MRjD5xYRSONHzUw5cLl+5S13M/jf72foZbJ/GJvBq15iOu7VLaPEcZdyA3tPzGT0cTMEaaXNjJvP243f1H2Qf+E4qe0pkb9f29InJukIDi4SnqZsxkXIkh9mZW1XT++wgk26wUpzcgzRfomb+gStX4joiblqvqYXy7HcyHG9JP0iGr4rZ+D29yYkOJn7fDbI5uHhrvxj9vNo/9n+3ctSq4Rwyfnv/qf83Jd9bvU3Q26AfV7BYiLwOTePJUgH4rEXFL9KLHpnDiuPcc1FRk96LBZcxd/oMer7STn+Bq/bK2Z+CshXr/P+OaViowz9f/f1kb73Jp521r2vDxYFj/73ppEqljBGtUZOH/59M3/oTw5tS6NevW9LIS4PscHPV2ujnUY/3+W4ehFxIStBL1pxv4DO2Ph/jc4zB33L1GrA0YbMHlB5EVsXalFO/VlakTXgJivy26MHFLLX/jxSmhbKvc24+N3xrJ3PWmNxp7G51/k2+rMGNCoBaj5TOtSKZOhUCxZtwbDq+hA5WplAAAAA==" alt="" width="18" height="18">Robinhood Chain <small>· Independent Brand</small></span>
       <h1 id="hero-title" class="reveal" style="--d:.08s">
         <span class="line">A Little Blue,</span>
         <span class="line grad-text">A Bigger World.</span>
@@ -1240,7 +1242,7 @@ html[data-theme="dark"] .theme-btn .moon{color:#9fd0ff}
         <a href="#home" class="brand"><img src="assets/blumi-mascot-160.webp" alt="" width="38" height="38" loading="lazy">BLUMI</a>
         <p class="footer-statement" data-i18n="foot.statement">Bringing people, creativity, and technology together to shape a more connected digital world.</p>
         <p class="footer-tag">A LITTLE BLUE, A BIGGER WORLD.</p>
-        <div style="margin-top:22px"><span class="base-badge"><span class="dot" aria-hidden="true"></span>Base <span class="amp">+</span> <img class="rh-dot" src="assets/robinhood-chain.webp" alt="" width="18" height="18">Robinhood Chain</span></div>
+        <div style="margin-top:22px"><span class="base-badge"><span class="dot" aria-hidden="true"></span>Base <span class="amp">+</span> <img class="rh-dot" src="data:image/webp;base64,UklGRgIDAABXRUJQVlA4IPYCAAAQEgCdASpAAEAAPj0ai0QiIaEUCgWoIAPEsgBnGst8ANpI6r+MH4AdWDwh3PwXf2k7wB/GN0B+wG+AfoxwAHkxfrN8BX7K/rd7KWaAaAsfGfZPEClW0zbzsv737gPaP8+/8X3Cf5P/S/956t3sA9Bj9ZjlqmuFV4zprsrUmy6ehmsWhtaWaPJ8HcCibHyRo70HSysApY8AMjAA/vxwn7Ua/CMvw2bw2H0e6Stj24LgZvjEay3hKmzitrrE8/5f7z/5AhQPdP8Ubnx/iG4d6URjy2PXd93/73iN33xX5+lM7jNHnf8avDPYq5OZVD+9FIb2NGGSjelrvpS3M9qiovTzD4+00v+af+2gz1oW0I6vuF/l6fm/4ZUDlkCvfb+QWaYP5LEZ1jjQ/CMB/U0SYn6KyBntwL9SV2u6HnT4y+ub4fBISZN9xG+uOhGj58N4fkEFW2/1VD/87imcnW/B/DTUfRYCqI6ut9MRjD5xYRSONHzUw5cLl+5S13M/jf72foZbJ/GJvBq15iOu7VLaPEcZdyA3tPzGT0cTMEaaXNjJvP243f1H2Qf+E4qe0pkb9f29InJukIDi4SnqZsxkXIkh9mZW1XT++wgk26wUpzcgzRfomb+gStX4joiblqvqYXy7HcyHG9JP0iGr4rZ+D29yYkOJn7fDbI5uHhrvxj9vNo/9n+3ctSq4Rwyfnv/qf83Jd9bvU3Q26AfV7BYiLwOTePJUgH4rEXFL9KLHpnDiuPcc1FRk96LBZcxd/oMer7STn+Bq/bK2Z+CshXr/P+OaViowz9f/f1kb73Jp521r2vDxYFj/73ppEqljBGtUZOH/59M3/oTw5tS6NevW9LIS4PscHPV2ujnUY/3+W4ehFxIStBL1pxv4DO2Ph/jc4zB33L1GrA0YbMHlB5EVsXalFO/VlakTXgJivy26MHFLLX/jxSmhbKvc24+N3xrJ3PWmNxp7G51/k2+rMGNCoBaj5TOtSKZOhUCxZtwbDq+hA5WplAAAAA==" alt="" width="18" height="18">Robinhood Chain</span></div>
       </div>
       <div>
         <h4 data-i18n="foot.explore">Explore</h4>
@@ -1510,8 +1512,8 @@ const ARROW = '<svg class="s-arrow" viewBox="0 0 24 24" fill="none" stroke="curr
       acts.push(`<a class="btn btn-ghost" href="${esc(W.explorer + CA)}" target="_blank" rel="noopener noreferrer">${L("View on Basescan","Lihat di Basescan")} ${ext}</a>`);
       if (safeUrl(T.chartUrl)) acts.push(`<a class="btn btn-ghost" href="${esc(T.chartUrl)}" target="_blank" rel="noopener noreferrer">${L("View Chart","Lihat Chart")} ${ext}</a>`);
       $('[data-t="actions"]').innerHTML = acts.join("");
-      $('[data-t="title"]').innerHTML = L('Officially <span class="grad-text">on Base.</span>', 'Resmi <span class="grad-text">di Base.</span>');
-      $('[data-t="lead"]').textContent = L("Always check the contract address below before you interact with any BLUMI token. This is the only official one.", "Selalu cek alamat kontrak di bawah sebelum berinteraksi dengan token BLUMI mana pun. Hanya ini yang resmi.");
+      $('[data-t="title"]').innerHTML = RH ? L('Officially on <span class="grad-text">Base &amp; Robinhood Chain.</span>', 'Resmi di <span class="grad-text">Base &amp; Robinhood Chain.</span>') : L('Officially <span class="grad-text">on Base.</span>', 'Resmi <span class="grad-text">di Base.</span>');
+      $('[data-t="lead"]').textContent = RH ? L("BLUMI has its own official contract on each network. Pick the network below and always check the address before you buy.", "BLUMI punya kontrak resmi sendiri di tiap jaringan. Pilih jaringannya di bawah dan selalu cek alamatnya sebelum membeli.") : L("Always check the contract address below before you interact with any BLUMI token. This is the only official one.", "Selalu cek alamat kontrak di bawah sebelum berinteraksi dengan token BLUMI mana pun. Hanya ini yang resmi.");
       $('[data-t="warn"]').textContent = L("Beware of fake tokens. BLUMI will never DM you first, ask for your seed phrase, or announce a different contract address outside this website and its official channels.", "Waspadai token palsu. BLUMI tidak akan pernah DM kamu duluan, meminta seed phrase, atau mengumumkan alamat kontrak lain di luar website ini dan kanal resminya.");
     } else {
       tk.hidden = false; tk.innerHTML = '<span class="soon-pill">SOON</span>'; tk.classList.add("soon");
@@ -1566,7 +1568,7 @@ const ARROW = '<svg class="s-arrow" viewBox="0 0 24 24" fill="none" stroke="curr
       acts.push(`<a class="btn btn-ghost" href="${esc(RH.explorer + RCA)}" target="_blank" rel="noopener noreferrer">${L("View on","Lihat di")} ${esc(RH.explorerName)} ${ext}</a>`);
       if (safeUrl(RT.chartUrl)) acts.push(`<a class="btn btn-ghost" href="${esc(RT.chartUrl)}" target="_blank" rel="noopener noreferrer">${L("View Chart","Lihat Chart")} ${ext}</a>`);
       $('[data-t="actions"]').innerHTML = acts.join("");
-      $('[data-t="title"]').innerHTML = L('Now live <span class="grad-text">on Robinhood Chain.</span>', 'Sudah live <span class="grad-text">di Robinhood Chain.</span>');
+      $('[data-t="title"]').innerHTML = L('Officially on <span class="grad-text">Base &amp; Robinhood Chain.</span>', 'Resmi di <span class="grad-text">Base &amp; Robinhood Chain.</span>');
       $('[data-t="lead"]').textContent = L("Blumi on Robinhood Chain has its own contract, separate from Base. Check the network and the address before you buy.", "Blumi di Robinhood Chain punya kontrak sendiri, terpisah dari Base. Cek jaringan dan alamatnya sebelum membeli.");
       $('[data-t="warn"]').textContent = L("This is the only official BLUMI contract on Robinhood Chain. BLUMI is not affiliated with Robinhood Markets or Pons, will never DM you first, and will never ask for your seed phrase.", "Ini satu-satunya kontrak BLUMI resmi di Robinhood Chain. BLUMI tidak berafiliasi dengan Robinhood Markets maupun Pons, tidak akan pernah DM kamu duluan, dan tidak akan pernah meminta seed phrase.");
     } else {
@@ -1578,7 +1580,7 @@ const ARROW = '<svg class="s-arrow" viewBox="0 0 24 24" fill="none" stroke="curr
       const cb = $("[data-copy]"); cb.disabled = true; cb.setAttribute("aria-label", L("Copy contract address (available after launch)", "Salin alamat kontrak (tersedia setelah launch)"));
       $('[data-t="actions"]').innerHTML = [L("Buy on ","Beli di ") + RH.launchpad, L("View on ","Lihat di ") + RH.explorerName]
         .map((l,i) => `<span class="btn ${i ? "btn-ghost" : "btn-primary"} is-disabled" aria-disabled="true">${esc(l)} · Soon</span>`).join("");
-      $('[data-t="title"]').innerHTML = L('Coming <span class="grad-text">soon on Robinhood Chain.</span>', 'Segera <span class="grad-text">hadir di Robinhood Chain.</span>');
+      $('[data-t="title"]').innerHTML = L('Officially on <span class="grad-text">Base &amp; Robinhood Chain.</span>', 'Resmi di <span class="grad-text">Base &amp; Robinhood Chain.</span>');
       $('[data-t="lead"]').textContent = L("Blumi is launching on Robinhood Chain through Pons. The official contract address will be posted right here and on our official channels.", "Blumi akan launch di Robinhood Chain lewat Pons. Alamat kontrak resminya akan diumumkan di sini dan lewat kanal resmi kami.");
       $('[data-t="warn"]').textContent = L("Until the address is posted here, any BLUMI token on Robinhood Chain is not ours. BLUMI is not affiliated with Robinhood Markets or Pons.", "Sebelum alamatnya diumumkan di sini, token BLUMI apa pun di Robinhood Chain bukan milik kami. BLUMI tidak berafiliasi dengan Robinhood Markets maupun Pons.");
     }
@@ -1588,7 +1590,7 @@ const ARROW = '<svg class="s-arrow" viewBox="0 0 24 24" fill="none" stroke="curr
     const box = $("[data-chain-tabs]"); if (!box) return;
     if (!RH) { box.hidden = true; return; }
     box.innerHTML = `<button class="chain-tab" type="button" role="tab" data-chain="base" aria-selected="${CHAIN === "base"}"><span class="cdot" aria-hidden="true"></span>Base</button>`
-      + `<button class="chain-tab" type="button" role="tab" data-chain="robinhood" aria-selected="${CHAIN === "robinhood"}"><img class="clogo" src="assets/robinhood-chain.webp" alt="" width="18" height="18">Robinhood Chain${RH_LIVE ? "" : '<span class="csoon">SOON</span>'}</button>`;
+      + `<button class="chain-tab" type="button" role="tab" data-chain="robinhood" aria-selected="${CHAIN === "robinhood"}"><img class="clogo" src="data:image/webp;base64,UklGRgIDAABXRUJQVlA4IPYCAAAQEgCdASpAAEAAPj0ai0QiIaEUCgWoIAPEsgBnGst8ANpI6r+MH4AdWDwh3PwXf2k7wB/GN0B+wG+AfoxwAHkxfrN8BX7K/rd7KWaAaAsfGfZPEClW0zbzsv737gPaP8+/8X3Cf5P/S/956t3sA9Bj9ZjlqmuFV4zprsrUmy6ehmsWhtaWaPJ8HcCibHyRo70HSysApY8AMjAA/vxwn7Ua/CMvw2bw2H0e6Stj24LgZvjEay3hKmzitrrE8/5f7z/5AhQPdP8Ubnx/iG4d6URjy2PXd93/73iN33xX5+lM7jNHnf8avDPYq5OZVD+9FIb2NGGSjelrvpS3M9qiovTzD4+00v+af+2gz1oW0I6vuF/l6fm/4ZUDlkCvfb+QWaYP5LEZ1jjQ/CMB/U0SYn6KyBntwL9SV2u6HnT4y+ub4fBISZN9xG+uOhGj58N4fkEFW2/1VD/87imcnW/B/DTUfRYCqI6ut9MRjD5xYRSONHzUw5cLl+5S13M/jf72foZbJ/GJvBq15iOu7VLaPEcZdyA3tPzGT0cTMEaaXNjJvP243f1H2Qf+E4qe0pkb9f29InJukIDi4SnqZsxkXIkh9mZW1XT++wgk26wUpzcgzRfomb+gStX4joiblqvqYXy7HcyHG9JP0iGr4rZ+D29yYkOJn7fDbI5uHhrvxj9vNo/9n+3ctSq4Rwyfnv/qf83Jd9bvU3Q26AfV7BYiLwOTePJUgH4rEXFL9KLHpnDiuPcc1FRk96LBZcxd/oMer7STn+Bq/bK2Z+CshXr/P+OaViowz9f/f1kb73Jp521r2vDxYFj/73ppEqljBGtUZOH/59M3/oTw5tS6NevW9LIS4PscHPV2ujnUY/3+W4ehFxIStBL1pxv4DO2Ph/jc4zB33L1GrA0YbMHlB5EVsXalFO/VlakTXgJivy26MHFLLX/jxSmhbKvc24+N3xrJ3PWmNxp7G51/k2+rMGNCoBaj5TOtSKZOhUCxZtwbDq+hA5WplAAAAA==" alt="" width="18" height="18">Robinhood Chain${RH_LIVE ? "" : '<span class="csoon">SOON</span>'}</button>`;
     $$(".chain-tab", box).forEach(b => b.addEventListener("click", () => {
       if (b.dataset.chain === CHAIN) return;
       CHAIN = b.dataset.chain; renderChainTabs(); renderToken();
