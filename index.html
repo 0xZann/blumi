@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>BLUMI — A Little Blue, A Bigger World</title>
-<meta name="description" content="BLUMI is an independent digital brand being built within the Base ecosystem. Beyond Limits, United Minds, Innovation — bringing people, creativity and technology together.">
+<meta name="description" content="BLUMI is an independent digital brand building on Base and Robinhood Chain. Beyond Limits, United Minds, Innovation — bringing people, creativity and technology together.">
 <meta name="theme-color" content="#0a5cff">
 <script>
 (function(){ try {
@@ -13,7 +13,7 @@
 } catch (e) { document.documentElement.setAttribute("data-theme", "light"); } })();
 </script>
 <meta property="og:title" content="BLUMI — A Little Blue, A Bigger World">
-<meta property="og:description" content="An independent digital brand focused on creativity, community, technology and innovation. Build on Base.">
+<meta property="og:description" content="An independent digital brand focused on creativity, community, technology and innovation. Building on Base and Robinhood Chain.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="BLUMI">
 <meta property="og:image" content="assets/og-image.png">
@@ -21,7 +21,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="BLUMI — A Little Blue, A Bigger World">
-<meta name="twitter:description" content="An independent digital brand focused on creativity, community, technology and innovation. Build on Base.">
+<meta name="twitter:description" content="An independent digital brand focused on creativity, community, technology and innovation. Building on Base and Robinhood Chain.">
 <meta name="twitter:image" content="assets/og-image.png">
 <link rel="apple-touch-icon" href="assets/blumi-mascot-160.webp">
 <link rel="icon" type="image/png" href="assets/favicon.png">
@@ -103,6 +103,10 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
 .base-badge{display:inline-flex;align-items:center;gap:10px;padding:8px 14px 8px 10px;border-radius:999px;background:var(--glass);border:1px solid var(--line);
   backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);font:600 13px/1 var(--font-display);color:var(--ink);box-shadow:var(--shadow-sm)}
 .base-badge .dot{width:18px;height:18px;margin:2px;border-radius:3px;background:#0000ff;flex:none}
+.base-badge .rh-dot{width:18px;height:18px;margin:2px 0;border-radius:5px;flex:none;display:block}
+.base-badge .amp{color:var(--ink-soft);font-weight:500}
+.base-badge{white-space:nowrap}
+@media(max-width:480px){.base-badge small{display:none}.base-badge{gap:7px}}
 .base-badge small{font-weight:500;color:var(--ink-soft);font-size:12px}
 
 .mascot-tile{position:relative;border-radius:28%;overflow:hidden;box-shadow:var(--shadow-glow),inset 0 0 0 1px rgba(255,255,255,.4);isolation:isolate}
@@ -270,6 +274,23 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
    TOKEN — hidden until BLUMI_CONFIG.web3.tokenLaunched = true
    ========================================================== */
 .token-sec[hidden]{display:none!important}
+.chain-tabs{display:flex;justify-content:center;gap:6px;width:max-content;max-width:100%;margin:0 auto 20px;padding:6px;border-radius:999px;background:rgba(255,255,255,.7);border:1px solid var(--line);box-shadow:var(--shadow-sm,0 6px 18px -10px rgba(10,40,120,.25))}
+.chain-tab{appearance:none;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:9px;padding:11px 18px;border-radius:999px;background:transparent;color:var(--ink-soft);font:700 14px/1 var(--font-display);letter-spacing:.02em;white-space:nowrap;transition:background .3s var(--ease),color .3s,box-shadow .3s}
+.chain-tab:hover{color:var(--electric)}
+.chain-tab[aria-selected="true"]{background:linear-gradient(135deg,var(--electric-2),var(--electric));color:#fff;box-shadow:0 10px 22px -10px rgba(10,92,255,.8)}
+.chain-tab .cdot{width:12px;height:12px;border-radius:3px;background:#0000ff;box-shadow:0 0 0 2px #fff}
+.chain-tab .cdot.ring{border-radius:50%;background:transparent;box-shadow:inset 0 0 0 2.5px currentColor}
+.chain-tab .csoon{padding:4px 7px;border-radius:999px;font:700 9.5px/1 var(--font-display);letter-spacing:.1em;background:rgba(10,92,255,.1);color:var(--electric)}
+.chain-tab[aria-selected="true"] .csoon{background:rgba(255,255,255,.22);color:#fff}
+@media(max-width:420px){.chain-tab{padding:10px 13px;font-size:13px;gap:7px}}
+@media(max-width:560px){.token-card.rh .token-stat strong{font-size:15px;word-break:normal;overflow-wrap:break-word}}
+.token-card.rh .token-net i{width:20px;height:20px;border-radius:6px;background:#ccff00 url(assets/robinhood-chain.webp) center/cover;box-shadow:0 0 0 2px rgba(255,255,255,.85)}
+.chain-tab .clogo{width:18px;height:18px;border-radius:5px;display:block;box-shadow:0 0 0 1.5px rgba(255,255,255,.9)}
+.token-card.swap{animation:chainSwap .45s var(--ease)}
+@keyframes chainSwap{from{opacity:.35;transform:translateY(8px)}to{opacity:1;transform:none}}
+html[data-theme="dark"] .chain-tabs{background:rgba(11,23,54,.7);border-color:var(--card-line)}
+html[data-theme="dark"] .chain-tab{color:#b9cdf0}
+html[data-theme="dark"] .chain-tab .csoon{background:rgba(120,170,255,.16);color:#9fd0ff}
 .token-card{position:relative;display:grid;gap:0;border-radius:var(--r-xl);overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-md)}
 @media(min-width:960px){.token-card{grid-template-columns:.85fr 1.15fr}}
 .token-id{position:relative;padding:40px 32px;color:#fff;overflow:hidden;
@@ -328,12 +349,19 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
 .phase:hover .phase-card{transform:translateY(-5px)}
 .phase-meta{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .phase-num{font:600 12px/1 var(--font-display);letter-spacing:.18em;color:var(--ink-soft)}
-.status{padding:6px 10px;border-radius:999px;font:600 10.5px/1 var(--font-display);letter-spacing:.12em;text-transform:uppercase;background:var(--ice);color:var(--ink-soft)}
+.status{padding:6px 10px;border-radius:999px;white-space:nowrap;font:600 10.5px/1 var(--font-display);letter-spacing:.12em;text-transform:uppercase;background:var(--ice);color:var(--ink-soft)}
 .phase.current .status{background:rgba(10,92,255,.1);color:var(--electric)}
 .phase-card h3{margin-top:16px;font-size:24px;font-weight:700;letter-spacing:.02em}
 .phase-card ul{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px}
 .phase-card li{position:relative;padding-left:22px;color:var(--ink-soft);font-size:15px}
 .phase-card li::before{content:"";position:absolute;left:2px;top:.62em;width:8px;height:8px;border-radius:50%;border:2px solid var(--sky)}
+.phase.done .phase-node{color:#fff;background:linear-gradient(135deg,#7cc1ff,#2f7bff);border-color:transparent;box-shadow:0 12px 24px -10px rgba(10,92,255,.6)}
+.phase.done .status{background:rgba(22,160,100,.12);color:#13845a}
+html[data-theme="dark"] .phase.done .status{background:rgba(95,227,154,.14);color:#7ef0b0}
+html[data-theme="dark"] .phase.done .phase-node{background:linear-gradient(135deg,#7cc1ff,#2f7bff);border-color:transparent}
+.phase-card li.ok{color:var(--ink)}
+.phase-card li.ok::before{left:0;top:.3em;width:15px;height:15px;border:0;background:var(--electric) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/11px no-repeat}
+@media(min-width:1000px){.road-line{background:linear-gradient(90deg,var(--electric) 0%,var(--electric) 40%,rgba(10,92,255,.15) 62%)}}
 .road-note{margin-top:32px;text-align:center;font-size:14px;color:var(--ink-soft)}
 
 /* ==========================================================
@@ -492,8 +520,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 8px)}
 @media(max-width:560px) and (max-height:760px){.overlay .small{display:none}}
 .game-note{margin-top:18px;text-align:center;font-size:13.5px;color:var(--ink-soft)}
 /* game picker */
-.game-pick{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin:0 0 18px}
-@media(max-width:1100px){.game-pick{grid-template-columns:repeat(3,1fr)}}
+.game-pick{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 18px}
 .gp{appearance:none;font:inherit;text-align:left;cursor:pointer;display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:18px;color:var(--ink);
   background:var(--card,rgba(255,255,255,.8));border:1px solid var(--line);box-shadow:0 8px 22px -14px rgba(6,23,61,.25);
   transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease)}
@@ -520,7 +547,6 @@ html[data-theme="dark"] .gp .gi{background:rgba(120,170,255,.12);color:#9fd0ff}
 #extraCard .overlay .xg-ctl{font-size:13px;opacity:.75;margin-top:16px}
 @media(max-width:820px){.game-pick{grid-template-columns:repeat(3,1fr);gap:8px}.gp{flex-direction:column;align-items:center;text-align:center;padding:12px 6px 11px}.gp .new{display:none}}
 @media(max-width:560px){.gp{gap:8px;border-radius:16px}.gp .gi.app,.gp .gi.app svg,.gp .gi.app img{width:44px;height:44px}.gp b{font-size:11.5px}.gp small{font-size:10.5px}}
-@media(min-width:821px){.gp{flex-direction:column;align-items:center;text-align:center;gap:10px;padding:16px 8px 14px}.gp .new{margin:6px auto 0;display:table}}
 
 /* ---------- FAQ ---------- */
 .faq-list{max-width:860px;margin:0 auto;display:grid;gap:12px}
@@ -797,7 +823,7 @@ html[data-theme="dark"] .theme-btn .moon{color:#9fd0ff}
 
 <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
   <div data-mobile-nav style="display:flex;flex-direction:column"></div>
-  <span class="base-badge"><span class="dot" aria-hidden="true"></span>Build on Base</span>
+  <span class="base-badge"><span class="dot" aria-hidden="true"></span>Base <span class="amp">+</span> <img class="rh-dot" src="assets/robinhood-chain.webp" alt="" width="18" height="18">Robinhood Chain</span>
 </nav>
 
 <main id="main">
@@ -815,7 +841,7 @@ html[data-theme="dark"] .theme-btn .moon{color:#9fd0ff}
   </div>
   <div class="container hero-grid hero-solo">
     <div class="hero-copy">
-      <span class="base-badge reveal"><span class="dot" aria-hidden="true"></span>Build on Base <small>· Independent Brand</small></span>
+      <span class="base-badge reveal"><span class="dot" aria-hidden="true"></span>Base <span class="amp">+</span> <img class="rh-dot" src="assets/robinhood-chain.webp" alt="" width="18" height="18">Robinhood Chain <small>· Independent Brand</small></span>
       <h1 id="hero-title" class="reveal" style="--d:.08s">
         <span class="line">A Little Blue,</span>
         <span class="line grad-text">A Bigger World.</span>
@@ -903,7 +929,7 @@ html[data-theme="dark"] .theme-btn .moon{color:#9fd0ff}
       </div>
       <div class="facts">
         <div class="fact reveal" style="--d:.05s"><small data-i18n="fact.1k">Shape</small><strong data-i18n="fact.1v">A single water drop</strong><p data-i18n="fact.1p">Small on its own, powerful together.</p></div>
-        <div class="fact reveal" style="--d:.1s"><small data-i18n="fact.2k">Colour</small><strong data-i18n="fact.2v">Electric blue</strong><p data-i18n="fact.2p">A little blue, building on Base.</p></div>
+        <div class="fact reveal" style="--d:.1s"><small data-i18n="fact.2k">Colour</small><strong data-i18n="fact.2v">Electric blue</strong><p data-i18n="fact.2p">A little blue, building on Base and Robinhood Chain.</p></div>
         <div class="fact reveal" style="--d:.15s"><small data-i18n="fact.3k">Superpower</small><strong data-i18n="fact.3v">Making ripples</strong><p data-i18n="fact.3p">One small idea, spreading far.</p></div>
       </div>
     </div>
@@ -967,15 +993,12 @@ html[data-theme="dark"] .theme-btn .moon{color:#9fd0ff}
     <div class="section-head center">
       <span class="eyebrow reveal" data-i18n="play.eyebrow">BLUMI Playground</span>
       <h2 class="section-title reveal" id="play-title" style="--d:.06s" data-i18n="play.title">Pick a game. <span class="grad-text">Play free.</span></h2>
-      <p class="section-lead reveal" style="--d:.12s" data-i18n="play.lead">Six mini games, right in your browser. No wallet, no sign-up. Pick one and see how far you can go.</p>
+      <p class="section-lead reveal" style="--d:.12s" data-i18n="play.lead">Three mini games, right in your browser. No wallet, no sign-up. Pick one and see how far you can go.</p>
     </div>
     <div class="game-pick reveal" role="tablist" aria-label="Choose a game">
       <button class="gp" type="button" role="tab" aria-selected="true" data-game="drops"><span class="gi app"><img src="assets/blumi-mascot-160.webp" alt="" width="48" height="48"></span><span><b>Catch the Drops</b><small>Endless · combos</small></span></button>
       <button class="gp" type="button" role="tab" aria-selected="false" data-game="gates"><span class="gi app"><svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="tG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6cc0ff"/><stop offset=".55" stop-color="#2f7bff"/><stop offset="1" stop-color="#0a4fe0"/></linearGradient><linearGradient id="gG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cfe8ff"/></linearGradient></defs><rect x="1" y="1" width="46" height="46" rx="13" fill="url(#tG)"/><path d="M6 14C6 8 9 4 15 4h18c6 0 9 4 9 10-6-3-12-4-18-4S12 11 6 14z" fill="#fff" opacity=".22"/><rect x="9" y="6" width="9" height="13" rx="2" fill="#1a1f3d"/><rect x="9" y="17" width="9" height="2.4" fill="#ff6b8b"/><rect x="30" y="29" width="9" height="13" rx="2" fill="#1a1f3d"/><rect x="30" y="29" width="9" height="2.4" fill="#ff6b8b"/><circle cx="24" cy="25" r="7.5" fill="url(#gG)"/><circle cx="21.6" cy="25.6" r="1.4" fill="#2f7bff"/><circle cx="26.4" cy="25.6" r="1.4" fill="#2f7bff"/><ellipse cx="21.5" cy="21.6" rx="2.4" ry="1.3" fill="#fff" opacity=".9"/><circle cx="13" cy="27" r="1.4" fill="#fff" opacity=".7"/><circle cx="9.5" cy="29.5" r="1" fill="#fff" opacity=".5"/><rect x="1.5" y="1.5" width="45" height="45" rx="12.5" fill="none" stroke="#fff" stroke-opacity=".35"/></svg></span><span><b>Glitch Gates<span class="new">NEW</span></b><small>Fly through the glitch</small></span></button>
       <button class="gp" type="button" role="tab" aria-selected="false" data-game="wars"><span class="gi app"><svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="tW" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6cc0ff"/><stop offset=".55" stop-color="#2f7bff"/><stop offset="1" stop-color="#0a4fe0"/></linearGradient><linearGradient id="gW" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cfe8ff"/></linearGradient></defs><rect x="1" y="1" width="46" height="46" rx="13" fill="url(#tW)"/><path d="M6 14C6 8 9 4 15 4h18c6 0 9 4 9 10-6-3-12-4-18-4S12 11 6 14z" fill="#fff" opacity=".22"/><path d="M30 9l1.6 3.4 3.7.4-2.8 2.5.8 3.6-3.3-1.9-3.3 1.9.8-3.6-2.8-2.5 3.7-.4z" fill="#ffe08a" opacity=".95"/><rect x="22" y="19.5" width="15" height="3.6" rx="1.8" transform="rotate(-26 22 21.3)" fill="url(#gW)"/><path d="M14 30c0-5.5 4.5-9 10-9s10 3.5 10 9z" fill="url(#gW)"/><rect x="8" y="29" width="32" height="6" rx="2" fill="url(#gW)"/><rect x="7" y="34" width="34" height="7" rx="3.5" fill="#0d2c70"/><circle cx="12" cy="37.5" r="1.8" fill="#9fd0ff"/><circle cx="18.6" cy="37.5" r="1.8" fill="#9fd0ff"/><circle cx="25.2" cy="37.5" r="1.8" fill="#9fd0ff"/><circle cx="31.8" cy="37.5" r="1.8" fill="#9fd0ff"/><circle cx="37" cy="37.5" r="1.8" fill="#9fd0ff"/><rect x="1.5" y="1.5" width="45" height="45" rx="12.5" fill="none" stroke="#fff" stroke-opacity=".35"/></svg></span><span><b>Drop Wars<span class="new">NEW</span></b><small>Tank artillery duel</small></span></button>
-      <button class="gp" type="button" role="tab" aria-selected="false" data-game="invasion"><span class="gi app"><svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="tI" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6cc0ff"/><stop offset=".55" stop-color="#2f7bff"/><stop offset="1" stop-color="#0a4fe0"/></linearGradient><linearGradient id="gI" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cfe8ff"/></linearGradient></defs><rect x="1" y="1" width="46" height="46" rx="13" fill="url(#tI)"/><path d="M6 14C6 8 9 4 15 4h18c6 0 9 4 9 10-6-3-12-4-18-4S12 11 6 14z" fill="#fff" opacity=".22"/><g transform="translate(31 13) rotate(20)"><path d="M0-7l2 4 4-2-1 5 5 1-4 3 3 4-5-1-1 5-3-4-3 4-1-5-5 1 3-4-4-3 5-1-1-5 4 2z" fill="#1a1f3d" stroke="#ff6b8b" stroke-width="1.4"/></g><rect x="21.5" y="20" width="2.6" height="7" rx="1.3" fill="#fff"/><rect x="26" y="22" width="2.6" height="7" rx="1.3" fill="#fff" opacity=".8"/><rect x="17" y="30" width="14" height="14" rx="4" fill="url(#gI)"/><circle cx="21.6" cy="37" r="1.4" fill="#2f7bff"/><circle cx="26.4" cy="37" r="1.4" fill="#2f7bff"/><rect x="1.5" y="1.5" width="45" height="45" rx="12.5" fill="none" stroke="#fff" stroke-opacity=".35"/></svg></span><span><b>Glitch Invasion<span class="new">NEW</span></b><small>Space shooter</small></span></button>
-      <button class="gp" type="button" role="tab" aria-selected="false" data-game="run"><span class="gi app"><svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="tR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6cc0ff"/><stop offset=".55" stop-color="#2f7bff"/><stop offset="1" stop-color="#0a4fe0"/></linearGradient><linearGradient id="gR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cfe8ff"/></linearGradient></defs><rect x="1" y="1" width="46" height="46" rx="13" fill="url(#tR)"/><path d="M6 14C6 8 9 4 15 4h18c6 0 9 4 9 10-6-3-12-4-18-4S12 11 6 14z" fill="#fff" opacity=".22"/><rect x="8" y="35" width="32" height="5" rx="2.5" fill="#e8f3ff"/><path d="M33 35l3-6 3 6z" fill="#1a1f3d" stroke="#ff6b8b" stroke-width="1.2"/><g transform="rotate(-10 20 22)"><rect x="13" y="15" width="14" height="14" rx="4" fill="url(#gR)"/><circle cx="17.6" cy="22" r="1.4" fill="#2f7bff"/><circle cx="22.4" cy="22" r="1.4" fill="#2f7bff"/></g><rect x="5" y="18" width="6" height="2" rx="1" fill="#fff" opacity=".7"/><rect x="3" y="23" width="8" height="2" rx="1" fill="#fff" opacity=".5"/><rect x="6" y="28" width="5" height="2" rx="1" fill="#fff" opacity=".4"/><path d="M30 14c1.6 2 2.6 3.4 2.6 4.6a2.6 2.6 0 0 1-5.2 0c0-1.2 1-2.6 2.6-4.6z" fill="#fff"/><rect x="1.5" y="1.5" width="45" height="45" rx="12.5" fill="none" stroke="#fff" stroke-opacity=".35"/></svg></span><span><b>Blumi Run<span class="new">NEW</span></b><small>Endless runner</small></span></button>
-      <button class="gp" type="button" role="tab" aria-selected="false" data-game="breaker"><span class="gi app"><svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="tB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6cc0ff"/><stop offset=".55" stop-color="#2f7bff"/><stop offset="1" stop-color="#0a4fe0"/></linearGradient><linearGradient id="gB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cfe8ff"/></linearGradient></defs><rect x="1" y="1" width="46" height="46" rx="13" fill="url(#tB)"/><path d="M6 14C6 8 9 4 15 4h18c6 0 9 4 9 10-6-3-12-4-18-4S12 11 6 14z" fill="#fff" opacity=".22"/><rect x="7" y="9" width="10" height="5" rx="2" fill="#ff6b8b"/><rect x="19" y="9" width="10" height="5" rx="2" fill="#9b7bff"/><rect x="31" y="9" width="10" height="5" rx="2" fill="#ff6b8b"/><rect x="13" y="16" width="10" height="5" rx="2" fill="#ff3d9a"/><rect x="25" y="16" width="10" height="5" rx="2" fill="#ff6b8b" opacity=".55"/><circle cx="30" cy="26" r="2.6" fill="#fff"/><circle cx="33" cy="22.5" r="1.3" fill="#fff" opacity=".5"/><rect x="9" y="37" width="30" height="5" rx="2.5" fill="#e8f3ff"/><rect x="18" y="29" width="12" height="12" rx="3.5" fill="url(#gB)"/><circle cx="22" cy="35" r="1.2" fill="#2f7bff"/><circle cx="26" cy="35" r="1.2" fill="#2f7bff"/><rect x="1.5" y="1.5" width="45" height="45" rx="12.5" fill="none" stroke="#fff" stroke-opacity=".35"/></svg></span><span><b>Glitch Breaker<span class="new">NEW</span></b><small>Brick breaker</small></span></button>
     </div>
     <div class="game-stage">
     <div class="game-card reveal" id="gameCard">
@@ -1024,9 +1047,6 @@ html[data-theme="dark"] .theme-btn .moon{color:#9fd0ff}
     </div>
     <div class="game-card" id="extraCard" hidden></div>
     <div class="game-card" id="warsCard" hidden></div>
-    <div class="game-card" id="invCard" hidden></div>
-    <div class="game-card" id="runCard" hidden></div>
-    <div class="game-card" id="breakCard" hidden></div>
     </div>
     <p class="game-note reveal" data-i18n="play.note">Just for fun: no prizes, no tokens, nothing to buy or connect.</p>
   </div>
@@ -1068,13 +1088,14 @@ html[data-theme="dark"] .theme-btn .moon{color:#9fd0ff}
       <h2 class="section-title reveal" id="token-title" style="--d:.06s" data-t="title"></h2>
       <p class="section-lead reveal" style="--d:.12s" data-t="lead"></p>
     </div>
+    <div class="chain-tabs reveal" role="tablist" aria-label="Choose a network" data-chain-tabs></div>
     <div class="token-card reveal">
       <div class="token-id">
         <span class="ring" aria-hidden="true"></span>
         <div class="mascot-tile"><img src="assets/blumi-mascot-160.webp" alt="" width="88" height="88" loading="lazy"></div>
         <h3 data-t="name"></h3>
         <span class="token-ticker" data-t="ticker"></span>
-        <p class="token-net"><i aria-hidden="true"></i>Build on Base</p>
+        <p class="token-net" data-t="net"><i aria-hidden="true"></i><span>Build on Base</span></p>
       </div>
       <div class="token-body">
         <div class="token-stats" data-t="stats"></div>
@@ -1102,24 +1123,24 @@ html[data-theme="dark"] .theme-btn .moon{color:#9fd0ff}
     <div class="section-head">
       <span class="eyebrow reveal">Roadmap</span>
       <h2 class="section-title reveal" id="road-title" style="--d:.06s" data-i18n="road.title">Brand first. Ecosystem next.</h2>
-      <p class="section-lead reveal" style="--d:.12s" data-i18n="road.lead">A four-phase plan for how BLUMI intends to grow. Every phase describes goals, not finished achievements.</p>
+      <p class="section-lead reveal" style="--d:.12s" data-i18n="road.lead">A four-phase plan for how BLUMI grows. Checked items are done. Everything else is a goal, not a promise.</p>
     </div>
     <div class="road">
       <div class="road-line" aria-hidden="true"></div>
-      <article class="phase current reveal">
+      <article class="phase done reveal">
         <div class="phase-node" aria-hidden="true">01</div>
         <div class="phase-card">
-          <div class="phase-meta"><span class="phase-num" data-i18n="road.p1">PHASE 01</span><span class="status" data-i18n="road.now">Current focus</span></div>
+          <div class="phase-meta"><span class="phase-num" data-i18n="road.p1">PHASE 01</span><span class="status" data-i18n="road.done">Done</span></div>
           <h3 data-i18n="road.h1">Foundation</h3>
-          <ul data-i18n="road.l1"><li>Establish the BLUMI identity</li><li>Official website launch</li><li>Introduce the mascot</li><li>Build the initial community</li><li>Playground: 6 free mini games</li></ul>
+          <ul data-i18n="road.l1"><li class="ok">Establish the BLUMI identity</li><li class="ok">Official website launch</li><li class="ok">Introduce the mascot</li><li class="ok">Build the initial community</li><li class="ok">Playground: 3 free mini games</li></ul>
         </div>
       </article>
-      <article class="phase reveal" style="--d:.08s">
+      <article class="phase current reveal" style="--d:.08s">
         <div class="phase-node" aria-hidden="true">02</div>
         <div class="phase-card">
-          <div class="phase-meta"><span class="phase-num" data-i18n="road.p2">PHASE 02</span><span class="status" data-i18n="road.planned">Planned</span></div>
+          <div class="phase-meta"><span class="phase-num" data-i18n="road.p2">PHASE 02</span><span class="status" data-i18n="road.now">In progress</span></div>
           <h3 data-i18n="road.h2">Launch</h3>
-          <ul data-i18n="road.l2"><li>BLUMI token launch on Base</li><li>Official contract address published on this website and official channels</li><li>Trading on a Base DEX</li><li>Community growth</li></ul>
+          <ul data-i18n="road.l2"><li class="ok">$BLUMI launched on Base</li><li class="ok">Official contract address published on this website and official channels</li><li class="ok">Trading live on Base</li><li class="ok">First burns, posted with onchain proof</li><li>DexScreener profile upgrade</li><li>Community growth</li></ul>
         </div>
       </article>
       <article class="phase reveal" style="--d:.16s">
@@ -1165,11 +1186,11 @@ html[data-theme="dark"] .theme-btn .moon{color:#9fd0ff}
     </div>
     <div class="faq-list">
       <details class="faq-item reveal"><summary><span data-i18n="faq.q1">What is BLUMI?</span><span class="pm" aria-hidden="true"></span></summary>
-        <div class="faq-a" data-i18n="faq.a1">BLUMI is an independent digital brand being built within the Base ecosystem. It focuses on creativity, community, technology and innovation, with the BLUMI mascot as its face. The plan is simple: brand first, ecosystem next.</div></details>
+        <div class="faq-a" data-i18n="faq.a1">BLUMI is an independent digital brand building on Base and Robinhood Chain. It focuses on creativity, community, technology and innovation, with the BLUMI mascot as its face. The plan is simple: brand first, ecosystem next.</div></details>
       <details class="faq-item reveal"><summary><span data-i18n="faq.q2">Has the BLUMI token launched?</span><span class="pm" aria-hidden="true"></span></summary>
         <div class="faq-a" data-faq-token></div></details>
       <details class="faq-item reveal"><summary><span data-i18n="faq.q3">Is BLUMI affiliated with Base or Coinbase?</span><span class="pm" aria-hidden="true"></span></summary>
-        <div class="faq-a" data-i18n="faq.a3">No. BLUMI is an independent project building on Base. It is not affiliated with, sponsored by or endorsed by Base or Coinbase.</div></details>
+        <div class="faq-a" data-i18n="faq.a3">No. BLUMI is an independent project building on Base and Robinhood Chain. It is not affiliated with, sponsored by or endorsed by Base, Coinbase, Robinhood Markets or Pons.</div></details>
       <details class="faq-item reveal"><summary><span data-i18n="faq.q4">What does BLUMI stand for?</span><span class="pm" aria-hidden="true"></span></summary>
         <div class="faq-a" data-i18n="faq.a4"><b>B</b>eyond <b>L</b>imits, <b>U</b>nited <b>M</b>inds, <b>I</b>nnovation: the three principles behind everything we build.</div></details>
       <details class="faq-item reveal"><summary><span data-i18n="faq.q5">How can I join the community?</span><span class="pm" aria-hidden="true"></span></summary>
@@ -1219,7 +1240,7 @@ html[data-theme="dark"] .theme-btn .moon{color:#9fd0ff}
         <a href="#home" class="brand"><img src="assets/blumi-mascot-160.webp" alt="" width="38" height="38" loading="lazy">BLUMI</a>
         <p class="footer-statement" data-i18n="foot.statement">Bringing people, creativity, and technology together to shape a more connected digital world.</p>
         <p class="footer-tag">A LITTLE BLUE, A BIGGER WORLD.</p>
-        <div style="margin-top:22px"><span class="base-badge"><span class="dot" aria-hidden="true"></span>Build on Base</span></div>
+        <div style="margin-top:22px"><span class="base-badge"><span class="dot" aria-hidden="true"></span>Base <span class="amp">+</span> <img class="rh-dot" src="assets/robinhood-chain.webp" alt="" width="18" height="18">Robinhood Chain</span></div>
       </div>
       <div>
         <h4 data-i18n="foot.explore">Explore</h4>
@@ -1286,6 +1307,26 @@ const BLUMI_CONFIG = {
       totalSupply: "1,000,000,000 (1B)",
       buyUrl: "https://clanker.world/clanker/0x30cf38c92EE4aC79b461DBaEff3E4c6B96BACcCC",
       chartUrl: ""       // optional: DexScreener / GeckoTerminal link
+    },
+
+    /* ---- ROBINHOOD CHAIN (second tab in the Token section) -----
+       Fill in the contract and buy link after deploying on Pons,
+       then set launched to true. Until then the tab shows SOON.
+       ---------------------------------------------------------- */
+    robinhood: {
+      launched: false,
+      network: "Robinhood Chain",
+      explorer: "https://robinhoodchain.blockscout.com/token/",
+      explorerName: "Blockscout",
+      launchpad: "Pons",
+      token: {
+        name: "Blumi",
+        ticker: "$BLUMI",
+        contract: "",      // 0x… address on Robinhood Chain (required)
+        totalSupply: "",   // e.g. "1,000,000,000 (1B)"
+        buyUrl: "",        // the token page on Pons
+        chartUrl: ""
+      }
     }
   }
 };
@@ -1316,7 +1357,7 @@ const I18N_ID = {
   "mascot.s2": "Ke mana pun ia pergi, ia membawa semangat brand ini: melampaui batas, menyatukan pikiran, dan memberi ruang untuk ide-ide baru. Sendirian ia hanya sedikit biru. Bersama komunitas, ia menjadi dunia yang lebih besar.",
   "trait.1": "Penasaran", "trait.2": "Ramah", "trait.3": "Optimis", "trait.4": "Futuristik", "trait.5": "Selalu mengalir",
   "fact.1k": "Bentuk", "fact.1v": "Setetes air", "fact.1p": "Kecil sendirian, kuat bersama-sama.",
-  "fact.2k": "Warna", "fact.2v": "Biru elektrik", "fact.2p": "Sedikit biru, membangun di Base.",
+  "fact.2k": "Warna", "fact.2v": "Biru elektrik", "fact.2p": "Sedikit biru, membangun di Base dan Robinhood Chain.",
   "fact.3k": "Kekuatan super", "fact.3v": "Menciptakan riak", "fact.3p": "Satu ide kecil, menyebar jauh.",
   "eco.eyebrow": "Ekosistem BLUMI",
   "eco.title": "Satu brand.<br>Empat dunia untuk bertumbuh.",
@@ -1349,12 +1390,12 @@ const I18N_ID = {
   "tok.eyebrow": "Token BLUMI",
   "tok.ca": "Alamat kontrak resmi",
   "road.title": "Brand dulu. Ekosistem kemudian.",
-  "road.lead": "Rencana empat fase tentang bagaimana BLUMI ingin bertumbuh. Setiap fase berisi tujuan, bukan pencapaian yang sudah selesai.",
+  "road.lead": "Rencana empat fase tentang bagaimana BLUMI bertumbuh. Yang dicentang sudah selesai. Sisanya adalah tujuan, bukan janji.",
   "road.p1": "FASE 01", "road.p2": "FASE 02", "road.p3": "FASE 03", "road.p4": "FASE 04",
-  "road.now": "Fokus saat ini", "road.planned": "Direncanakan",
+  "road.now": "Berjalan", "road.done": "Selesai", "road.planned": "Direncanakan",
   "road.h1": "Fondasi", "road.h2": "Peluncuran", "road.h3": "Komunitas", "road.h4": "Ekspansi",
-  "road.l1": "<li>Membangun identitas BLUMI</li><li>Peluncuran website resmi</li><li>Memperkenalkan maskot</li><li>Membangun komunitas awal</li><li>Preview Playground: Catch the Drops</li>",
-  "road.l2": "<li>Peluncuran token BLUMI di Base</li><li>Alamat kontrak resmi diumumkan di website ini dan kanal resmi</li><li>Trading di DEX Base</li><li>Pertumbuhan komunitas</li>",
+  "road.l1": "<li class=\"ok\">Membangun identitas BLUMI</li><li class=\"ok\">Peluncuran website resmi</li><li class=\"ok\">Memperkenalkan maskot</li><li class=\"ok\">Membangun komunitas awal</li><li class=\"ok\">Playground: 3 mini game gratis</li>",
+  "road.l2": "<li class=\"ok\">$BLUMI resmi launch di Base</li><li class=\"ok\">Alamat kontrak resmi diumumkan di website ini dan kanal resmi</li><li class=\"ok\">Trading sudah aktif di Base</li><li class=\"ok\">Burn pertama, diposting dengan bukti onchain</li><li>Upgrade profil DexScreener</li><li>Pertumbuhan komunitas</li>",
   "road.l3": "<li>Kampanye interaktif</li><li>Event dan kompetisi Playground</li><li>Kolaborasi kreator</li><li>Mengembangkan kehadiran di media sosial</li>",
   "road.l4": "<li>Konsep koleksi digital</li><li>Eksperimen BLUMI Labs</li><li>Integrasi ekosistem Base</li><li>Kolaborasi strategis</li>",
   "road.note": "Isi roadmap adalah tujuan dan bisa berubah. Belum ada tanggal yang dijanjikan.",
@@ -1362,10 +1403,10 @@ const I18N_ID = {
   "com.lead": "Setiap ide hebat berawal dari manusia. Gabung dengan komunitas BLUMI dan jadilah bagian dari gerakan digital yang terus bertumbuh.",
   "faq.title": "Pertanyaan, <span class=\"grad-text\">terjawab.</span>",
   "faq.q1": "Apa itu BLUMI?",
-  "faq.a1": "BLUMI adalah brand digital independen yang sedang dibangun di ekosistem Base. Fokusnya pada kreativitas, komunitas, teknologi, dan inovasi, dengan maskot BLUMI sebagai wajahnya. Rencananya sederhana: brand dulu, ekosistem kemudian.",
+  "faq.a1": "BLUMI adalah brand digital independen yang membangun di Base dan Robinhood Chain. Fokusnya pada kreativitas, komunitas, teknologi, dan inovasi, dengan maskot BLUMI sebagai wajahnya. Rencananya sederhana: brand dulu, ekosistem kemudian.",
   "faq.q2": "Apakah token BLUMI sudah launch?",
   "faq.q3": "Apakah BLUMI berafiliasi dengan Base atau Coinbase?",
-  "faq.a3": "Tidak. BLUMI adalah proyek independen yang membangun di Base. BLUMI tidak berafiliasi dengan, tidak disponsori, dan tidak didukung secara resmi oleh Base maupun Coinbase.",
+  "faq.a3": "Tidak. BLUMI adalah proyek independen yang membangun di Base dan Robinhood Chain. BLUMI tidak berafiliasi dengan, tidak disponsori, dan tidak didukung secara resmi oleh Base, Coinbase, Robinhood Markets, maupun Pons.",
   "faq.q4": "BLUMI singkatan dari apa?",
   "faq.a4": "<b>B</b>eyond <b>L</b>imits, <b>U</b>nited <b>M</b>inds, <b>I</b>nnovation: melampaui batas, menyatukan pikiran, dan inovasi. Tiga prinsip di balik semua yang kami bangun.",
   "faq.q5": "Bagaimana cara gabung komunitas?",
@@ -1440,8 +1481,21 @@ const ARROW = '<svg class="s-arrow" viewBox="0 0 24 24" fill="none" stroke="curr
   const TOKEN_LIVE = !!(W.tokenLaunched && /^0x[a-fA-F0-9]{40}$/.test((T.contract||"").trim()));
   if (W.tokenLaunched && !TOKEN_LIVE) console.warn("BLUMI: tokenLaunched is true but contract address is missing or invalid; Token section stays in SOON state.");
   const CA = TOKEN_LIVE ? T.contract.trim() : "";
+  let CUR_CA = CA;
+  const RH = W.robinhood || null, RT = RH ? RH.token : {};
+  const RH_LIVE = !!(RH && RH.launched && /^0x[a-fA-F0-9]{40}$/.test((RT.contract||"").trim()));
+  const RCA = RH_LIVE ? RT.contract.trim() : "";
+  let CHAIN = "base";
+  function resetCard(){
+    const tk = $('[data-t="ticker"]'); tk.classList.remove("soon");
+    $(".ca-box").classList.remove("soon");
+    const cb = $("[data-copy]"); cb.disabled = false; cb.removeAttribute("aria-label");
+  }
 
   function renderToken(){
+    if (CHAIN === "robinhood") { renderRobinhood(); renderShared(); return; }
+    resetCard(); CUR_CA = CA;
+    $(".token-card").classList.remove("rh"); $('[data-t="net"] span').textContent = "Build on Base";
     const ext = ICONS.open.replace('aria-hidden="true"', 'aria-hidden="true" width="18" height="18"');
     $('[data-t="name"]').textContent = TOKEN_LIVE ? (T.name || "BLUMI") : "BLUMI";
     const tk = $('[data-t="ticker"]');
@@ -1472,11 +1526,17 @@ const ARROW = '<svg class="s-arrow" viewBox="0 0 24 24" fill="none" stroke="curr
       $('[data-t="lead"]').textContent = L("The BLUMI token has not launched yet. When it does, the official contract address will be published right here and through BLUMI's official channels.", "Token BLUMI belum launch. Saat sudah launch, alamat kontrak resminya akan diumumkan di sini dan lewat kanal resmi BLUMI.");
       $('[data-t="warn"]').textContent = L("Until the official launch, any token using the BLUMI name is not ours. BLUMI will never DM you first or ask for your seed phrase.", "Sampai launch resmi, token apa pun yang memakai nama BLUMI bukan milik kami. BLUMI tidak akan pernah DM kamu duluan atau meminta seed phrase.");
     }
-    $("[data-disclaimer]").textContent = TOKEN_LIVE
+    renderShared();
+  }
+
+  function renderShared(){
+    const rhNote = RH_LIVE ? L(` BLUMI also has an official token on Robinhood Chain: ${RCA}. BLUMI is not affiliated with, sponsored by, or endorsed by Robinhood Markets or Pons.`,
+                               ` BLUMI juga punya token resmi di Robinhood Chain: ${RCA}. BLUMI tidak berafiliasi dengan, tidak disponsori, dan tidak didukung secara resmi oleh Robinhood Markets maupun Pons.`) : "";
+    $("[data-disclaimer]").textContent = (TOKEN_LIVE
       ? L(`BLUMI is an independent project built on Base. It is not affiliated with, sponsored by, or endorsed by Base or Coinbase. The only official BLUMI token contract is ${CA}. Any other address using the BLUMI name is not ours. Nothing on this website is financial advice.`,
           `BLUMI adalah proyek independen yang dibangun di Base. BLUMI tidak berafiliasi dengan, tidak disponsori, dan tidak didukung secara resmi oleh Base maupun Coinbase. Satu-satunya kontrak token BLUMI yang resmi adalah ${CA}. Alamat lain yang memakai nama BLUMI bukan milik kami. Tidak ada isi website ini yang merupakan nasihat keuangan.`)
       : L("BLUMI is an independent project being developed within the Base ecosystem. It is not affiliated with, sponsored by, or endorsed by Base or Coinbase. BLUMI has not launched a token. Any token, sale or contract address using the BLUMI name is not official unless announced through BLUMI's own channels.",
-          "BLUMI adalah proyek independen yang sedang dikembangkan di ekosistem Base. BLUMI tidak berafiliasi dengan, tidak disponsori, dan tidak didukung secara resmi oleh Base maupun Coinbase. BLUMI belum meluncurkan token. Token, penjualan, atau alamat kontrak apa pun yang memakai nama BLUMI tidak resmi kecuali diumumkan lewat kanal resmi BLUMI.");
+          "BLUMI adalah proyek independen yang sedang dikembangkan di ekosistem Base. BLUMI tidak berafiliasi dengan, tidak disponsori, dan tidak didukung secara resmi oleh Base maupun Coinbase. BLUMI belum meluncurkan token. Token, penjualan, atau alamat kontrak apa pun yang memakai nama BLUMI tidak resmi kecuali diumumkan lewat kanal resmi BLUMI.")) + rhNote;
     // FAQ answers that depend on live data
     $("[data-faq-token]").innerHTML = TOKEN_LIVE
       ? L(`Yes. The only official contract is <code>${esc(CA)}</code>. You'll always find it in the <a href="#token">Token</a> section and under <a href="#official">Official Channels</a>.`,
@@ -1489,9 +1549,57 @@ const ARROW = '<svg class="s-arrow" viewBox="0 0 24 24" fill="none" stroke="curr
       `Follow <a href="${sx[0].url}" target="_blank" rel="noopener noreferrer">${sx[0].handle}</a> di X untuk kabar terbaru, dan ikut ngobrol di <a href="${sx[1].url}" target="_blank" rel="noopener noreferrer">Telegram</a>. Semua orang dipersilakan.`);
   }
 
-  if (TOKEN_LIVE) $("[data-copy]").addEventListener("click", async e => {
-    const b = e.currentTarget;
-    if (await copyText(CA, L("Contract address copied", "Alamat kontrak disalin"))) {
+  function renderRobinhood(){
+    resetCard(); CUR_CA = RCA;
+    const ext = ICONS.open.replace('aria-hidden="true"', 'aria-hidden="true" width="18" height="18"');
+    const card = $(".token-card"); card.classList.add("rh"); $('[data-t="net"] span').textContent = RH.network;
+    $('[data-t="name"]').textContent = RT.name || "Blumi";
+    const tk = $('[data-t="ticker"]');
+    $('[data-t="copylabel"]').textContent = L("Copy", "Salin");
+    if (RH_LIVE) {
+      if (RT.ticker) { tk.textContent = RT.ticker; tk.hidden = false; } else tk.hidden = true;
+      const stats = [[L("Network","Jaringan"), RH.network], ["Ticker", RT.ticker], [L("Total supply","Total suplai"), RT.totalSupply], ["Launchpad", RH.launchpad]].filter(x => x[1]);
+      $('[data-t="stats"]').innerHTML = stats.map(([k,v]) => `<div class="token-stat"><span>${esc(k)}</span><strong>${esc(v)}</strong></div>`).join("");
+      $('[data-t="contract"]').textContent = RCA;
+      const acts = [];
+      if (safeUrl(RT.buyUrl)) acts.push(`<a class="btn btn-primary" href="${esc(RT.buyUrl)}" target="_blank" rel="noopener noreferrer">${L("Buy","Beli")} ${esc(RT.ticker||"BLUMI")} ${L("on","di")} ${esc(RH.launchpad)} ${ext}</a>`);
+      acts.push(`<a class="btn btn-ghost" href="${esc(RH.explorer + RCA)}" target="_blank" rel="noopener noreferrer">${L("View on","Lihat di")} ${esc(RH.explorerName)} ${ext}</a>`);
+      if (safeUrl(RT.chartUrl)) acts.push(`<a class="btn btn-ghost" href="${esc(RT.chartUrl)}" target="_blank" rel="noopener noreferrer">${L("View Chart","Lihat Chart")} ${ext}</a>`);
+      $('[data-t="actions"]').innerHTML = acts.join("");
+      $('[data-t="title"]').innerHTML = L('Now live <span class="grad-text">on Robinhood Chain.</span>', 'Sudah live <span class="grad-text">di Robinhood Chain.</span>');
+      $('[data-t="lead"]').textContent = L("Blumi on Robinhood Chain has its own contract, separate from Base. Check the network and the address before you buy.", "Blumi di Robinhood Chain punya kontrak sendiri, terpisah dari Base. Cek jaringan dan alamatnya sebelum membeli.");
+      $('[data-t="warn"]').textContent = L("This is the only official BLUMI contract on Robinhood Chain. BLUMI is not affiliated with Robinhood Markets or Pons, will never DM you first, and will never ask for your seed phrase.", "Ini satu-satunya kontrak BLUMI resmi di Robinhood Chain. BLUMI tidak berafiliasi dengan Robinhood Markets maupun Pons, tidak akan pernah DM kamu duluan, dan tidak akan pernah meminta seed phrase.");
+    } else {
+      tk.hidden = false; tk.innerHTML = '<span class="soon-pill">SOON</span>'; tk.classList.add("soon");
+      $('[data-t="stats"]').innerHTML = [[L("Network","Jaringan"), RH.network, false], ["Ticker", RT.ticker || "SOON", false], ["Launchpad", RH.launchpad, false], [L("Total supply","Total suplai"), "SOON", true]]
+        .map(([k,v,soon]) => `<div class="token-stat"><span>${esc(k)}</span><strong class="${soon ? "soon" : ""}">${esc(v)}</strong></div>`).join("");
+      $('[data-t="contract"]').textContent = "SOON";
+      $(".ca-box").classList.add("soon");
+      const cb = $("[data-copy]"); cb.disabled = true; cb.setAttribute("aria-label", L("Copy contract address (available after launch)", "Salin alamat kontrak (tersedia setelah launch)"));
+      $('[data-t="actions"]').innerHTML = [L("Buy on ","Beli di ") + RH.launchpad, L("View on ","Lihat di ") + RH.explorerName]
+        .map((l,i) => `<span class="btn ${i ? "btn-ghost" : "btn-primary"} is-disabled" aria-disabled="true">${esc(l)} · Soon</span>`).join("");
+      $('[data-t="title"]').innerHTML = L('Coming <span class="grad-text">soon on Robinhood Chain.</span>', 'Segera <span class="grad-text">hadir di Robinhood Chain.</span>');
+      $('[data-t="lead"]').textContent = L("Blumi is launching on Robinhood Chain through Pons. The official contract address will be posted right here and on our official channels.", "Blumi akan launch di Robinhood Chain lewat Pons. Alamat kontrak resminya akan diumumkan di sini dan lewat kanal resmi kami.");
+      $('[data-t="warn"]').textContent = L("Until the address is posted here, any BLUMI token on Robinhood Chain is not ours. BLUMI is not affiliated with Robinhood Markets or Pons.", "Sebelum alamatnya diumumkan di sini, token BLUMI apa pun di Robinhood Chain bukan milik kami. BLUMI tidak berafiliasi dengan Robinhood Markets maupun Pons.");
+    }
+  }
+
+  function renderChainTabs(){
+    const box = $("[data-chain-tabs]"); if (!box) return;
+    if (!RH) { box.hidden = true; return; }
+    box.innerHTML = `<button class="chain-tab" type="button" role="tab" data-chain="base" aria-selected="${CHAIN === "base"}"><span class="cdot" aria-hidden="true"></span>Base</button>`
+      + `<button class="chain-tab" type="button" role="tab" data-chain="robinhood" aria-selected="${CHAIN === "robinhood"}"><img class="clogo" src="assets/robinhood-chain.webp" alt="" width="18" height="18">Robinhood Chain${RH_LIVE ? "" : '<span class="csoon">SOON</span>'}</button>`;
+    $$(".chain-tab", box).forEach(b => b.addEventListener("click", () => {
+      if (b.dataset.chain === CHAIN) return;
+      CHAIN = b.dataset.chain; renderChainTabs(); renderToken();
+      const c = $(".token-card"); c.classList.remove("swap"); void c.offsetWidth; c.classList.add("swap");
+    }));
+  }
+  renderChainTabs();
+
+  $("[data-copy]").addEventListener("click", async e => {
+    const b = e.currentTarget; if (!CUR_CA) return;
+    if (await copyText(CUR_CA, L("Contract address copied", "Alamat kontrak disalin"))) {
       b.classList.add("done"); $('[data-t="copylabel"]').textContent = L("Copied", "Tersalin");
       setTimeout(() => { b.classList.remove("done"); $('[data-t="copylabel"]').textContent = L("Copy", "Salin"); }, 2000);
     }
@@ -1527,7 +1635,8 @@ const ARROW = '<svg class="s-arrow" viewBox="0 0 24 24" fill="none" stroke="curr
     const rows = [
       { icon: ICONS.web, label: L("Website","Website"), value: site.value, href: site.href, copy: site.href },
       ...BLUMI_CONFIG.socials.map(s => ({ icon: ICONS[s.key], label: s.label, value: s.handle, href: s.url, copy: s.url })),
-      { icon: ICONS.coin, label: L("Token contract (Base)","Kontrak token (Base)"), value: TOKEN_LIVE ? CA : "SOON", soon: !TOKEN_LIVE, href: TOKEN_LIVE ? W.explorer + CA : null, copy: TOKEN_LIVE ? CA : null }
+      { icon: ICONS.coin, label: L("Token contract (Base)","Kontrak token (Base)"), value: TOKEN_LIVE ? CA : "SOON", soon: !TOKEN_LIVE, href: TOKEN_LIVE ? W.explorer + CA : null, copy: TOKEN_LIVE ? CA : null },
+      ...(RH ? [{ icon: ICONS.coin, label: L("Token contract (Robinhood Chain)","Kontrak token (Robinhood Chain)"), value: RH_LIVE ? RCA : "SOON", soon: !RH_LIVE, href: RH_LIVE ? RH.explorer + RCA : null, copy: RH_LIVE ? RCA : null }] : [])
     ];
     $("[data-official]").innerHTML = rows.map((r,i) => `<div class="off-row">
       <span class="off-ic">${r.icon}</span>
@@ -2032,10 +2141,9 @@ const ARROW = '<svg class="s-arrow" viewBox="0 0 24 24" fill="none" stroke="curr
   /* ---------- Playground game picker (extra games load on demand) ---------- */
   (() => {
     const btns = [...document.querySelectorAll(".gp")];
-    const cards = { drops: document.getElementById("gameCard"), extra: document.getElementById("extraCard"), wars: document.getElementById("warsCard"), invasion: document.getElementById("invCard"), run: document.getElementById("runCard"), breaker: document.getElementById("breakCard") };
-    const MODS = { wars: ["drop-wars.js", "BlumiWars"], invasion: ["glitch-invasion.js", "BlumiInvasion"], run: ["blumi-run.js", "BlumiRun"], breaker: ["glitch-breaker.js", "BlumiBreaker"] };
+    const cards = { drops: document.getElementById("gameCard"), extra: document.getElementById("extraCard"), wars: document.getElementById("warsCard") };
     if (!btns.length || !cards.drops || !cards.extra) return;
-    const cardOf = id => cards[id] || cards.extra;
+    const cardOf = id => id === "drops" ? cards.drops : id === "wars" ? cards.wars : cards.extra;
     let current = "drops", busy = false;
     const loaders = {};
     const load = (file, ready) => ready() ? Promise.resolve() : (loaders[file] = loaders[file] || new Promise((ok, fail) => {
@@ -2049,20 +2157,20 @@ const ARROW = '<svg class="s-arrow" viewBox="0 0 24 24" fill="none" stroke="curr
     };
     function leave(id){
       if (id === "drops") window.__blumiGame && window.__blumiGame.pause();
-      else if (MODS[id]) window[MODS[id][1]] && window[MODS[id][1]].hide();
+      else if (id === "wars") window.BlumiWars && window.BlumiWars.hide();
       else window.BlumiExtra && window.BlumiExtra.hide();
     }
     async function select(id){
       if (busy || id === current) return; busy = true;
       btns.forEach(b => b.setAttribute("aria-selected", String(b.dataset.game === id)));
       try {
-        if (MODS[id]) await load(MODS[id][0], () => !!window[MODS[id][1]]);
+        if (id === "wars") await load("drop-wars.js", () => !!window.BlumiWars);
         else if (id !== "drops") await load("playground-games.js", () => !!window.BlumiExtra);
         leave(current);
         const from = cardOf(current), to = cardOf(id);
         const enter = () => {
           if (id === "drops") window.__blumiGame && window.__blumiGame.resize();
-          else if (MODS[id]) window[MODS[id][1]].show();
+          else if (id === "wars") window.BlumiWars.show();
           else window.BlumiExtra.show(id);
         };
         if (from === to) enter(); else swap(from, to, enter);
